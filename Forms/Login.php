@@ -9,7 +9,7 @@
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
-    <link rel="stylesheet" type="text/css" href="../../SoftwareEngineeringProject/Master/CSS/master.css">
+    <link rel="stylesheet" type="text/css" href="../../EmployeeManager/Master/CSS/master.css">
     <style>
         body
         {
@@ -34,7 +34,7 @@
     <div id="divTitle">
         <h1>Login</h1>
     </div>
-    <form id="formLogin" action="../../SoftwareEngineeringProject/Master/Server_Scripts/LoginManager.php" method="post" accept-charset="UTF-8">
+    <form id="formLogin" action="../../EmployeeManager/Master/Server_Scripts/LoginManager.php" method="post" accept-charset="UTF-8">
         <div>
             <div id="divEmployeeNumber">
                 <label for="enumber"><b>Employee Number: </b></label><br>
