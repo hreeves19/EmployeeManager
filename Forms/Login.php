@@ -7,11 +7,23 @@
  */?>
 <!DOCTYPE html>
 <html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../../SoftwareEngineeringProject/Master/CSS/master.css">
+</head>
 <body>
-
-<h1>What it do</h1>
-
-
+<div class="flex-container">
+    <div id="divLogin">
+        <div id="divTitle">
+            <h1>Employee Management System</h1>
+        </div>
+        <div id="divEmployeeNumber">
+            <input id="txtEmployeeNumber" type="text" placeholder="Enter Employee Number" required>
+        </div>
+        <div id="divPassword">
+            <input id="txtPassword" type="password" placeholder="Enter Password" required>
+        </div>
+    </div>
+</div>
 </body>
 </html>
 
