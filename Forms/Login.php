@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: final
+ * User: Ruben
  * Date: 9/13/2018
  * Time: 8:10 PM
  */?>
@@ -9,7 +9,7 @@
 <html>
 <body>
 
-<h1>What it do</h1>
+<h1>This is Ruben's page</h1>
 
 
 </body>
