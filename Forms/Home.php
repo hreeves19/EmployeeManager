@@ -7,13 +7,25 @@
  */
 session_start();
 $firstname = $_SESSION['first_name'];
+$manager = $_SESSION['manager_id'];
 ?>
 <!DOCTYPE html>
 <html>
 <title>Home</title>
 <body>
 
-<?php echo "<h1>Welcome $firstname!</h1>" ?>
+<?php
+echo "<br>Manager: $manager";
+if($manager > 0)
+{
+    echo "<h1>Welcome Manager $firstname!</h1>";
+}
+
+else
+{
+    echo "<h1>Welcome $firstname!</h1>";
+}
+?>
 
 </body>
 </html

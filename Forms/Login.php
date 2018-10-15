@@ -5,13 +5,6 @@
  * Date: 9/13/2018
  * Time: 8:10 PM
  */
-session_start();
-$logged = $_SESSION['logged_in'];
-
-if($logged == false)
-{
-    echo "<script>alert(\"Employee number or password are incorrect.\")</script>";
-}
 ?>
 <!DOCTYPE html>
 <html>

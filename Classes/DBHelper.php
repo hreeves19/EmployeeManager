@@ -22,7 +22,6 @@ class DBHelper
         $this->user = 'root';
         $this->password = 'TKrEuOL8bWneYLvH';
         $this->db = 'employeemanager';
-        $this->setSql();
     }
 
     public function getConnection()
@@ -52,7 +51,7 @@ class DBHelper
     public function authenticateUser($employeeNumber, $password)
     {
         // Create connection
-        $conn = $this->sql;
+        $conn = $this->getConnection();
         $firstname = "";
 
         // Check connection
@@ -60,7 +59,7 @@ class DBHelper
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $sql = "SELECT `id` FROM `employee` WHERE `employee_number` = $employeeNumber AND `password` LIKE \"$password\" LIMIT 1";
+        $sql = "SELECT `id`, `first_name` FROM `employee` WHERE `employee_number` = $employeeNumber AND `password` LIKE \"$password\" LIMIT 1";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0)
@@ -80,7 +79,7 @@ class DBHelper
     public function checkManager($employeeNumber, $password)
     {
         // Create connection
-        $conn = $this->sql;
+        $conn = $this->getConnection();
         $manager = 0;
 
         // Check connection
@@ -88,9 +87,9 @@ class DBHelper
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $sql = "SELECT `dept_manager_id` FROM `dept_manager` m " .
+        $sql = "SELECT `dept_manager_ID` FROM `dept_manager` m " .
             "left join `employee` e on e.`id` = m.`employee_id` " .
-            "WHERE e.`employee_number` = $employeeNumber AND e.`password` LIKE \"$password\"";
+            "WHERE e.`employee_number` = $employeeNumber AND e.`password` LIKE \"$password\" LIMIT 1";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0)
@@ -98,7 +97,7 @@ class DBHelper
             // output data of each row
             while($row = $result->fetch_assoc())
             {
-                $manager = $row["department_manager_ID"];
+                $manager = $row["dept_manager_ID"];
             }
         }
 

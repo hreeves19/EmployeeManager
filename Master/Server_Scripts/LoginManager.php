@@ -9,7 +9,6 @@
 require_once("C:/xampp/htdocs/EmployeeManager/Classes/DBHelper.php");
 session_start(); // Starting session
 
-
 if(isset($_POST["enumber"]) && isset($_POST["psw"]))
 {
     $enumber = $_POST["enumber"];
@@ -22,16 +21,15 @@ if(isset($_POST["enumber"]) && isset($_POST["psw"]))
     // Checking to see if we found the user
     if($firstName != "")
     {
+        echo "passed";
         // Creating a session
         $_SESSION['first_name'] = $firstName;
         $_SESSION['manager_id'] = $manager;
-        $_SESSION['logged_in'] = true;
         header("Location: ../../Forms/Home.php");
     }
 
     else
     {
-        $_SESSION['logged_in'] = false;
         header("location: ../../Forms/Login.php");
         echo "Failed to login.";
     }
