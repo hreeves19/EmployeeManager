@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.1
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 14, 2018 at 03:36 AM
--- Server version: 10.1.33-MariaDB
--- PHP Version: 7.2.6
+-- Generation Time: Oct 12, 2018 at 08:39 AM
+-- Server version: 10.1.35-MariaDB
+-- PHP Version: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -38,6 +38,13 @@ CREATE TABLE `address` (
   `state` varchar(50) NOT NULL,
   `country` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `address`
+--
+
+INSERT INTO `address` (`address_ID`, `street_address`, `city`, `zipcode`, `state`, `country`) VALUES
+(1, '1773 Ennis Joslin Rd', 'Corpus Christi', 78412, 'Texas', 'United States');
 
 -- --------------------------------------------------------
 
@@ -88,10 +95,18 @@ CREATE TABLE `employee` (
   `first_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
   `gender` varchar(1) NOT NULL COMMENT 'M=male, F=female, O=other',
-  `hire_date` varchar(25) NOT NULL COMMENT 'Date employee was hired',
+  `hire_date` date NOT NULL COMMENT 'Date employee was hired',
   `adress_id` tinyint(1) NOT NULL COMMENT 'Foreign key to address table',
-  `employee_number` int(11) NOT NULL COMMENT 'The employee number that the company gave'
+  `employee_number` int(11) NOT NULL COMMENT 'The employee number that the company gave',
+  `password` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `employee`
+--
+
+INSERT INTO `employee` (`id`, `first_name`, `last_name`, `gender`, `hire_date`, `adress_id`, `employee_number`, `password`) VALUES
+(1, 'John', 'Doe', 'M', '2018-10-09', 1, 123456789, NULL);
 
 -- --------------------------------------------------------
 
@@ -169,7 +184,7 @@ ALTER TABLE `titles`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `address_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary key';
+  MODIFY `address_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary key', AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `departments`
@@ -187,7 +202,7 @@ ALTER TABLE `dept_emp`
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary key to identify unique values';
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary key to identify unique values', AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `salaries`
