@@ -30,6 +30,7 @@
         }
     </style>
 </head>
+<title>Login</title>
 <body>
 <div class="flex-container">
     <div id="divTitle">

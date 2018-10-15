@@ -37,8 +37,6 @@ class DBHelper
         $this->sql = $this->getConnection();
     }
 
-
-
     /**
      * @return string
      */
@@ -127,6 +125,4 @@ class DBHelper
         }
         $conn->close();
     }
-
-
 }
