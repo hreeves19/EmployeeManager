@@ -33,20 +33,20 @@
     <div class="card card-login mx-auto mt-5">
         <div class="card-header">Login</div>
         <div class="card-body">
-            <form>
+            <form id="formLogin" action="../../EmployeeManager/Master/Server_Scripts/LoginManager.php" method="post" accept-charset="UTF-8">
                 <div class="form-group">
                     <div class="form-label-group">
-                        <input type="text" id="enumber" class="form-control" placeholder="Employee Number" required="required" autofocus="autofocus">
+                        <input id="enumber" type="text" name="enumber" class="form-control" placeholder="Employee Number" required="required" autofocus="autofocus">
                         <label for="enumber">Employee Number</label>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="form-label-group">
-                        <input type="password" id="psw" class="form-control" placeholder="Password" required="required">
+                        <input id="psw" type="password" name="psw" class="form-control" placeholder="Password" required="required">
                         <label for="psw">Password</label>
                     </div>
                 </div>
-                <a class="btn btn-primary btn-block" href="../../EmployeeManager/Forms/Home.php">Login</a>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
             </form>
         </div>
     </div>
