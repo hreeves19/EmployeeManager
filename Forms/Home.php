@@ -36,8 +36,7 @@ $manager = $_SESSION['manager_id'];
 </head>
 <body id="page-top">
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-
-    <a class="navbar-brand mr-1" href="index.html">Start Bootstrap</a>
+    <a class="navbar-brand mr-1" href="../../EmployeeManager/Forms/Home.php">Employee Management System</a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
         <i class="fas fa-bars"></i>
@@ -65,11 +64,9 @@ $manager = $_SESSION['manager_id'];
             </div>
         </li>
     </ul>
-
 </nav>
 
 <div id="wrapper">
-
     <!-- Sidebar -->
     <ul class="sidebar navbar-nav">
         <li class="nav-item">
@@ -78,56 +75,20 @@ $manager = $_SESSION['manager_id'];
                 <span>Home</span>
             </a>
         </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-fw fa-folder"></i>
-                <span>Login Pages</span>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                <h6 class="dropdown-header">Login Screens:</h6>
-                <a class="dropdown-item" href="../../EmployeeManager/Forms/Login.php">Login</a>
-                <?php
-                // If manager
-                if($manager > 0)
-                {
-                    echo "<a class=\"dropdown-item\" href=\"../../EmployeeManager/Forms/SignUp.php\">Add Employee</a>";
-                }
-                ?>
-                <div class="dropdown-divider"></div>
-                <h6 class="dropdown-header">Other Pages:</h6>
-                <a class="dropdown-item" href="404.html">404 Page</a>
-                <a class="dropdown-item active" href="blank.html">Blank Page</a>
-            </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="charts.html">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Charts</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="tables.html">
-                <i class="fas fa-fw fa-table"></i>
-                <span>Tables</span></a>
-        </li>
     </ul>
 
     <div id="content-wrapper">
-
         <div class="container-fluid">
 
-            <!-- Breadcrumbs-->
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="index.html">Dashboard</a>
-                </li>
-                <li class="breadcrumb-item active">Blank Page</li>
-            </ol>
-
             <!-- Page Content -->
-            <h1>Blank Page</h1>
+            <h1>Welcome
+                <?php
+                if($firstname !== "")
+                {
+                    echo $firstname;
+                }
+                ?>!</h1>
             <hr>
-            <p>This is a great starting point for new custom pages.</p>
-
         </div>
         <!-- /.container-fluid -->
 
@@ -139,10 +100,8 @@ $manager = $_SESSION['manager_id'];
                 </div>
             </div>
         </footer>
-
     </div>
     <!-- /.content-wrapper -->
-
 </div>
 <!-- /#wrapper -->
 
@@ -164,7 +123,7 @@ $manager = $_SESSION['manager_id'];
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
+                <a class="btn btn-primary" href="../../EmployeeManager/Forms/Login.php">Logout</a>
             </div>
         </div>
     </div>

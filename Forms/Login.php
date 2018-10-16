@@ -8,50 +8,56 @@
 ?>
 <!DOCTYPE html>
 <html>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
     <link rel="stylesheet" type="text/css" href="../../EmployeeManager/Master/CSS/master.css">
-    <style>
-        body
-        {
-            font-family: Arial, Helvetica, sans-serif;
-        }
 
-        form
-        {
-            display: flex;
-            justify-content: center;
-        }
+    <!-- Bootstrap template -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-        form > div
-        {
-            text-align: center;
-            font-size: 18px;
-        }
-    </style>
+    <!-- Bootstrap core CSS-->
+    <link href="../../EmployeeManager/Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
+    <link href="../../EmployeeManager/Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template-->
+    <link href="../../EmployeeManager/Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/css/sb-admin.css" rel="stylesheet">
 </head>
 <title>Login</title>
-<body>
-<div class="flex-container">
-    <div id="divTitle">
-        <h1>Login</h1>
-    </div>
-    <form id="formLogin" action="../../EmployeeManager/Master/Server_Scripts/LoginManager.php" method="post" accept-charset="UTF-8">
-        <div>
-            <div id="divEmployeeNumber">
-                <label for="enumber"><b>Employee Number: </b></label><br>
-                <input type="text" placeholder="Enter Employee Number" name="enumber" required>
-            </div>
-            <div id="divPassword" style="padding-bottom: 10px;">
-                <label for="psw"><b>Password: </b></label><br>
-                <input type="password" placeholder="Enter Password" name="psw" required>
-            </div>
-            <div id="divSubmitBtn">
-                <button type="submit">Login</button>
-            </div>
+<body class="bg-dark">
+<div class="container">
+    <div class="card card-login mx-auto mt-5">
+        <div class="card-header">Login</div>
+        <div class="card-body">
+            <form>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        <input type="text" id="enumber" class="form-control" placeholder="Employee Number" required="required" autofocus="autofocus">
+                        <label for="enumber">Employee Number</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        <input type="password" id="psw" class="form-control" placeholder="Password" required="required">
+                        <label for="psw">Password</label>
+                    </div>
+                </div>
+                <a class="btn btn-primary btn-block" href="../../EmployeeManager/Forms/Home.php">Login</a>
+            </form>
         </div>
-    </form>
+    </div>
 </div>
+
+<!-- Bootstrap core JavaScript-->
+<script src="../../EmployeeManager/Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/vendor/jquery/jquery.min.js"></script>
+<script src="../../EmployeeManager/Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Core plugin JavaScript-->
+<script src="../../EmployeeManager/Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/vendor/jquery-easing/jquery.easing.min.js"></script>
+
 </body>
 </html>
 

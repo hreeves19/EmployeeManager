@@ -25,7 +25,8 @@ if(isset($_POST["enumber"]) && isset($_POST["psw"]))
         // Creating a session
         $_SESSION['first_name'] = $firstName;
         $_SESSION['manager_id'] = $manager;
-        header("Location: ../../Forms/Home.php");
+        var_dump($_SESSION);
+        /*header("Location: ../../Forms/Home.php");*/
     }
 
     else
