@@ -9,6 +9,8 @@
 require_once("../../../EmployeeManager/Classes/DBHelper.php");
 require_once('../../../EmployeeManager/Classes/SessionManager.php');
 
+session_start();
+
 if(isset($_POST["enumber"]) && isset($_POST["psw"]))
 {
     $enumber = $_POST["enumber"];
@@ -32,9 +34,15 @@ if(isset($_POST["enumber"]) && isset($_POST["psw"]))
         // array(5) { ["id"]=> string(1) "1" ["first_name"]=> string(4)
         // "John" ["last_name"]=> string(3) "Doe" ["employee_number"]=> string(9) "123456789"
         // ["admin"]=> string(1) "0" }
-        $session = SessionManager::login($data["id"], $data["employee_number"], $data["first_name"],
-            $data["last_name"], $manager, $data["admin"], true);
-        $_SESSION['userSession'] = $session;
+        $_SESSION['primarykey'] = $data['id'];
+        $_SESSION['employeeNumber'] = $data['employee_number'];
+        $_SESSION['firstName'] = $data["first_name"];
+        $_SESSION['lastName'] = $data["last_name"];
+        $_SESSION['isManager'] = $manager;
+        $_SESSION['isAdmin'] = $data["admin"];
+
+        $session = new SessionManager();
+        $_SESSION['sessionobj'] = $session;
 
         header("Location: ../../Forms/Home.php");
     }

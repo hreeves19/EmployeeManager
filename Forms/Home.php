@@ -7,10 +7,15 @@
  */
 require('../../EmployeeManager/Classes/SessionManager.php');
 
+// ADD THIS SECTION ON EVERY PAGE EXCEPT LOGIN
+// This helps us keep track of the user
+/****************************************************************************/
+session_start();
+
 // Checking to see if session exists, if it doesn't redirect user to log in
-if(session_id() != '' && isset($_SESSION['userSession']))
+if(session_id() != '' && isset($_SESSION['sessionobj']))
 {
-    $session = $_SESSION['userSession'];
+    $session = $_SESSION['sessionobj'];
     $session->setLoggedIn(true);
 }
 
@@ -18,6 +23,7 @@ else
 {
     header("Location: ../../EmployeeManager/Forms/Login.php");
 }
+/****************************************************************************/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -79,10 +85,31 @@ else
 <div id="wrapper">
     <!-- Sidebar -->
     <ul class="sidebar navbar-nav">
+        <!-- Home page -->
         <li class="nav-item">
             <a class="nav-link" href="../../EmployeeManager/Forms/Home.php">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <i class="fas fa-fw fa-compass"></i>
                 <span>Home</span>
+            </a>
+        </li>
+        <!-- Register new user admins only -->
+        <?php
+        // Checking if admin
+        if((int) $session->getIsAdmin() == 1)
+        {
+            echo "<li class=\"nav-item\">
+            <a class=\"nav-link\" href=\"../../EmployeeManager/Forms/SignUp.php\">
+            <i class='fas fa-fw fa-user'></i>
+                <span>Register New User</span>
+            </a>
+        </li>";
+        }
+        ?>
+        <!-- Time sheet -->
+        <li class="nav-item">
+            <a class="nav-link" href="../../EmployeeManager/Forms/TimeSheet.php">
+                <i class="fas fa-fw fa-clipboard"></i>
+                <span>Time Sheet</span>
             </a>
         </li>
     </ul>
@@ -93,7 +120,7 @@ else
             <!-- Page Content -->
             <h1>Welcome
                 <?php
-                $session->getFirstName();
+                echo $session->getFirstName();
                 ?>!</h1>
             <hr>
         </div>

@@ -22,8 +22,29 @@ class SessionManager
      */
     public function __construct()
     {
-        // Start the session
         session_start();
+
+        // logging in
+        if(isset($_SESSION['primarykey']) && isset($_SESSION['employeeNumber']) && isset($_SESSION['firstName'])
+         && isset($_SESSION['lastName']) && isset($_SESSION['isManager']) && isset($_SESSION['isAdmin']))
+        {
+            // Setting class variables
+            $this->setPrimarykey($_SESSION['primarykey']);
+            $this->setEmployeeNumber($_SESSION['employeeNumber']);
+            $this->setFirstName($_SESSION['firstName']);
+            $this->setLastName($_SESSION['lastName']);
+            $this->setIsManager($_SESSION['isManager']);
+            $this->setIsAdmin($_SESSION['isAdmin']);
+            $this->setLoggedIn(true);
+        }
+    }
+
+    public function loggout()
+    {
+        // Logging out
+        session_destroy();
+        $this->setLoggedIn(false);
+        header("Location: ../../EmployeeManager/Forms/Login.php");
     }
 
     // Need static function for the first initiation of this object.
