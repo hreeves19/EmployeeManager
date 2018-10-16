@@ -5,9 +5,19 @@
  * Date: 10/14/2018
  * Time: 4:18 PM
  */
-session_start();
-$firstname = $_SESSION['first_name'];
-$manager = $_SESSION['manager_id'];
+require('../../EmployeeManager/Classes/SessionManager.php');
+
+// Checking to see if session exists, if it doesn't redirect user to log in
+if(session_id() != '' && isset($_SESSION['userSession']))
+{
+    $session = $_SESSION['userSession'];
+    $session->setLoggedIn(true);
+}
+
+else
+{
+    header("Location: ../../EmployeeManager/Forms/Login.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,7 +70,7 @@ $manager = $_SESSION['manager_id'];
                 <a class="dropdown-item" href="#">Settings</a>
                 <a class="dropdown-item" href="#">Activity Log</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+                <a class="dropdown-item" href="../../EmployeeManager/Forms/Login.php" data-toggle="modal" data-target="#logoutModal">Logout</a>
             </div>
         </li>
     </ul>
@@ -83,10 +93,7 @@ $manager = $_SESSION['manager_id'];
             <!-- Page Content -->
             <h1>Welcome
                 <?php
-                if($firstname !== "")
-                {
-                    echo $firstname;
-                }
+                $session->getFirstName();
                 ?>!</h1>
             <hr>
         </div>

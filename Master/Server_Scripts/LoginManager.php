@@ -6,8 +6,8 @@
  * Time: 8:00 PM
  */
 
-require_once("C:/xampp/htdocs/EmployeeManager/Classes/DBHelper.php");
-session_start(); // Starting session
+require_once("../../../EmployeeManager/Classes/DBHelper.php");
+require_once('../../../EmployeeManager/Classes/SessionManager.php');
 
 if(isset($_POST["enumber"]) && isset($_POST["psw"]))
 {
@@ -15,18 +15,28 @@ if(isset($_POST["enumber"]) && isset($_POST["psw"]))
     $password = $_POST["psw"];
 
     $DB = new DBHelper();
-    $firstName = $DB->authenticateUser($enumber, $password);
+    $data = $DB->authenticateUser($enumber, $password);
     $manager = $DB->checkManager($enumber, $password);
 
     // Checking to see if we found the user
-    if($firstName != "")
+    if($data != "")
     {
-        echo "passed";
+        // Checking to see if user is a manager
+        if($manager < 1)
+        {
+            $manager = false;
+        }
+
         // Creating a session
-        $_SESSION['first_name'] = $firstName;
-        $_SESSION['manager_id'] = $manager;
-        var_dump($_SESSION);
-        /*header("Location: ../../Forms/Home.php");*/
+        // Example of what data looks like
+        // array(5) { ["id"]=> string(1) "1" ["first_name"]=> string(4)
+        // "John" ["last_name"]=> string(3) "Doe" ["employee_number"]=> string(9) "123456789"
+        // ["admin"]=> string(1) "0" }
+        $session = SessionManager::login($data["id"], $data["employee_number"], $data["first_name"],
+            $data["last_name"], $manager, $data["admin"], true);
+        $_SESSION['userSession'] = $session;
+
+        header("Location: ../../Forms/Home.php");
     }
 
     else

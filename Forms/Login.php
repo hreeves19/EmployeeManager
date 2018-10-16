@@ -5,6 +5,7 @@
  * Date: 9/13/2018
  * Time: 8:10 PM
  */
+require('../../EmployeeManager/Classes/SessionManager.php');
 ?>
 <!DOCTYPE html>
 <html>

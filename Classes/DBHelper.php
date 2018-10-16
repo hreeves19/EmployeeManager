@@ -50,27 +50,26 @@ class DBHelper
     {
         // Create connection
         $conn = $this->getConnection();
-        $firstname = "";
+        $data = "";
 
         // Check connection
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $sql = "SELECT `id`, `first_name` FROM `employee` WHERE `employee_number` = $employeeNumber AND `password` LIKE \"$password\" LIMIT 1";
+        $sql = "SELECT `id`, `first_name`, `last_name`, `employee_number`, `admin` FROM `employee` WHERE `employee_number` = $employeeNumber AND `password` LIKE \"$password\" LIMIT 1";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0)
         {
-            // output data of each row
+            // output data of each row, there is only one though
             while($row = $result->fetch_assoc())
             {
-                $firstname = $row["first_name"];
-                $empid = $row["id"];
+                $data = $row;
             }
         }
         $conn->close();
-        return $firstname;
+        return $data;
     }
 
     // If 0, not a manager. Anything else, they are
