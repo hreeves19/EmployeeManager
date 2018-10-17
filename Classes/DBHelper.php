@@ -45,6 +45,33 @@ class DBHelper
         return $this->db;
     }
 
+    // Used to return the latest date_to in the pay_period table
+    public function GET_LATEST_PAY_PERIOD()
+    {
+        // Create connection
+        $conn = $this->getConnection();
+        $data = "";
+
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "SELECT MAX(`date_to`) FROM `pay_period`";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0)
+        {
+            // output data of each row, there is only one though
+            while($row = $result->fetch_assoc())
+            {
+                $data = $row;
+            }
+        }
+        $conn->close();
+        return $data;
+    }
+
     // Used to log a user in
     public function authenticateUser($employeeNumber, $password)
     {
