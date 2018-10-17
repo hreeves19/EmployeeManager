@@ -102,26 +102,32 @@ class DBHelper
         return $manager;
     }
 
-    public function getUsername()
+    public function signUp($address, $city, $zip, $state, $country, $firstName, $lastName, $gender, $password, $date)
     {
-        // Create connection
-        $conn = $this->sql;
-        // Check connection
+        //Create connection
+        $conn = $this->getConnection();
+ 
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $sql = "SELECT * FROM `employee`";
-        $result = $conn->query($sql);
+        $sql = "INSERT INTO `address`(`street_address`, `city`, `zipcode`, `state`, `country`) VALUES (\"$address\", \"$city\", \"$zip\", \"$state\", \"$country\")";
 
-        if ($result->num_rows > 0) {
-            // output data of each row
-            while($row = $result->fetch_assoc()) {
-                echo "id: " . $row["id"]. " - Name: " . $row["first_name"]. " " . $row["last_name"]. "<br>";
-            }
-        } else {
-            echo "0 results";
+        $resultAdd = $conn->query($sql);
+
+        $sql = "INSERT INTO `employee`(`first_name`, `last_name`, `gender`, `hire_date`, `password`) VALUES (\"$firstName\", \"$lastName\", \"$gender\", \"$date\", \"$password\")";
+
+        $resultEmp = $conn->query($sql);
+
+        if($resultAdd === TRUE && $resultEmp ===TRUE)
+        {
+            echo "<script>alert(\"Sign up successful\")</script>";
         }
+        else
+        {
+            echo "<script>alert(\"Sign up unsuccessful\")</script>";
+        }
+
         $conn->close();
     }
 }
