@@ -10,3 +10,18 @@
 {
     text-align: center;
 }
+
+#timer
+{
+    display: inline-block;
+    font-size: 1.5em;
+    list-style-type: none;
+    padding: 1em;
+    text-transform: uppercase;
+}
+
+#timer span
+{
+    display: block;
+    font-size: 4.5rem;
+}

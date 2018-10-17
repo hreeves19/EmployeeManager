@@ -37,6 +37,16 @@ else
 
     <title>Home</title>
 
+    <!-- Bootstrap core JavaScript-->
+    <script src="../../EmployeeManager/Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/vendor/jquery/jquery.min.js"></script>
+    <script src="../../EmployeeManager/Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="../../EmployeeManager/Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="../../EmployeeManager/Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/js/sb-admin.min.js"></script>
+
     <!-- Bootstrap core CSS-->
     <link href="../../EmployeeManager/Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -48,6 +58,10 @@ else
 
     <!-- Custom styles for this template-->
     <link href="../../EmployeeManager/Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/css/sb-admin.css" rel="stylesheet">
+
+    <script src="../../EmployeeManager/Master/Client_Scripts/call_server_script.js"></script>
+    <script src="../../EmployeeManager/Master/Client_Scripts/count_down_clock.js"></script>
+    <link href="../../EmployeeManager/Master/CSS/master.css" rel="stylesheet">
 
 </head>
 <body id="page-top">
@@ -123,6 +137,18 @@ else
                 echo $session->getFirstName();
                 ?>!</h1>
             <hr>
+
+            <div class="container" style="text-align: center;">
+                <h1 id="head" style="font-weight: normal;">Countdown to End of Pay Period</h1>
+                <ul>
+                    <li id="timer"><span id="days"></span>Days</li>
+                    <li id="timer"><span id="hours"></span>Hours</li>
+                    <li id="timer"><span id="minutes"></span>Minutes</li>
+                    <li id="timer"><span id="seconds"></span>Seconds</li>
+                </ul>
+            </div>
+
+            <p id="countdown"></p>
         </div>
         <!-- /.container-fluid -->
 
@@ -162,15 +188,6 @@ else
         </div>
     </div>
 </div>
-<!-- Bootstrap core JavaScript-->
-<script src="../../EmployeeManager/Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/vendor/jquery/jquery.min.js"></script>
-<script src="../../EmployeeManager/Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<!-- Core plugin JavaScript-->
-<script src="../../EmployeeManager/Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="../../EmployeeManager/Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/js/sb-admin.min.js"></script>
 </body>
 </html>
 
