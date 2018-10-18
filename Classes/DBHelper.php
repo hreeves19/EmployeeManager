@@ -64,6 +64,33 @@ class DBHelper
         return $data;
     }
 
+    // "SELECT * FROM `time_sheet` WHERE `date` BETWEEN \"$monday\" AND \"$friday\""
+    public function getPieChartData($monday, $friday, $employee_id)
+    {
+        // Create connection
+        $conn = $this->getConnection();
+        $data = [];
+
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "SELECT * FROM `time_sheet` WHERE `date` BETWEEN \"$monday\" AND \"$friday\" AND `employee_id` = $employee_id";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0)
+        {
+            // output data of each row, there is only one though
+            while($row = mysqli_fetch_assoc($result))
+            {
+                $data[] = $row;
+            }
+        }
+        $conn->close();
+        return $data;
+    }
+
     // Used to insert hours
     public function submitHours($hours, $date, $employee_id, $pay_period_id, $timef, $timet)
     {

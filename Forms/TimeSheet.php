@@ -24,6 +24,12 @@ else
 {
     header("Location: ../../EmployeeManager/Forms/Login.php");
 }
+
+if(isset($_SESSION["message"]))
+{
+    echo $_SESSION["message"];
+    unset($_SESSION["message"]);
+}
 /****************************************************************************/
 ?>
 <!DOCTYPE html>
@@ -155,6 +161,34 @@ else
                     </form>
                 </div>
             </div>
+            <!-- Pie chart stuff -->
+            <hr>
+            <h1 style="text-align: center;">Time Statistics</h1>
+            <hr>
+            <div class="row" style="padding-top: 10px;">
+                <div class="col-lg-8">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <i class="fas fa-chart-bar"></i>
+                            Hours Worked</div>
+                        <div class="card-body">
+                            <canvas id="myBarChart" width="100%" height="50"></canvas>
+                        </div>
+                        <div class="card-footer small text-muted">Time Statistics</div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <i class="fas fa-chart-pie"></i>
+                            Work Accomplished</div>
+                        <div class="card-body">
+                            <canvas id="myPieChart" width="100%" height="100%"></canvas>
+                        </div>
+                        <div class="card-footer small text-muted">Time Statistics</div>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- /.container-fluid -->
 
@@ -204,10 +238,16 @@ else
 <!-- Custom scripts for all pages-->
 <script src="../../EmployeeManager/Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/js/sb-admin.min.js"></script>
 
+<!-- For Chart -->
+<!-- Page level plugin JavaScript-->
+<script src="../../EmployeeManager/Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/vendor/chart.js/Chart.min.js"></script>
+
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="../../EmployeeManager/Master/Client_Scripts/timesheet_manager.js"></script>
+<script src="../Master/Client_Scripts/time_statistics_manager_pie.js"></script>
+<script src="../Master/Client_Scripts/time_statistics_manager_bar.js"></script>
 
 <script>
     $( function() {

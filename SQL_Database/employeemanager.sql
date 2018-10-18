@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 18, 2018 at 04:23 AM
+-- Generation Time: Oct 18, 2018 at 08:23 AM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -190,7 +190,11 @@ CREATE TABLE `time_sheet` (
 
 INSERT INTO `time_sheet` (`time_id`, `number_hours`, `time_from`, `time_to`, `date`, `employee_id`, `pay_period_id`) VALUES
 (1, 1.05, '00:00:00', '00:00:00', '2018-10-17', 3, 1),
-(2, 0.916667, '13:05:00', '14:00:00', '2018-10-17', 3, 1);
+(2, 0.916667, '13:05:00', '14:00:00', '2018-10-17', 3, 1),
+(3, 0.0333333, '13:03:00', '13:05:00', '2018-10-17', 3, 1),
+(4, 9, '08:00:00', '17:00:00', '2018-10-18', 3, 1),
+(5, 3.91667, '08:00:00', '11:55:00', '2018-10-19', 3, 1),
+(6, 4, '08:00:00', '12:00:00', '2018-10-18', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -318,7 +322,7 @@ ALTER TABLE `salaries`
 -- AUTO_INCREMENT for table `time_sheet`
 --
 ALTER TABLE `time_sheet`
-  MODIFY `time_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `time_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `titles`
