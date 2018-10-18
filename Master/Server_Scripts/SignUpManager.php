@@ -28,3 +28,7 @@ if(isset($_POST["FirstName"]) && isset($_POST["LastName"]) && isset($_POST["gend
 
 }
 
+else if(isset($_POST["getDDLTitle"]))
+{
+    var_dump($_POST);
+}
