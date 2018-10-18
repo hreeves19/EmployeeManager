@@ -114,9 +114,9 @@ if(isset($_SESSION["message"]))
         ?>
         <!-- Sign Up -->
         <li class="nav-item">
-            <a class="nav-link" href="../../EmployeeManager/Forms/SignUp.php">
+            <a class="nav-link" href="../../EmployeeManager/Forms/TimeSheet.php">
                 <i class="fas fa-fw fa-clipboard"></i>
-                <span>Sign Up</span>
+                <span>Time Sheet</span>
             </a>
         </li>
     </ul>
