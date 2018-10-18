@@ -228,6 +228,9 @@ if(isset($_SESSION["message"]))
         </div>
     </div>
 </div>
+
+<script src="../../EmployeeManager/Master/Client_Scripts/timesheet_manager.js"></script>
+
 <!-- Bootstrap core JavaScript-->
 <script src="../../EmployeeManager/Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/vendor/jquery/jquery.min.js"></script>
 <script src="../../EmployeeManager/Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -245,7 +248,6 @@ if(isset($_SESSION["message"]))
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="../../EmployeeManager/Master/Client_Scripts/timesheet_manager.js"></script>
 <script src="../Master/Client_Scripts/time_statistics_manager_pie.js"></script>
 <script src="../Master/Client_Scripts/time_statistics_manager_bar.js"></script>
 

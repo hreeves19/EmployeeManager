@@ -35,12 +35,14 @@ require('../../EmployeeManager/Classes/SessionManager.php');
         <div class="card-header">Login</div>
         <div class="card-body">
             <form id="formLogin" action="../../EmployeeManager/Master/Server_Scripts/LoginManager.php" method="post" accept-charset="UTF-8">
+                <!-- Employee Number -->
                 <div class="form-group">
                     <div class="form-label-group">
                         <input id="enumber" type="text" name="enumber" class="form-control" placeholder="Employee Number" required="required" autofocus="autofocus">
                         <label for="enumber">Employee Number</label>
                     </div>
                 </div>
+                <!-- Password -->
                 <div class="form-group">
                     <div class="form-label-group">
                         <input id="psw" type="password" name="psw" class="form-control" placeholder="Password" required="required">

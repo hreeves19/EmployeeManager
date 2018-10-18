@@ -9641,7 +9641,7 @@
 	 */
 	DataTable.models.oColumn = {
 		/**
-		 * Column index. This could be worked out on-the-fly with $.inArray, but it
+		 * Column index. This could be hoursWorked out on-the-fly with $.inArray, but it
 		 * is faster to just hold it as a variable
 		 *  @type integer
 		 *  @default null

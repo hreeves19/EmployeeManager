@@ -50,4 +50,12 @@ if(isset($_POST["date"]) && isset($_POST["timef"]) && isset($_POST["timet"]) && 
 
     header("Location: ../../../EmployeeManager/Forms/TimeSheet.php");
 }
+
+// Populating datatable from time_sheet
+if(isset($_GET["datatable"]))
+{
+    $currentPeriod = $DB->getLatestPayPeiod();
+    $data = $DB->selectAllTimeSheet($session->getPrimarykey(), $currentPeriod);
+    echo json_encode($data);
+}
 ?>
