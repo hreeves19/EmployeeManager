@@ -126,7 +126,7 @@ else
                         <!-- Enter Time From -->
                         <div class="form-group">
                             <div class="form-label-group">
-                                <input id="timef" type="time" name="timef" class="form-control" placeholder="Time From" required="required" autofocus="autofocus" min="08:00" max="17:00">
+                                <input id="timef" type="time" name="timef" class="form-control" placeholder="Time From" required="required" min="08:00" max="17:00">
                                 <label for="timef">Time From</label>
                             </div>
                         </div>

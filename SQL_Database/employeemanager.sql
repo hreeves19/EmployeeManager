@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 18, 2018 at 03:02 AM
--- Server version: 10.1.35-MariaDB
--- PHP Version: 7.2.9
+-- Generation Time: Oct 18, 2018 at 04:23 AM
+-- Server version: 10.1.33-MariaDB
+-- PHP Version: 7.2.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -177,6 +177,8 @@ INSERT INTO `salaries` (`salary_ID`, `salary_per_hour`, `title_id`) VALUES
 CREATE TABLE `time_sheet` (
   `time_id` int(11) NOT NULL,
   `number_hours` float NOT NULL COMMENT 'Number of hours submitted',
+  `time_from` time NOT NULL COMMENT 'Time work started',
+  `time_to` time NOT NULL COMMENT 'Time work ended',
   `date` date NOT NULL COMMENT 'Day time submitted on',
   `employee_id` int(11) NOT NULL COMMENT 'Foreign key to the employee table',
   `pay_period_id` int(11) NOT NULL COMMENT 'Foreign key to the pay period'
@@ -186,8 +188,9 @@ CREATE TABLE `time_sheet` (
 -- Dumping data for table `time_sheet`
 --
 
-INSERT INTO `time_sheet` (`time_id`, `number_hours`, `date`, `employee_id`, `pay_period_id`) VALUES
-(1, 1.05, '2018-10-17', 3, 1);
+INSERT INTO `time_sheet` (`time_id`, `number_hours`, `time_from`, `time_to`, `date`, `employee_id`, `pay_period_id`) VALUES
+(1, 1.05, '00:00:00', '00:00:00', '2018-10-17', 3, 1),
+(2, 0.916667, '13:05:00', '14:00:00', '2018-10-17', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -315,7 +318,7 @@ ALTER TABLE `salaries`
 -- AUTO_INCREMENT for table `time_sheet`
 --
 ALTER TABLE `time_sheet`
-  MODIFY `time_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `time_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `titles`

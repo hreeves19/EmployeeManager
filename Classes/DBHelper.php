@@ -65,7 +65,7 @@ class DBHelper
     }
 
     // Used to insert hours
-    public function submitHours($hours, $date, $employee_id, $pay_period_id)
+    public function submitHours($hours, $date, $employee_id, $pay_period_id, $timef, $timet)
     {
         // Create connection
         $conn = $this->getConnection();
@@ -75,7 +75,7 @@ class DBHelper
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $sql = "INSERT INTO `time_sheet`(`number_hours`, `date`, `employee_id`, `pay_period_id`) VALUES ($hours,\"$date\",$employee_id,(SELECT `pay_period_id` FROM `pay_period` WHERE `date_to` = \"$pay_period_id\"))";
+        $sql = "INSERT INTO `time_sheet`(`number_hours`, `time_from`, `time_to`, `date`, `employee_id`, `pay_period_id`) VALUES ($hours, \"$timef\", \"$timet\", \"$date\",$employee_id,(SELECT `pay_period_id` FROM `pay_period` WHERE `date_to` = \"$pay_period_id\"))";
 
         if ($conn->query($sql) === TRUE) {
             echo "New record created successfully";

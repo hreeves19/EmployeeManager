@@ -40,14 +40,12 @@ if(isset($_POST["date"]) && isset($_POST["timef"]) && isset($_POST["timet"]) && 
 
     // Getting other variables
     $dateSpecified = $_POST["date"];
-    $timef = $_POST["timef"];
-    $timet = $_POST["timet"];
+    $timef = $_POST["timef"] . ":00";
+    $timet = $_POST["timet"] . ":00";
     $hours = $_POST["hours"];
 
-    $DB->submitHours($hours, $dateSpecified, $session->getPrimarykey(), $currentPeriod);
+    $DB->submitHours($hours, $dateSpecified, $session->getPrimarykey(), $currentPeriod, $timef, $timet);
 
-
-    
-    /*header("Location: ../../../EmployeeManager/Forms/TimeSheet.php");*/
+    header("Location: ../../../EmployeeManager/Forms/TimeSheet.php");
 }
 ?>
