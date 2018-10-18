@@ -1,25 +1,28 @@
 // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#292b2c';
-var totalWorkHours = 40;
-var worked = 0;
-var hoursLeft = 0;
+var totalHours = 40;
+var hoursWorked = 0;
+var pieHoursLeft = 0;
 
 $.ajax({
     type: "POST",
     url: "../../EmployeeManager/Master/Server_Scripts/PieChartStatistics.php",
     success: function(data)
     {
-        var result = JSON.parse(data);
-        console.log(result);
+        var objArray = JSON.parse(data);
+        console.log(objArray);
 
-        for(var i = 0; i < result.length; i++)
+        for(var i = 0; i < objArray.length; i++)
         {
-            console.log(result[i].time_id);
-            worked += parseFloat(result[i].number_hours);
+            console.log("Adding " + objArray[i].number_hours + " to " + hoursWorked);
+            hoursWorked += parseFloat(objArray[i].number_hours);
         }
 
-        hoursLeft = totalWorkHours - worked;
+        pieHoursLeft = totalHours - hoursWorked;
+        console.log("Total Work Hours: " + totalHours);
+        console.log("Hours hoursWorked: " + hoursWorked);
+        console.log("Hours left: " + pieHoursLeft);
 
         // Pie Chart Example
         var ctx = document.getElementById("myPieChart");
@@ -29,7 +32,7 @@ $.ajax({
             data: {
                 labels: ["Hours Worked", "Hours Left"],
                 datasets: [{
-                    data: [worked, hoursLeft],
+                    data: [hoursWorked, pieHoursLeft],
                     backgroundColor: ['#8DC641', '#21357E'],
                 }],
             },

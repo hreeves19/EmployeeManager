@@ -5,7 +5,7 @@ Chart.defaults.global.defaultFontColor = '#292b2c';
 var totalWorkHours = 40;
 var worked = 0;
 var hoursLeft = 0;
-var days = [0, 0, 0, 0, 0];
+var days = [0, 0, 0, 0, 0, 0, 0];
 
 $.ajax({
     type: "POST",
@@ -13,18 +13,17 @@ $.ajax({
     success: function(data)
     {
         var result = JSON.parse(data);
-        console.log(result);
+        console.log("Length" + result.length);
 
         // Looping through array of objects
         for(var i = 0; i < result.length; i++)
         {
             // Counting the number of hours
-            console.log(result[i].time_id);
             worked += parseFloat(result[i].number_hours);
 
             // Date, Sunday = 0, Monday = 1
             var date = new Date(result[i].date);
-            var position = date.getDay() - 1;
+            var position = date.getDay();
             days[position] += parseFloat(result[i].number_hours);
         }
 
@@ -68,7 +67,10 @@ $.ajax({
                     }],
                 },
                 legend: {
-                    display: false
+                    display: true,
+                    labels: {
+                        fontColor: 'rgb(0, 0, 0)'
+                    }
                 }
             }
         });

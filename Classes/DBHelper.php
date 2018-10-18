@@ -200,4 +200,39 @@ class DBHelper
 
         $conn->close();
     }
+
+    // pay_period_id is actually the current date, not the primary key
+    public function selectAllTimeSheet($employee_id, $pay_period_id)
+    {
+        $data = array();
+
+        // Getting connection
+        $mysqli = $this->getConnection();
+
+        // Checking to see if the connection failed
+        if($mysqli->connect_errno)
+        {
+            echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+            return false;
+        }
+
+        $sql = "SELECT * FROM `time_sheet` WHERE `employee_id` = $employee_id AND `pay_period_id` = (SELECT `pay_period_id` FROM `pay_period` WHERE `date_to` = \"$pay_period_id\"))";
+        $response = $mysqli->query($sql);
+
+        if ($response)
+        {
+            while($row = mysqli_fetch_assoc($response))
+            {
+                $data[] = $row;
+            }
+        }
+        else
+        {
+            echo "Error: " . $sql . "<br>" . $mysqli->error;
+        }
+
+        $mysqli->close();
+
+        return $data;
+    }
 }
