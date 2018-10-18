@@ -46,6 +46,8 @@ if(isset($_POST["date"]) && isset($_POST["timef"]) && isset($_POST["timet"]) && 
 
     $DB->submitHours($hours, $dateSpecified, $session->getPrimarykey(), $currentPeriod, $timef, $timet);
 
+   /* $_SESSION["message"] = "<script>alert(\"Your time sheet has been aproved!\");</script>";*/
+
     header("Location: ../../../EmployeeManager/Forms/TimeSheet.php");
 }
 ?>
