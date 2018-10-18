@@ -60,8 +60,14 @@ else
     <link href="../../EmployeeManager/Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/css/sb-admin.css" rel="stylesheet">
 
     <script src="../../EmployeeManager/Master/Client_Scripts/call_server_script.js"></script>
-    <script src="../../EmployeeManager/Master/Client_Scripts/count_down_clock.js"></script>
     <link href="../../EmployeeManager/Master/CSS/master.css" rel="stylesheet">
+    <script>
+        // Runs as soon as the page loads
+        $( document ).ready(function()
+        {
+            getLatest();
+        });
+    </script>
 
 </head>
 <body id="page-top">
@@ -138,7 +144,7 @@ else
                 ?>!</h1>
             <hr>
 
-            <div class="container" style="text-align: center;">
+            <div id="divClock" class="container" style="text-align: center; display: none;">
                 <h1 id="head" style="font-weight: normal;">Countdown to End of Pay Period</h1>
                 <ul>
                     <li id="timer"><span id="days"></span>Days</li>
@@ -147,7 +153,6 @@ else
                     <li id="timer"><span id="seconds"></span>Seconds</li>
                 </ul>
             </div>
-
             <p id="countdown"></p>
         </div>
         <!-- /.container-fluid -->

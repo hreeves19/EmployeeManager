@@ -122,29 +122,36 @@ else
             <div class="card card-login mx-auto mt-5">
                 <div class="card-header">Time Submission</div>
                 <div class="card-body">
-                    <form id="formLogin" action="../../EmployeeManager/Master/Server_Scripts/TimeSheetManager.php" method="post" accept-charset="UTF-8">
-                        <!-- Enter Date -->
-                        <div class="form-group">
-                            <div class="form-label-group">
-                                <input id="date" type="text" name="date" class="form-control" placeholder="Date" required="required" autofocus="autofocus">
-                                <label for="date">Date</label>
-                            </div>
-                        </div>
+                    <form id="formTimeSheet" action="../../EmployeeManager/Master/Server_Scripts/TimeSheetManager.php" method="post" accept-charset="UTF-8" onsubmit="return validateForm(this)">
                         <!-- Enter Time From -->
                         <div class="form-group">
                             <div class="form-label-group">
-                                <input id="timef" type="text" name="timef" class="form-control" placeholder="Time From" required="required">
+                                <input id="timef" type="time" name="timef" class="form-control" placeholder="Time From" required="required" autofocus="autofocus" min="08:00" max="17:00">
                                 <label for="timef">Time From</label>
                             </div>
                         </div>
                         <!-- Enter Time To -->
                         <div class="form-group">
                             <div class="form-label-group">
-                                <input id="timet" type="text" name="timet" class="form-control" placeholder="Time To" required="required">
+                                <input id="timet" type="time" name="timet" class="form-control" placeholder="Time To" required="required" min="08:00" max="17:00">
                                 <label for="timet">Time To</label>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block">Submit Time</button>
+                        <!-- Enter Date -->
+                        <div class="form-group">
+                            <div class="form-label-group">
+                                <input id="date" type="text" name="date" class="form-control" placeholder="Date" required="required">
+                                <label for="date">Date</label>
+                            </div>
+                        </div>
+                        <!-- Hidden Hours Worked -->
+                        <div class="form-group">
+                            <div class="form-label-group">
+                                <input id="hours" type="text" name="hours" class="form-control" placeholder="Hours" style="display: none;">
+                                <label for="hours"></label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block" onclick="calculateHours()">Submit Time</button>
                     </form>
                 </div>
             </div>
@@ -200,10 +207,11 @@ else
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="../../EmployeeManager/Master/Client_Scripts/timesheet_manager.js"></script>
 
 <script>
     $( function() {
-        $( "#date" ).datepicker();
+        $( "#date" ).datepicker({dateFormat: "yy-mm-dd"});
     } );
 </script>
 </body>

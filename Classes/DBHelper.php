@@ -12,7 +12,6 @@ class DBHelper
     private $user;
     private $password;
     private $db;
-    private $sql;
 
     /**
      * DBHelper constructor.
@@ -29,13 +28,6 @@ class DBHelper
         return $db = new mysqli('localhost', $this->user, $this->password, $this->db);
     }
 
-    /**
-     * @param mixed $sql
-     */
-    public function setSql()
-    {
-        $this->sql = $this->getConnection();
-    }
 
     /**
      * @return string
@@ -46,7 +38,7 @@ class DBHelper
     }
 
     // Used to return the latest date_to in the pay_period table
-    public function GET_LATEST_PAY_PERIOD()
+    public function getLatestPayPeiod()
     {
         // Create connection
         $conn = $this->getConnection();
@@ -70,6 +62,30 @@ class DBHelper
         }
         $conn->close();
         return $data;
+    }
+
+    // Used to insert hours
+    public function submitHours($hours, $date, $employee_id, $pay_period_id)
+    {
+        // Create connection
+        $conn = $this->getConnection();
+
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "INSERT INTO `time_sheet`(`number_hours`, `date`, `employee_id`, `pay_period_id`) VALUES ($hours,\"$date\",$employee_id,(SELECT `pay_period_id` FROM `pay_period` WHERE `date_to` = \"$pay_period_id\"))";
+
+        if ($conn->query($sql) === TRUE) {
+            echo "New record created successfully";
+        }
+
+        else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+
+        $conn->close();
     }
 
     // Used to log a user in

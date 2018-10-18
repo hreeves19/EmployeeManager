@@ -12,7 +12,7 @@ $DB = new DBHelper();
 
 if(isset($_POST["getLatestPayPeriod"]))
 {
-    $latest = $DB->GET_LATEST_PAY_PERIOD();
+    $latest = $DB->getLatestPayPeiod();
 
     echo json_encode($latest);
 }

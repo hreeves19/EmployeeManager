@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 17, 2018 at 12:23 AM
+-- Generation Time: Oct 18, 2018 at 03:02 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -30,7 +30,6 @@ USE `employeemanager`;
 -- Table structure for table `address`
 --
 
-DROP TABLE IF EXISTS `address`;
 CREATE TABLE `address` (
   `address_ID` int(11) NOT NULL COMMENT 'Primary key',
   `street_address` varchar(50) NOT NULL,
@@ -54,7 +53,6 @@ INSERT INTO `address` (`address_ID`, `street_address`, `city`, `zipcode`, `state
 -- Table structure for table `departments`
 --
 
-DROP TABLE IF EXISTS `departments`;
 CREATE TABLE `departments` (
   `deptartment_id` int(11) NOT NULL,
   `department_number` int(11) DEFAULT NULL COMMENT 'Department number given by company',
@@ -74,11 +72,10 @@ INSERT INTO `departments` (`deptartment_id`, `department_number`, `department_na
 -- Table structure for table `dept_emp`
 --
 
-DROP TABLE IF EXISTS `dept_emp`;
 CREATE TABLE `dept_emp` (
   `dept_emp_ID` int(11) NOT NULL COMMENT 'Primary key',
-  `from_date` varchar(50) NOT NULL COMMENT 'Day employee started working for the department',
-  `to_date` varchar(50) NOT NULL COMMENT 'till this point',
+  `from_date` date NOT NULL COMMENT 'Day employee started working for the department',
+  `to_date` date NOT NULL COMMENT 'Present or when they stopped',
   `employee_id` int(11) NOT NULL COMMENT 'Foreign key to employee table',
   `department_id` int(11) NOT NULL COMMENT 'Foreign key to the departments table',
   `dept_manager_id` int(11) NOT NULL COMMENT 'Foreign key to the dept_manager table'
@@ -90,7 +87,6 @@ CREATE TABLE `dept_emp` (
 -- Table structure for table `dept_manager`
 --
 
-DROP TABLE IF EXISTS `dept_manager`;
 CREATE TABLE `dept_manager` (
   `dept_manager_ID` int(11) NOT NULL COMMENT 'Primary Key',
   `from_date` date NOT NULL COMMENT 'Day manager started for department',
@@ -112,7 +108,6 @@ INSERT INTO `dept_manager` (`dept_manager_ID`, `from_date`, `to_date`, `employee
 -- Table structure for table `employee`
 --
 
-DROP TABLE IF EXISTS `employee`;
 CREATE TABLE `employee` (
   `id` int(11) NOT NULL COMMENT 'Primary key to identify unique values',
   `first_name` varchar(50) NOT NULL,
@@ -141,7 +136,6 @@ INSERT INTO `employee` (`id`, `first_name`, `last_name`, `gender`, `hire_date`, 
 -- Table structure for table `pay_period`
 --
 
-DROP TABLE IF EXISTS `pay_period`;
 CREATE TABLE `pay_period` (
   `pay_period_id` int(11) NOT NULL,
   `date_from` date NOT NULL COMMENT 'Date that pay period has started',
@@ -161,7 +155,6 @@ INSERT INTO `pay_period` (`pay_period_id`, `date_from`, `date_to`) VALUES
 -- Table structure for table `salaries`
 --
 
-DROP TABLE IF EXISTS `salaries`;
 CREATE TABLE `salaries` (
   `salary_ID` int(11) NOT NULL COMMENT 'Primary key to identify unique values',
   `salary_per_hour` int(11) NOT NULL COMMENT 'Amount employee is making per hour',
@@ -181,13 +174,20 @@ INSERT INTO `salaries` (`salary_ID`, `salary_per_hour`, `title_id`) VALUES
 -- Table structure for table `time_sheet`
 --
 
-DROP TABLE IF EXISTS `time_sheet`;
 CREATE TABLE `time_sheet` (
   `time_id` int(11) NOT NULL,
   `number_hours` float NOT NULL COMMENT 'Number of hours submitted',
+  `date` date NOT NULL COMMENT 'Day time submitted on',
   `employee_id` int(11) NOT NULL COMMENT 'Foreign key to the employee table',
   `pay_period_id` int(11) NOT NULL COMMENT 'Foreign key to the pay period'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `time_sheet`
+--
+
+INSERT INTO `time_sheet` (`time_id`, `number_hours`, `date`, `employee_id`, `pay_period_id`) VALUES
+(1, 1.05, '2018-10-17', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -195,7 +195,6 @@ CREATE TABLE `time_sheet` (
 -- Table structure for table `titles`
 --
 
-DROP TABLE IF EXISTS `titles`;
 CREATE TABLE `titles` (
   `title_id` int(11) NOT NULL COMMENT 'Primary key',
   `title` varchar(50) NOT NULL COMMENT 'Job title description'
@@ -316,13 +315,29 @@ ALTER TABLE `salaries`
 -- AUTO_INCREMENT for table `time_sheet`
 --
 ALTER TABLE `time_sheet`
-  MODIFY `time_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `time_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `titles`
 --
 ALTER TABLE `titles`
   MODIFY `title_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary key', AUTO_INCREMENT=2;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `address`
+--
+ALTER TABLE `address`
+  ADD CONSTRAINT `address_ibfk_1` FOREIGN KEY (`address_ID`) REFERENCES `employee` (`id`);
+
+--
+-- Constraints for table `titles`
+--
+ALTER TABLE `titles`
+  ADD CONSTRAINT `titles_ibfk_1` FOREIGN KEY (`title_id`) REFERENCES `employee` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

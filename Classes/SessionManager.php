@@ -47,24 +47,6 @@ class SessionManager
         header("Location: ../../EmployeeManager/Forms/Login.php");
     }
 
-    // Need static function for the first initiation of this object.
-    public static function login($primarykey, $employeeNumber, $firstName, $lastName, $isManager, $isAdmin, $loggedIn)
-    {
-        // Starting new instance of this class
-        $instance = new self();
-
-        // Setting class variables
-        $instance->setPrimarykey($primarykey);
-        $instance->setEmployeeNumber($employeeNumber);
-        $instance->setFirstName($firstName);
-        $instance->setLastName($lastName);
-        $instance->setIsManager($isManager);
-        $instance->setIsAdmin($isAdmin);
-        $instance->setLoggedIn(true);
-
-        return $instance;
-    }
-
     /**
      * @return mixed
      */
