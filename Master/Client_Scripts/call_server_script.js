@@ -57,7 +57,6 @@ function startCountDown(latest)
         if (distance < 0)
         {
             clearInterval(x);
-            document.getElementById("countdown").innerHTML = "EXPIRED";
 
             // Temp is the end of next pay period, monday is the beginning of the new pay period
             var temp = new Date();
