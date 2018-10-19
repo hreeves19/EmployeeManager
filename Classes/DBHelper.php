@@ -235,4 +235,27 @@ class DBHelper
 
         return $data;
     }
+
+    function updatePayPeriod($to, $from)
+    {
+        // Create connection
+        $conn = $this->getConnection();
+
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "INSERT INTO `pay_period`(`date_from`, `date_to`) VALUES (\"$from\",\"$to\")";
+
+        if ($conn->query($sql) === TRUE) {
+            echo "New record created successfully";
+        }
+
+        else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+
+        $conn->close();
+    }
 }

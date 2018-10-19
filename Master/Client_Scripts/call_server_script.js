@@ -54,9 +54,49 @@ function startCountDown(latest)
         document.getElementById("divClock").style.display = "block";
 
         // If the count down is over, write some text
-        if (distance < 0) {
+        if (distance < 0)
+        {
             clearInterval(x);
             document.getElementById("countdown").innerHTML = "EXPIRED";
+
+            // Temp is the end of next pay period, monday is the beginning of the new pay period
+            var temp = new Date();
+            temp.setDate(temp.getDate() + 14);
+
+            var monday = new Date();
+            monday.setDate(monday.getDate() + 3);
+            updatePayPeriod(temp, monday);
         }
     }, 1000);
+}
+
+function updatePayPeriod(endNextPayPeriod, beginNextPayPeriod)
+{
+    // Making a request to the server to get the pay period
+    var xmlhttp = new XMLHttpRequest();
+    endNextPayPeriod = formatStringToDate(endNextPayPeriod);
+    beginNextPayPeriod = formatStringToDate(beginNextPayPeriod);
+
+    // Calling the server
+    xmlhttp.onreadystatechange = function()
+    {
+        if (this.readyState == 4 && this.status == 200)
+        {
+            // Parsing the json encoded response from the server
+            console.log(this.responseText);
+            getLatest();
+        }
+    };
+
+    // Telling it where to go, what method to use, and what parameters i want to pass
+    xmlhttp.open("POST", "../../EmployeeManager/Master/Server_Scripts/HomeManager.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send("updatePayPeriod=" + true + "&endNextPayPeriod=" + endNextPayPeriod + "&beginNextPayPeriod=" + beginNextPayPeriod);
+}
+
+function formatStringToDate(value)
+{
+    var translation = value.toLocaleDateString();
+    translation = translation.split("/");
+    return (translation[2] + "-" + translation[0] + "-" + translation[1]);
 }

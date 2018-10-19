@@ -17,6 +17,13 @@ if(isset($_POST["getLatestPayPeriod"]))
     echo json_encode($latest);
 }
 
+else if(isset($_POST["updatePayPeriod"]) && isset($_POST["endNextPayPeriod"]) && isset($_POST["beginNextPayPeriod"]))
+{
+    var_dump($_POST);
+
+    $DB->updatePayPeriod($_POST["endNextPayPeriod"], $_POST["beginNextPayPeriod"]);
+}
+
 else
 {
     echo "Cannot get the latest pay period.";
