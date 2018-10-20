@@ -91,35 +91,7 @@ if(isset($_SESSION["message"]))
 
 <div id="wrapper">
     <!-- Sidebar -->
-    <ul class="sidebar navbar-nav">
-        <!-- Home page -->
-        <li class="nav-item">
-            <a class="nav-link" href="../../EmployeeManager/Forms/Home.php">
-                <i class="fas fa-fw fa-compass"></i>
-                <span>Home</span>
-            </a>
-        </li>
-        <!-- Register new user admins only -->
-        <?php
-        // Checking if admin
-        if((int) $session->getIsAdmin() == 1)
-        {
-            echo "<li class=\"nav-item\">
-            <a class=\"nav-link\" href=\"../../EmployeeManager/Forms/SignUp.php\">
-            <i class='fas fa-fw fa-user'></i>
-                <span>Register New User</span>
-            </a>
-        </li>";
-        }
-        ?>
-        <!-- Sign Up -->
-        <li class="nav-item">
-            <a class="nav-link" href="../../EmployeeManager/Forms/TimeSheet.php">
-                <i class="fas fa-fw fa-clipboard"></i>
-                <span>Time Sheet</span>
-            </a>
-        </li>
-    </ul>
+    <?php include("../Master/sidenavbar.php") ?>
 
     <div id="content-wrapper">
         <div class="container-fluid">

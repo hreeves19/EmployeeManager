@@ -34,9 +34,9 @@ $.ajax({
         var myLineChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ["Monday", "Tuesday", "wednesday", "Thursday", "Friday"],
+                labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
                 datasets: [{
-                    label: "Hours Worked",
+                    label: "Hours Worked This Week",
                     backgroundColor: "rgba(2,117,216,1)",
                     borderColor: "rgba(2,117,216,1)",
                     data: [days[0], days[1], days[2], days[3], days[4]],

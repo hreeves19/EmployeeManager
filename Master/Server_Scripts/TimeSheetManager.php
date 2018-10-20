@@ -56,6 +56,6 @@ if(isset($_GET["datatable"]))
 {
     $currentPeriod = $DB->getLatestPayPeiod();
     $data = $DB->selectAllTimeSheet($session->getPrimarykey(), $currentPeriod);
-    echo json_encode($data);
+    echo json_encode(array('data' => $data));
 }
 ?>

@@ -205,6 +205,7 @@ class DBHelper
     public function selectAllTimeSheet($employee_id, $pay_period_id)
     {
         $data = array();
+        $to_date = $pay_period_id["MAX(`date_to`)"];
 
         // Getting connection
         $mysqli = $this->getConnection();
@@ -216,7 +217,8 @@ class DBHelper
             return false;
         }
 
-        $sql = "SELECT * FROM `time_sheet` WHERE `employee_id` = $employee_id AND `pay_period_id` = (SELECT `pay_period_id` FROM `pay_period` WHERE `date_to` = \"$pay_period_id\"))";
+        $sql = "SELECT * FROM `time_sheet` WHERE `employee_id` = $employee_id AND `pay_period_id` = (SELECT `pay_period_id` FROM `pay_period` WHERE `date_to` = \"$to_date\")";
+
         $response = $mysqli->query($sql);
 
         if ($response)

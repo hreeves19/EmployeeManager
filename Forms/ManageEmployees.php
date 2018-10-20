@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: Courtland
- * Date: 10/14/2018
- * Time: 10:36 PM
+ * Date: 10/20/2018
+ * Time: 6:31 PM
  */
 
 // ADD THIS SECTION ON EVERY PAGE EXCEPT LOGIN
@@ -229,3 +229,4 @@ if(isset($_SESSION["message"]))
 </script>
 </body>
 </html>
+

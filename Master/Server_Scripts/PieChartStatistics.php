@@ -31,6 +31,14 @@ $DB = new DBHelper();
 // Getting monday of this week and friday
 $monday = date('Y-m-d', strtotime('monday this week'));
 $friday = date('Y-m-d', strtotime("friday this week"));
+$now = date('Y-m-d', strtotime("now"));
+
+// Need to move to next week
+if($now > $friday)
+{
+    $monday = date('Y-m-d', strtotime('next monday'));
+    $friday = date('Y-m-d', strtotime('next friday'));
+}
 
 // Getting data
 $data = $DB->getPieChartData($monday, $friday, $session->getPrimarykey());
