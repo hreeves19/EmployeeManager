@@ -42,7 +42,7 @@ if(isset($_SESSION["message"]))
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Time Sheet</title>
+    <title>Manage Employees</title>
 
     <!-- Bootstrap core CSS-->
     <link href="../../EmployeeManager/Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -94,72 +94,11 @@ if(isset($_SESSION["message"]))
 
     <div id="content-wrapper">
         <div class="container-fluid">
-            <h1 style="text-align: center">Time Sheet</h1>
-            <hr>
-            <div class="card card-login mx-auto mt-5">
-                <div class="card-header">Time Submission</div>
-                <div class="card-body">
-                    <form id="formTimeSheet" action="../../EmployeeManager/Master/Server_Scripts/TimeSheetManager.php" method="post" accept-charset="UTF-8" onsubmit="return validateForm(this)">
-                        <!-- Enter Time From -->
-                        <div class="form-group">
-                            <div class="form-label-group">
-                                <input id="timef" type="time" name="timef" class="form-control" placeholder="Time From" required="required" min="08:00" max="17:00">
-                                <label for="timef">Time From</label>
-                            </div>
-                        </div>
-                        <!-- Enter Time To -->
-                        <div class="form-group">
-                            <div class="form-label-group">
-                                <input id="timet" type="time" name="timet" class="form-control" placeholder="Time To" required="required" min="08:00" max="17:00">
-                                <label for="timet">Time To</label>
-                            </div>
-                        </div>
-                        <!-- Enter Date -->
-                        <div class="form-group">
-                            <div class="form-label-group">
-                                <input id="date" type="text" name="date" class="form-control" placeholder="Date" required="required">
-                                <label for="date">Date</label>
-                            </div>
-                        </div>
-                        <!-- Hidden Hours Worked -->
-                        <div class="form-group">
-                            <div class="form-label-group">
-                                <input id="hours" type="text" name="hours" class="form-control" placeholder="Hours" style="display: none;">
-                                <label for="hours"></label>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block" onclick="calculateHours()">Submit Time</button>
-                    </form>
-                </div>
-            </div>
-            <!-- Pie chart stuff -->
-            <hr>
-            <h1 style="text-align: center;">Time Statistics</h1>
-            <hr>
-            <div class="row" style="padding-top: 10px;">
-                <div class="col-lg-8">
-                    <div class="card mb-3">
-                        <div class="card-header">
-                            <i class="fas fa-chart-bar"></i>
-                            Hours Worked</div>
-                        <div class="card-body">
-                            <canvas id="myBarChart" width="100%" height="50"></canvas>
-                        </div>
-                        <div class="card-footer small text-muted">Time Statistics</div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="card mb-3">
-                        <div class="card-header">
-                            <i class="fas fa-chart-pie"></i>
-                            Work Accomplished</div>
-                        <div class="card-body">
-                            <canvas id="myPieChart" width="100%" height="100%"></canvas>
-                        </div>
-                        <div class="card-footer small text-muted">Time Statistics</div>
-                    </div>
-                </div>
-            </div>
+            <!-- Table showing all their employees -->
+
+            <!-- Some kind of statistics showing hours worked for their employees -->
+
+            <!-- Time approval of their employee's time sheets -->
         </div>
         <!-- /.container-fluid -->
 
@@ -219,14 +158,7 @@ if(isset($_SESSION["message"]))
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="../Master/Client_Scripts/time_statistics_manager_pie.js"></script>
-<script src="../Master/Client_Scripts/time_statistics_manager_bar.js"></script>
 
-<script>
-    $( function() {
-        $( "#date" ).datepicker({dateFormat: "yy-mm-dd"});
-    } );
-</script>
 </body>
 </html>
 
