@@ -102,18 +102,27 @@ if(isset($_SESSION["message"]))
                     <div class="card-header">Register User</div>
                     <div class="card-body">
                         <form id="formLogin" action="../../EmployeeManager/Master/Server_Scripts/SignUpManager.php" method="post" accept-charset="UTF-8">
+
+                            <!-- First and Last Name Row -->
                             <div class="form-group">
-                                <div class="form-label-group">
-                                    <input id="FirstName" type="text" name="FirstName" class="form-control" placeholder="First Name" required="required" autofocus="autofocus">
-                                    <label for="FirstName">First Name</label>
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div class="form-label-group">
+                                            <input id="FirstName" type="text" name="FirstName" class="form-control" placeholder="First Name" required="required" autofocus="autofocus">
+                                            <label for="FirstName">First Name</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-label-group">
+                                            <input id="LastName" type="text" name="LastName" class="form-control" placeholder="Last Name" required="required">
+                                            <label for="LastName">Last Name</label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="form-label-group">
-                                    <input id="LastName" type="text" name="LastName" class="form-control" placeholder="Last Name" required="required">
-                                    <label for="LastName">Last Name</label>
-                                </div>
-                            </div>
+
+                            <!-- Drop down for Gender -->
                             <div class="form-group">
                                 <div class="form-label-group">
                                     <label for="gender"></label>
@@ -125,6 +134,8 @@ if(isset($_SESSION["message"]))
                                     </select>
                                 </div>
                             </div>
+
+                            <!-- Password Text Box -->
                             <div class="form-group">
                                 <div class="form-label-group">
                                     <input id="Password" type="password" name="Password" class="form-control" placeholder="Password" required="required">
@@ -137,18 +148,26 @@ if(isset($_SESSION["message"]))
                                     <label for="Address">Address</label>
                                 </div>
                             </div>
+
+                            <!-- Zip code and City Text Boxes -->
                             <div class="form-group">
-                                <div class="form-label-group">
-                                    <input id="zipCode" type="text" name="zipCode" class="form-control" placeholder="Zip Code" required="required">
-                                    <label for="zipCode">Zip Code</label>
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div class="form-label-group">
+                                            <input id="zipCode" type="text" name="zipCode" class="form-control" placeholder="Zip Code" required="required">
+                                            <label for="zipCode">Zip Code</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-label-group">
+                                            <input id="City" type="text" name="City" class="form-control" placeholder="City" required="required">
+                                            <label for="City">City</label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="form-label-group">
-                                    <input id="City" type="text" name="City" class="form-control" placeholder="City" required="required">
-                                    <label for="City">City</label>
-                                </div>
-                            </div>
+
+                                    <!-- State Drop Down box -->
                             <div class="form-group">
                                 <div class="form-label-group">
                                     <label for="State"></label>
@@ -206,6 +225,8 @@ if(isset($_SESSION["message"]))
                                     </select>
                                 </div>
                             </div>
+
+                            <!-- Country Drop Down Box -->
                             <div class="form-group">
                                 <div class="form-label-group">
                                     <label for="Country"></label>
@@ -457,6 +478,8 @@ if(isset($_SESSION["message"]))
                                     </select>
                                 </div>
                             </div>
+
+                            <!-- Date Picker Box -->
                             <div class="form-group">
                                 <div class="form-label-group">
                                     <input id="date" type="text" name="date" class="form-control" placeholder="Date" required="required">
