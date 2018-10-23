@@ -238,7 +238,7 @@ class DBHelper
         return $data;
     }
 
-    function updatePayPeriod($to, $from)
+    public function updatePayPeriod($to, $from)
     {
         // Create connection
         $conn = $this->getConnection();
@@ -259,5 +259,49 @@ class DBHelper
         }
 
         $conn->close();
+    }
+
+    public function ddlEmployees($manager_id)
+    {
+        // Getting connection
+        $mysqli = $this->getConnection();
+        // Checking to see if the connection failed
+        if($mysqli->connect_errno)
+        {
+            echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+            return false;
+        }
+        // Creating select statement
+        $sql = "SELECT `id`, `first_name`, `last_name` FROM `employee` e " .
+        "LEFT JOIN `dept_manager` m on m.`employee_id` = e.`id` " .
+        "LEFT JOIN `dept_emp` d on d.`employee_id` = e.`id` " .
+        "WHERE d.`dept_emp_ID` = $manager_id";
+
+        $result = $mysqli->query($sql);
+
+        if ($result)
+        {
+            echo "People to tag: <select id = 'ddlEmployees' class='form-control' name='peopleTagged'>";
+            echo "<option value ='" . -1 . "'>All</option>";
+
+            // output data of each row
+            while($row = $result->fetch_assoc())
+            {
+                $name = $row["first_name"] . " " . $row["last_name"];
+                echo "<option value ='" . $row["id"] . "'>"
+                    . $name  . "</option>";
+            }
+            echo "</select>";
+        }
+        else
+        {
+            // Closing database connection
+            echo "Hey there $manager_id";
+            $mysqli->close();
+            return false;
+        }
+        // Closing db connection
+        mysqli_close($mysqli);
+        return true;
     }
 }

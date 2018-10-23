@@ -26,7 +26,9 @@ $(document).ready(function() {
             var selectedDate = date._d;
             selectedDate.setDate(selectedDate.getDate() + 1);
             selectedDate = selectedDate.getFullYear() + '-' + (selectedDate.getMonth()+1) + '-' + selectedDate.getDate();
-            console.log(selectedDate);
+
+            $('#eventModal').modal('show');
+
         },
 
         loading: function(bool) {
