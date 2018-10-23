@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 18, 2018 at 08:23 AM
+-- Generation Time: Oct 23, 2018 at 10:27 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -81,6 +81,13 @@ CREATE TABLE `dept_emp` (
   `dept_manager_id` int(11) NOT NULL COMMENT 'Foreign key to the dept_manager table'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `dept_emp`
+--
+
+INSERT INTO `dept_emp` (`dept_emp_ID`, `from_date`, `to_date`, `employee_id`, `department_id`, `dept_manager_id`) VALUES
+(1, '2018-10-01', '2018-10-23', 1, 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -147,7 +154,8 @@ CREATE TABLE `pay_period` (
 --
 
 INSERT INTO `pay_period` (`pay_period_id`, `date_from`, `date_to`) VALUES
-(1, '2018-10-08', '2018-10-19');
+(1, '2018-10-08', '2018-10-19'),
+(2, '2018-10-22', '2018-11-02');
 
 -- --------------------------------------------------------
 
@@ -194,7 +202,8 @@ INSERT INTO `time_sheet` (`time_id`, `number_hours`, `time_from`, `time_to`, `da
 (3, 0.0333333, '13:03:00', '13:05:00', '2018-10-17', 3, 1),
 (4, 9, '08:00:00', '17:00:00', '2018-10-18', 3, 1),
 (5, 3.91667, '08:00:00', '11:55:00', '2018-10-19', 3, 1),
-(6, 4, '08:00:00', '12:00:00', '2018-10-18', 1, 1);
+(6, 4, '08:00:00', '12:00:00', '2018-10-18', 1, 1),
+(7, 2, '15:00:00', '17:00:00', '2018-10-22', 3, 2);
 
 -- --------------------------------------------------------
 
@@ -292,7 +301,7 @@ ALTER TABLE `departments`
 -- AUTO_INCREMENT for table `dept_emp`
 --
 ALTER TABLE `dept_emp`
-  MODIFY `dept_emp_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary key';
+  MODIFY `dept_emp_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary key', AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `dept_manager`
@@ -310,7 +319,7 @@ ALTER TABLE `employee`
 -- AUTO_INCREMENT for table `pay_period`
 --
 ALTER TABLE `pay_period`
-  MODIFY `pay_period_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `pay_period_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `salaries`
@@ -322,7 +331,7 @@ ALTER TABLE `salaries`
 -- AUTO_INCREMENT for table `time_sheet`
 --
 ALTER TABLE `time_sheet`
-  MODIFY `time_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `time_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `titles`
