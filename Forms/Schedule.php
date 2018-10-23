@@ -2,10 +2,9 @@
 /**
  * Created by PhpStorm.
  * User: Courtland
- * Date: 10/20/2018
- * Time: 6:31 PM
+ * Date: 10/22/2018
+ * Time: 9:24 PM
  */
-
 // ADD THIS SECTION ON EVERY PAGE EXCEPT LOGIN
 // This helps us keep track of the user
 /****************************************************************************/
@@ -42,7 +41,7 @@ if(isset($_SESSION["message"]))
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Manage Employees</title>
+    <title>My Schedule</title>
 
     <!-- Bootstrap core CSS-->
     <link href="../../EmployeeManager/Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -94,11 +93,13 @@ if(isset($_SESSION["message"]))
 
     <div id="content-wrapper">
         <div class="container-fluid">
-            <!-- Table showing all their employees -->
 
-            <!-- Some kind of statistics showing hours worked for their employees -->
+            <h1 style="text-align: center;">My Schedule</h1>
+            <hr>
 
-            <!-- Time approval of their employee's time sheets -->
+            <!-- Calendar -->
+            <div id='calendar'></div>
+
         </div>
         <!-- /.container-fluid -->
 
@@ -153,10 +154,24 @@ if(isset($_SESSION["message"]))
 <!-- Page level plugin JavaScript-->
 <script src="../../EmployeeManager/Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/vendor/chart.js/Chart.min.js"></script>
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- Open Source FullCalendar Javascript library -->
+<!-- https://fullcalendar.io/ -->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css" rel="stylesheet" type="text/css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.print.css" rel="stylesheet" type="text/css">-->
+<link href='https://fullcalendar.io/releases/fullcalendar/3.9.0/fullcalendar.min.css' rel='stylesheet' />
+<link href='https://fullcalendar.io/releases/fullcalendar/3.9.0/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+<script src='https://fullcalendar.io/releases/fullcalendar/3.9.0/lib/moment.min.js'></script>
+<script src='https://fullcalendar.io/releases/fullcalendar/3.9.0/lib/jquery.min.js'></script>
+<script src='https://fullcalendar.io/releases/fullcalendar/3.9.0/fullcalendar.min.js'></script>
+<script src='https://fullcalendar.io/releases/fullcalendar/3.9.0/gcal.min.js'></script>
+
+<!-- Our script files -->
+<script src="../../EmployeeManager/Master/Client_Scripts/schedule_calendar_manager.js"></script>
+
 
 </body>
 </html>
+
 

@@ -57,4 +57,11 @@
     </li>";
         }
     ?>
+    <!-- Schecduling -->
+    <li class="nav-item">
+        <a class="nav-link" href="../../EmployeeManager/Forms/Schedule.php">
+            <i class="fas fa-fw fa-calendar"></i>
+            <span>My Schedule</span>
+        </a>
+    </li>
 </ul>
