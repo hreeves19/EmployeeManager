@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.1
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 23, 2018 at 10:27 PM
--- Server version: 10.1.33-MariaDB
--- PHP Version: 7.2.6
+-- Generation Time: Oct 24, 2018 at 03:41 AM
+-- Server version: 10.1.35-MariaDB
+-- PHP Version: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -46,6 +46,22 @@ CREATE TABLE `address` (
 INSERT INTO `address` (`address_ID`, `street_address`, `city`, `zipcode`, `state`, `country`) VALUES
 (1, '1773 Ennis Joslin Rd', 'Corpus Christi', 78412, 'Tx', 'United States'),
 (2, '2921 Airline Rd Apartment 325', 'Corpus Christi', 78414, 'Tx', 'United States');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `calendar`
+--
+
+CREATE TABLE `calendar` (
+  `schedule_id` int(11) NOT NULL COMMENT 'PK schedule_id',
+  `date` date NOT NULL COMMENT 'Date scheduled',
+  `mandatory` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0 = not mandatory, 1 = is mandatory',
+  `time_start` time NOT NULL COMMENT 'Time the event starts',
+  `time_end` time NOT NULL COMMENT 'Time the event ends',
+  `event_id` int(11) NOT NULL COMMENT 'FK to the event table',
+  `employee_id` int(11) NOT NULL COMMENT 'FK to the employees table, the employee attached to this'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -136,6 +152,22 @@ INSERT INTO `employee` (`id`, `first_name`, `last_name`, `gender`, `hire_date`, 
 (1, 'John', 'Doe', 'M', '2018-10-09', 123456789, 'password', 0, 1, 1),
 (2, 'Jane', 'Doe', 'F', '2018-10-16', 987654321, 'password', 0, 1, 1),
 (3, 'Jack', 'Myer', 'M', '2018-10-16', 111222333, 'password', 1, 1, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `event`
+--
+
+CREATE TABLE `event` (
+  `event_id` int(11) NOT NULL COMMENT 'PK',
+  `name` varchar(50) NOT NULL COMMENT 'Name of the event',
+  `start_time` time NOT NULL COMMENT 'Time event starts',
+  `end_time` time NOT NULL COMMENT 'time event ends',
+  `description` varchar(250) NOT NULL COMMENT 'The description of the event',
+  `mandatory` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0 = not, 1 = is',
+  `dept_manager_ID` int(11) NOT NULL COMMENT 'The manager who schedule it'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -234,6 +266,12 @@ ALTER TABLE `address`
   ADD PRIMARY KEY (`address_ID`);
 
 --
+-- Indexes for table `calendar`
+--
+ALTER TABLE `calendar`
+  ADD PRIMARY KEY (`schedule_id`);
+
+--
 -- Indexes for table `departments`
 --
 ALTER TABLE `departments`
@@ -256,6 +294,12 @@ ALTER TABLE `dept_manager`
 --
 ALTER TABLE `employee`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `event`
+--
+ALTER TABLE `event`
+  ADD PRIMARY KEY (`event_id`);
 
 --
 -- Indexes for table `pay_period`
@@ -292,6 +336,12 @@ ALTER TABLE `address`
   MODIFY `address_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary key', AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `calendar`
+--
+ALTER TABLE `calendar`
+  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'PK schedule_id';
+
+--
 -- AUTO_INCREMENT for table `departments`
 --
 ALTER TABLE `departments`
@@ -314,6 +364,12 @@ ALTER TABLE `dept_manager`
 --
 ALTER TABLE `employee`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary key to identify unique values', AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `event`
+--
+ALTER TABLE `event`
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'PK';
 
 --
 -- AUTO_INCREMENT for table `pay_period`
