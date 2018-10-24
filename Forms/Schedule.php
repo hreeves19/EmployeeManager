@@ -113,7 +113,7 @@ if(isset($_SESSION["message"]))
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form id="addEventModalForm" method="post" action="../../EmployeeManager/Master/Server_Scripts/ScheduleManager.php">
+                            <form id="addEventModalForm">
                                 <div class="row">
                                     <div class="col-xl-4 form-group">
                                         <label for="eventName" style="text-align: center;">Event Name</label>
@@ -140,6 +140,10 @@ if(isset($_SESSION["message"]))
                                     <div class="col-xl-12 form-group">
                                         <textarea id="eventDescription" name="eventDescription" class="form-control" rows="5" placeholder="Type event description"></textarea>
                                     </div>
+                                    <div class="col-xl-12 form-group">
+                                        <label for="date">Day of Event</label>
+                                        <input id="date" type="text" name="date" class="form-control" placeholder="Day of Event" readonly>
+                                    </div>
                                 </div>
                                 <div class="float-left">
                                     <button class="btn btn-primary btn-outline" type="submit" id="btnSubmit" name="btnSubmit" data-toggle="modal" data-target="#myModal">Add Event</button>
@@ -154,7 +158,6 @@ if(isset($_SESSION["message"]))
                     </div>
                 </div>
             </div>
-
         </div>
         <!-- /.container-fluid -->
 

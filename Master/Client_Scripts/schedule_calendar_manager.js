@@ -27,7 +27,7 @@ $(document).ready(function() {
             selectedDate = date._d;
             selectedDate.setDate(selectedDate.getDate() + 1);
             selectedDate = selectedDate.getFullYear() + '-' + (selectedDate.getMonth() + 1) + '-' + selectedDate.getDate();
-
+            document.getElementById("date").value = selectedDate;
             $('#eventModal').modal('show');
 
         },
@@ -38,39 +38,42 @@ $(document).ready(function() {
 
     });
 
-    // Modal Validator
-    $('#eventModal').bootstrapValidator({
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        fields: {
-            eventName: {
-                validators: {
-                    notEmpty: {
-                        message: 'The event name is required'
-                    }
-                }
-            },
-        }
+    // Keeps modal showing
+    $('#eventModal').on('hidden.bs.modal', function() {
+        $('#eventModal').bootstrapValidator('resetForm', true);
     });
 
-    /*$('#addEventModalForm').on("submit", function (event) {
-        event.preventDefault();
-        if($('#eventName').val() == "")
+    // Modal Validator
+    $('#btnSubmit').click(function() {
+        var eventName = $('#eventName').val();
+        var eventStart = $('#eventStart').val();
+        var eventEnd = $('#eventEnd').val();
+        var mandatory = $('#mandatory').val();
+        var eventDescription = $('#eventDescription').val();
+        var people = $('#peopleTagged').val();
+        var selectedDate = $('#date').val();
+
+        if(eventName !== "" && eventStart !== "" && eventEnd !== "" && mandatory !== "" && eventDescription !== "" && people !== "")
         {
-            alert("Name is required");
+            /*alert("Success!");*/
+            /*console.log(selectedDate);*/
+
+            $.ajax({
+                url: "../../EmployeeManager/Master/Server_Scripts/ScheduleManager.php",
+                method:"POST",
+                data:{eventName:eventName, eventStart:eventStart, eventEnd:eventEnd, mandatory:mandatory, eventDescription:eventDescription, people:people, selectedDate:selectedDate},
+                success:function(data)
+                {
+
+                }
+            });
+
+            // Force body to reload
+            /*$('body').click(function() {
+                location.reload();
+            });*/
         }
-        else if($('#eventStart').val() == '')
-        {
-            alert("Address is required");
-        }
-        else if($('#eventEnd').val() == '')
-        {
-            alert("Designation is required");
-        }
-    });*/
+    });
 });
 
 function addEvent()
@@ -91,10 +94,6 @@ function addEvent()
         alert("All fields must be filled.");
     }*/
 }
-
-$('#eventModal').on('shown.bs.modal', function() {
-    $('#eventModal').bootstrapValidator('resetForm', true);
-});
 
 /*
 $(function() {
@@ -117,16 +116,17 @@ $(function() {
     });
 });*/
 
+/*
 $(function(){
     $('#addEventModalForm').on('submit', function(e){
         e.preventDefault();
         $.ajax({
             url: "../../EmployeeManager/Master/Server_Scripts/ScheduleManager.php", //this is the submit URL
             type: 'POST', //or POST
-            /*data: $('#addEventModalForm').serialize(),
+            /!*data: $('#addEventModalForm').serialize(),
             success: function(data){
                 alert('successfully submitted')
-            }*/
+            }*!/
         });
     });
-});
+});*/

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2018 at 03:41 AM
--- Server version: 10.1.35-MariaDB
--- PHP Version: 7.2.9
+-- Generation Time: Oct 24, 2018 at 07:55 PM
+-- Server version: 10.1.33-MariaDB
+-- PHP Version: 7.2.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -56,9 +56,6 @@ INSERT INTO `address` (`address_ID`, `street_address`, `city`, `zipcode`, `state
 CREATE TABLE `calendar` (
   `schedule_id` int(11) NOT NULL COMMENT 'PK schedule_id',
   `date` date NOT NULL COMMENT 'Date scheduled',
-  `mandatory` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0 = not mandatory, 1 = is mandatory',
-  `time_start` time NOT NULL COMMENT 'Time the event starts',
-  `time_end` time NOT NULL COMMENT 'Time the event ends',
   `event_id` int(11) NOT NULL COMMENT 'FK to the event table',
   `employee_id` int(11) NOT NULL COMMENT 'FK to the employees table, the employee attached to this'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -168,6 +165,15 @@ CREATE TABLE `event` (
   `mandatory` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0 = not, 1 = is',
   `dept_manager_ID` int(11) NOT NULL COMMENT 'The manager who schedule it'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `event`
+--
+
+INSERT INTO `event` (`event_id`, `name`, `start_time`, `end_time`, `description`, `mandatory`, `dept_manager_ID`) VALUES
+(1, 'BBQ', '18:00:00', '22:00:00', 'This is a BBQ For everyone! ', 0, 1),
+(2, 'BBQ', '18:00:00', '22:00:00', 'This is a BBQ For everyone! ', 0, 1),
+(3, 'Darkness', '17:00:00', '17:55:00', 'its better now right?', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -369,7 +375,7 @@ ALTER TABLE `employee`
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'PK';
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'PK', AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pay_period`

@@ -33,4 +33,15 @@ if(isset($_SESSION["message"]))
     unset($_SESSION["message"]);
 }
 /****************************************************************************/
+
+var_dump($_POST);
+$mandatory = 1;
+
+
+if($_POST["mandatory"] === "0")
+{
+    $mandatory = 0;
+}
+
+$DB->addEvent($_POST["eventName"], $_POST["eventStart"],  $_POST["eventEnd"], $_POST["eventDescription"], $mandatory, (int) $session->getisManager())
 ?>

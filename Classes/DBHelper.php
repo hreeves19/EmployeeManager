@@ -306,4 +306,28 @@ class DBHelper
         mysqli_close($mysqli);
         return true;
     }
+
+    public function addEvent($name, $startTime, $endTime, $description, $mandatory, $deptManager)
+    {
+        // Create connection
+        $conn = $this->getConnection();
+
+
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "INSERT INTO `event`(`name`, `start_time`, `end_time`, `description`, `mandatory`, `dept_manager_ID`) VALUES (\"$name\",\"$startTime\",\"$endTime\",\"$description\",$mandatory,$deptManager)";
+
+        if ($conn->query($sql) === TRUE) {
+            echo "New record created successfully";
+        }
+
+        else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+
+        $conn->close();
+    }
 }
