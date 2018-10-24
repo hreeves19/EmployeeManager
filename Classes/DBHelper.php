@@ -281,7 +281,9 @@ class DBHelper
 
         if ($result)
         {
-            echo "People to tag: <select id = 'ddlEmployees' class='form-control' name='peopleTagged'>";
+
+            echo "<label for='peopleTagged'>Tag employees</label>";
+            echo "<select id = 'peopleTagged' class='form-control' name='peopleTagged'>";
             echo "<option value ='" . -1 . "'>All</option>";
 
             // output data of each row

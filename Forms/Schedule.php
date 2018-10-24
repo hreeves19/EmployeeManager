@@ -101,11 +101,11 @@ if(isset($_SESSION["message"]))
             <hr>
 
             <!-- Calendar -->
-            <div id='calendar'></div>
+            <div id='calendar' style="padding: 10px;"></div>
 
             <div class="modal fade" id="eventModal" aria-labelledby="eventModal" role="dialog" tabindex="-1" aria-hidden="true" style="display: none;">
-                <div class="modal-dialog modal-simple">
-                    <form class="modal-content">
+                <div class="modal-dialog modal-simple" id="myModal">
+                    <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title" id="eventModal">Add Event</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -113,34 +113,45 @@ if(isset($_SESSION["message"]))
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div class="row">
-                                <div class="col-xl-4 form-group">
-                                    <label for="eventName" style="text-align: center;">Event Name</label>
-                                    <input type="text" class="form-control" name="eventName" placeholder="Event Name">
+                            <form id="addEventModalForm" method="post" action="../../EmployeeManager/Master/Server_Scripts/ScheduleManager.php">
+                                <div class="row">
+                                    <div class="col-xl-4 form-group">
+                                        <label for="eventName" style="text-align: center;">Event Name</label>
+                                        <input type="text" class="form-control" name="eventName" placeholder="Event Name" id="eventName" required="required">
+                                    </div>
+                                    <div class="col-xl-4 form-group">
+                                        <label for="eventStart">Event Starts</label>
+                                        <input id="eventStart" type="time" name="eventStart" class="form-control" placeholder="Event Starts" required="required">
+                                    </div>
+                                    <div class="col-xl-4 form-group">
+                                        <label for="eventEnd">Event Ends</label>
+                                        <input id="eventEnd" type="time" name="eventEnd" class="form-control" placeholder="Event Ends" required="required">
+                                    </div>
+                                    <div class="col-xl-6 form-group">
+                                        <?php $DB->ddlEmployees($session->getisManager()); ?>
+                                    </div>
+                                    <div class="col-xl-6 form-group">
+                                        <label for="mandatory">Mandatory</label>
+                                        <select id="mandatory" name="mandatory" class="form-control">
+                                            <option value="0">No</option>
+                                            <option value="1">yes</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-xl-12 form-group">
+                                        <textarea id="eventDescription" name="eventDescription" class="form-control" rows="5" placeholder="Type event description"></textarea>
+                                    </div>
                                 </div>
-                                <div class="col-xl-4 form-group">
-                                    <label for="timet">Event Starts</label>
-                                    <input id="timet" type="time" name="eventStart" class="form-control" placeholder="Event Starts">
+                                <div class="float-left">
+                                    <button class="btn btn-primary btn-outline" type="submit" id="btnSubmit" name="btnSubmit" data-toggle="modal" data-target="#myModal">Add Event</button>
                                 </div>
-                                <div class="col-xl-4 form-group">
-                                    <label for="timet">Event Ends</label>
-                                    <input id="timet" type="time" name="eventEnd" class="form-control" placeholder="Event Ends">
+                                <div class="float-right">
+                                    <button type="button" class="btn btn-primary btn-outline" data-dismiss="modal">Close</button>
                                 </div>
-                                <!--<div class="col-xl-12 form-group">
-                                    <textarea class="form-control" rows="5" placeholder="Type your message"></textarea>
-                                </div>-->
-                                <div class="col-xl-12 form-group">
-                                    <?php $DB->ddlEmployees($session->getisManager()); ?>
-                                </div>
-                                <div class="col-xl-12 form-group">
-                                    <textarea class="form-control" rows="5" placeholder="Type your comment"></textarea>
-                                </div>
-                                <div class="col-md-12 float-right">
-                                    <button class="btn btn-primary btn-outline" data-dismiss="modal" type="button">Add Event</button>
-                                </div>
-                            </div>
+                            </form>
                         </div>
-                    </form>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -206,6 +217,8 @@ if(isset($_SESSION["message"]))
 <script src='https://fullcalendar.io/releases/fullcalendar/3.9.0/gcal.min.js'></script>
 
 <script src="../../EmployeeManager/Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
 
 <!-- Our script files -->
 <script src="../../EmployeeManager/Master/Client_Scripts/schedule_calendar_manager.js"></script>
