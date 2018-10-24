@@ -17,6 +17,13 @@
             <span>Home</span>
         </a>
     </li>
+    <!-- Profile -->
+    <li class="nav-item">
+        <a class="nav-link" href="../../EmployeeManager/Forms/Profile.php">
+            <i class="fas fa-fw fa-clock"></i>
+            <span>Profile</span>
+        </a>
+    </li>
     <!-- Register new user admins only -->
     <?php
     // Checking if admin

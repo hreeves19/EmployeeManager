@@ -135,7 +135,7 @@ if(isset($_SESSION["message"]))
                                 </div>
                             </div>
 
-                            <!-- Password Text Box -->
+                            <!-- Password text Box -->
                             <div class="form-group">
                                 <div class="form-label-group">
                                     <input id="Password" type="password" name="Password" class="form-control" placeholder="Password" required="required">
@@ -149,7 +149,7 @@ if(isset($_SESSION["message"]))
                                 </div>
                             </div>
 
-                            <!-- Zip code and City Text Boxes -->
+                            <!-- ZipCode and City text Boxes -->
                             <div class="form-group">
                                 <div class="form-row">
                                     <div class="col-md-6">
