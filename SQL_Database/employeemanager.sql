@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.1
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 18, 2018 at 08:23 AM
--- Server version: 10.1.33-MariaDB
--- PHP Version: 7.2.6
+-- Generation Time: Oct 24, 2018 at 03:41 AM
+-- Server version: 10.1.35-MariaDB
+-- PHP Version: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -50,6 +50,22 @@ INSERT INTO `address` (`address_ID`, `street_address`, `city`, `zipcode`, `state
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `calendar`
+--
+
+CREATE TABLE `calendar` (
+  `schedule_id` int(11) NOT NULL COMMENT 'PK schedule_id',
+  `date` date NOT NULL COMMENT 'Date scheduled',
+  `mandatory` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0 = not mandatory, 1 = is mandatory',
+  `time_start` time NOT NULL COMMENT 'Time the event starts',
+  `time_end` time NOT NULL COMMENT 'Time the event ends',
+  `event_id` int(11) NOT NULL COMMENT 'FK to the event table',
+  `employee_id` int(11) NOT NULL COMMENT 'FK to the employees table, the employee attached to this'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `departments`
 --
 
@@ -80,6 +96,13 @@ CREATE TABLE `dept_emp` (
   `department_id` int(11) NOT NULL COMMENT 'Foreign key to the departments table',
   `dept_manager_id` int(11) NOT NULL COMMENT 'Foreign key to the dept_manager table'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `dept_emp`
+--
+
+INSERT INTO `dept_emp` (`dept_emp_ID`, `from_date`, `to_date`, `employee_id`, `department_id`, `dept_manager_id`) VALUES
+(1, '2018-10-01', '2018-10-23', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -133,6 +156,22 @@ INSERT INTO `employee` (`id`, `first_name`, `last_name`, `gender`, `hire_date`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `event`
+--
+
+CREATE TABLE `event` (
+  `event_id` int(11) NOT NULL COMMENT 'PK',
+  `name` varchar(50) NOT NULL COMMENT 'Name of the event',
+  `start_time` time NOT NULL COMMENT 'Time event starts',
+  `end_time` time NOT NULL COMMENT 'time event ends',
+  `description` varchar(250) NOT NULL COMMENT 'The description of the event',
+  `mandatory` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0 = not, 1 = is',
+  `dept_manager_ID` int(11) NOT NULL COMMENT 'The manager who schedule it'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `pay_period`
 --
 
@@ -147,7 +186,8 @@ CREATE TABLE `pay_period` (
 --
 
 INSERT INTO `pay_period` (`pay_period_id`, `date_from`, `date_to`) VALUES
-(1, '2018-10-08', '2018-10-19');
+(1, '2018-10-08', '2018-10-19'),
+(2, '2018-10-22', '2018-11-02');
 
 -- --------------------------------------------------------
 
@@ -194,7 +234,8 @@ INSERT INTO `time_sheet` (`time_id`, `number_hours`, `time_from`, `time_to`, `da
 (3, 0.0333333, '13:03:00', '13:05:00', '2018-10-17', 3, 1),
 (4, 9, '08:00:00', '17:00:00', '2018-10-18', 3, 1),
 (5, 3.91667, '08:00:00', '11:55:00', '2018-10-19', 3, 1),
-(6, 4, '08:00:00', '12:00:00', '2018-10-18', 1, 1);
+(6, 4, '08:00:00', '12:00:00', '2018-10-18', 1, 1),
+(7, 2, '15:00:00', '17:00:00', '2018-10-22', 3, 2);
 
 -- --------------------------------------------------------
 
@@ -225,6 +266,12 @@ ALTER TABLE `address`
   ADD PRIMARY KEY (`address_ID`);
 
 --
+-- Indexes for table `calendar`
+--
+ALTER TABLE `calendar`
+  ADD PRIMARY KEY (`schedule_id`);
+
+--
 -- Indexes for table `departments`
 --
 ALTER TABLE `departments`
@@ -247,6 +294,12 @@ ALTER TABLE `dept_manager`
 --
 ALTER TABLE `employee`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `event`
+--
+ALTER TABLE `event`
+  ADD PRIMARY KEY (`event_id`);
 
 --
 -- Indexes for table `pay_period`
@@ -283,6 +336,12 @@ ALTER TABLE `address`
   MODIFY `address_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary key', AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `calendar`
+--
+ALTER TABLE `calendar`
+  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'PK schedule_id';
+
+--
 -- AUTO_INCREMENT for table `departments`
 --
 ALTER TABLE `departments`
@@ -292,7 +351,7 @@ ALTER TABLE `departments`
 -- AUTO_INCREMENT for table `dept_emp`
 --
 ALTER TABLE `dept_emp`
-  MODIFY `dept_emp_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary key';
+  MODIFY `dept_emp_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary key', AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `dept_manager`
@@ -307,10 +366,16 @@ ALTER TABLE `employee`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary key to identify unique values', AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `event`
+--
+ALTER TABLE `event`
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'PK';
+
+--
 -- AUTO_INCREMENT for table `pay_period`
 --
 ALTER TABLE `pay_period`
-  MODIFY `pay_period_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `pay_period_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `salaries`
@@ -322,7 +387,7 @@ ALTER TABLE `salaries`
 -- AUTO_INCREMENT for table `time_sheet`
 --
 ALTER TABLE `time_sheet`
-  MODIFY `time_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `time_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `titles`
