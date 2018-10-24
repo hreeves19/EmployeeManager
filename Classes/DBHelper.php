@@ -172,6 +172,7 @@ class DBHelper
         return $manager;
     }
 
+    // Used to obtain user information
     public function signUp($address, $city, $zip, $state, $country, $firstName, $lastName, $gender, $password, $date)
     {
         //Create connection
