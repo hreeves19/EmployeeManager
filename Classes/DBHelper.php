@@ -308,7 +308,7 @@ class DBHelper
         return true;
     }
 
-    public function addEvent($name, $startTime, $endTime, $description, $mandatory, $deptManager)
+    public function addEvent($name, $startTime, $endTime, $description, $mandatory, $deptManager, $date)
     {
         // Create connection
         $conn = $this->getConnection();
@@ -319,7 +319,9 @@ class DBHelper
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $sql = "INSERT INTO `event`(`name`, `start_time`, `end_time`, `description`, `mandatory`, `dept_manager_ID`) VALUES (\"$name\",\"$startTime\",\"$endTime\",\"$description\",$mandatory,$deptManager)";
+        $sql = "INSERT INTO `event`(`date`, `name`, `start_time`, `end_time`, `description`, `mandatory`, `dept_manager_ID`) VALUES (\"$date\",\"$name\",\"$startTime\",\"$endTime\",\"$description\",$mandatory,$deptManager)";
+
+        echo $sql;
 
         if ($conn->query($sql) === TRUE) {
             echo "New record created successfully";
@@ -330,5 +332,40 @@ class DBHelper
         }
 
         $conn->close();
+    }
+
+    public function getEvents($deptManager)
+    {
+        $data = array();
+
+        // Getting connection
+        $mysqli = $this->getConnection();
+
+        // Checking to see if the connection failed
+        if($mysqli->connect_errno)
+        {
+            echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+            return false;
+        }
+
+        $sql = "SELECT * FROM `event` WHERE `dept_manager_ID` = $deptManager";
+
+        $response = $mysqli->query($sql);
+
+        if ($response)
+        {
+            while($row = mysqli_fetch_assoc($response))
+            {
+                $data[] = $row;
+            }
+        }
+        else
+        {
+            echo "Error: " . $sql . "<br>" . $mysqli->error;
+        }
+
+        $mysqli->close();
+
+        return $data;
     }
 }

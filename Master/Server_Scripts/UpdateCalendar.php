@@ -1,10 +1,11 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Court
- * Date: 10/23/2018
- * Time: 4:52 PM
+ * User: Courtland
+ * Date: 10/24/2018
+ * Time: 6:19 PM
  */
+
 // ADD THIS SECTION ON EVERY PAGE EXCEPT LOGIN
 // This helps us keep track of the user
 /****************************************************************************/
@@ -34,15 +35,25 @@ if(isset($_SESSION["message"]))
 }
 /****************************************************************************/
 
-var_dump($_POST);
-$mandatory = 1;
+$data = $DB->getEvents((int) $session->getisManager());
 
+var_dump($data);
 
-if($_POST["mandatory"] === "0")
+/*$data_events[] = array(
+    "id" => $r->ID,
+    "title" => $r->title,
+    "description" => $r->description,
+    "end" => $r->end,
+    "start" => $r->start
+);*/
+$data_events[] = array();
+foreach($data as $key => $value)
 {
-    $mandatory = 0;
+    $data_events[$key] = array(
+        "id" => $value["event_id"],
+        "title" => $value["name"]
+    );
 }
 
-// Inserting the event
-$DB->addEvent($_POST["eventName"], $_POST["eventStart"],  $_POST["eventEnd"], $_POST["eventDescription"], $mandatory, (int) $session->getisManager(), $_POST["selectedDate"]);
+var_dump($data_events);
 ?>

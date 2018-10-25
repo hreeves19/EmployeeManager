@@ -22,6 +22,26 @@ $(document).ready(function() {
         selectable: true,
         selectHelper: true,
 
+        eventSources: [
+            {
+                events: function(start, end, timezone, callback) {
+                    $.ajax({
+                        url: '../../EmployeeManager/Master/Server_Scripts/UpdateCalendar.php',
+                        dataType: 'json',
+                        data: {
+                            // our hypothetical feed requires UNIX timestamps
+                            start: start.unix(),
+                            end: end.unix()
+                        },
+                        success: function(msg) {
+                            var events = msg.events;
+                            callback(events);
+                        }
+                    });
+                }
+            },
+        ],
+
         dayClick: function (date, allDay, jsEvent, view) {
             // Date object, need to increment day to get the right one
             selectedDate = date._d;
@@ -69,9 +89,9 @@ $(document).ready(function() {
             });
 
             // Force body to reload
-            /*$('body').click(function() {
+            $('body').click(function() {
                 location.reload();
-            });*/
+            });
         }
     });
 });

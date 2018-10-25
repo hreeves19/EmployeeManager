@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2018 at 07:55 PM
+-- Generation Time: Oct 25, 2018 at 05:57 AM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -158,6 +158,7 @@ INSERT INTO `employee` (`id`, `first_name`, `last_name`, `gender`, `hire_date`, 
 
 CREATE TABLE `event` (
   `event_id` int(11) NOT NULL COMMENT 'PK',
+  `date` date NOT NULL COMMENT 'Date of the event',
   `name` varchar(50) NOT NULL COMMENT 'Name of the event',
   `start_time` time NOT NULL COMMENT 'Time event starts',
   `end_time` time NOT NULL COMMENT 'time event ends',
@@ -170,10 +171,11 @@ CREATE TABLE `event` (
 -- Dumping data for table `event`
 --
 
-INSERT INTO `event` (`event_id`, `name`, `start_time`, `end_time`, `description`, `mandatory`, `dept_manager_ID`) VALUES
-(1, 'BBQ', '18:00:00', '22:00:00', 'This is a BBQ For everyone! ', 0, 1),
-(2, 'BBQ', '18:00:00', '22:00:00', 'This is a BBQ For everyone! ', 0, 1),
-(3, 'Darkness', '17:00:00', '17:55:00', 'its better now right?', 0, 1);
+INSERT INTO `event` (`event_id`, `date`, `name`, `start_time`, `end_time`, `description`, `mandatory`, `dept_manager_ID`) VALUES
+(4, '2018-10-02', 'BBQ', '05:00:00', '07:00:00', 'fun', 0, 1),
+(5, '2018-10-04', 'Exam', '17:00:00', '19:00:00', 'Exam to take', 0, 1),
+(6, '2018-10-11', 'Class', '17:00:00', '19:00:00', 'All must attend this class.', 1, 1),
+(7, '2018-10-03', 'Meeting', '08:00:00', '10:00:00', 'We will be discussing how to program. How to git gud kid.', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -241,7 +243,8 @@ INSERT INTO `time_sheet` (`time_id`, `number_hours`, `time_from`, `time_to`, `da
 (4, 9, '08:00:00', '17:00:00', '2018-10-18', 3, 1),
 (5, 3.91667, '08:00:00', '11:55:00', '2018-10-19', 3, 1),
 (6, 4, '08:00:00', '12:00:00', '2018-10-18', 1, 1),
-(7, 2, '15:00:00', '17:00:00', '2018-10-22', 3, 2);
+(7, 2, '15:00:00', '17:00:00', '2018-10-22', 3, 2),
+(8, 3.8, '08:12:00', '12:00:00', '2018-10-24', 3, 2);
 
 -- --------------------------------------------------------
 
@@ -375,7 +378,7 @@ ALTER TABLE `employee`
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'PK', AUTO_INCREMENT=4;
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'PK', AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `pay_period`
@@ -393,7 +396,7 @@ ALTER TABLE `salaries`
 -- AUTO_INCREMENT for table `time_sheet`
 --
 ALTER TABLE `time_sheet`
-  MODIFY `time_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `time_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `titles`
