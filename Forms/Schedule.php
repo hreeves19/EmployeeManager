@@ -103,6 +103,7 @@ if(isset($_SESSION["message"]))
             <!-- Calendar -->
             <div id='calendar' style="padding: 10px;"></div>
 
+            <!-- Add Event Modal -->
             <div class="modal fade" id="eventModal" aria-labelledby="eventModal" role="dialog" tabindex="-1" aria-hidden="true" style="display: none;">
                 <div class="modal-dialog modal-simple" id="myModal">
                     <div class="modal-content">
@@ -147,6 +148,63 @@ if(isset($_SESSION["message"]))
                                 </div>
                                 <div class="float-left">
                                     <button class="btn btn-primary btn-outline" type="submit" id="btnSubmit" name="btnSubmit" data-toggle="modal" data-target="#myModal">Add Event</button>
+                                </div>
+                                <div class="float-right">
+                                    <button type="button" class="btn btn-primary btn-outline" data-dismiss="modal">Close</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edit Event Modal -->
+            <div class="modal fade" id="editModal" aria-labelledby="editModal" role="dialog" tabindex="-1" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog modal-simple" id="myModal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Edit Event</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="editEventModalForm">
+                                <div class="row">
+                                    <div class="col-xl-4 form-group">
+                                        <label for="eventNameEdit" style="text-align: center;">Event Name</label>
+                                        <input type="text" class="form-control" name="eventNameEdit" placeholder="Event Name" id="eventNameEdit" required="required">
+                                    </div>
+                                    <div class="col-xl-4 form-group">
+                                        <label for="eventStartEdit">Event Starts</label>
+                                        <input id="eventStartEdit" type="time" name="eventStartEdit" class="form-control" placeholder="Event Starts" required="required">
+                                    </div>
+                                    <div class="col-xl-4 form-group">
+                                        <label for="eventEndEdit">Event Ends</label>
+                                        <input id="eventEndEdit" type="time" name="eventEndEdit" class="form-control" placeholder="Event Ends" required="required">
+                                    </div>
+                                    <div class="col-xl-6 form-group">
+                                        <?php $DB->ddlEmployees($session->getisManager()); ?>
+                                    </div>
+                                    <div class="col-xl-6 form-group">
+                                        <label for="mandatoryEdit">Mandatory</label>
+                                        <select id="mandatoryEdit" name="mandatoryEdit" class="form-control">
+                                            <option value="0">No</option>
+                                            <option value="1">yes</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-xl-12 form-group">
+                                        <textarea id="eventDescriptionEdit" name="eventDescriptionEdit" class="form-control" rows="5" placeholder="Type event description"></textarea>
+                                    </div>
+                                    <div class="col-xl-12 form-group">
+                                        <label for="dateEdit">Day of Event</label>
+                                        <input id="dateEdit" type="text" name="dateEdit" class="form-control" placeholder="Day of Event" readonly>
+                                    </div>
+                                </div>
+                                <div class="float-left">
+                                    <button class="btn btn-primary btn-outline" type="submit" id="btnSubmitEdit" name="btnSubmitEdit" data-toggle="modal" data-target="#myModal">Update Event</button>
                                 </div>
                                 <div class="float-right">
                                     <button type="button" class="btn btn-primary btn-outline" data-dismiss="modal">Close</button>

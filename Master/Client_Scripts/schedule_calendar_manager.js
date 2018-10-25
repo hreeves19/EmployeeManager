@@ -6,14 +6,12 @@ $(document).ready(function() {
     var today = new Date();
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
-    console.log(date);
-
     $('#calendar').fullCalendar
     ({
         header: {
             left: 'prev,next today',
             center: 'title',
-            right: 'month,basicWeek,basicDay'
+            right: 'month,agendaWeek,agendaDay,listMonth'
         },
         defaultDate: date,
         navLinks: true, // can click day/week names to navigate views
@@ -44,23 +42,54 @@ $(document).ready(function() {
 
         dayClick: function (date, allDay, jsEvent, view) {
             // Date object, need to increment day to get the right one
+            // It is off by 5 hours, so we are adding 5 hours
+            var time = date._d;
+            time.setHours(time.getHours() + 5); //HH:mm
             selectedDate = date._d;
             selectedDate.setDate(selectedDate.getDate() + 1);
             selectedDate = selectedDate.getFullYear() + '-' + (selectedDate.getMonth() + 1) + '-' + selectedDate.getDate();
             document.getElementById("date").value = selectedDate;
+
             $('#eventModal').modal('show');
 
         },
 
         loading: function (bool) {
             $('#loading').toggle(bool);
-        }
+        },
 
+        select: function(start, end)
+        {
+            console.log(start);
+        },
+
+        eventClick: function(calEvent, jsEvent, view) {
+
+            /*alert('Event: ' + calEvent.title);
+            alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+            alert('View: ' + view.name);*/
+
+            // Need start and end
+            // Need id
+            // _d for date
+            console.log(calEvent);
+            console.log(jsEvent);
+            console.log(view);
+            console.log(calEvent.start._d.getDate());
+            var day = calEvent.start._d.getDate();
+
+            $('#editModal').modal('show');
+        }
     });
 
     // Keeps modal showing
     $('#eventModal').on('hidden.bs.modal', function() {
         $('#eventModal').bootstrapValidator('resetForm', true);
+    });
+
+    // Keeps modal showing
+    $('#editModal').on('hidden.bs.modal', function() {
+        $('#editModal').bootstrapValidator('resetForm', true);
     });
 
     // Modal Validator
@@ -75,9 +104,6 @@ $(document).ready(function() {
 
         if(eventName !== "" && eventStart !== "" && eventEnd !== "" && mandatory !== "" && eventDescription !== "" && people !== "")
         {
-            /*alert("Success!");*/
-            /*console.log(selectedDate);*/
-
             $.ajax({
                 url: "../../EmployeeManager/Master/Server_Scripts/ScheduleManager.php",
                 method:"POST",
@@ -96,57 +122,3 @@ $(document).ready(function() {
     });
 });
 
-function addEvent()
-{
-    var eventName = document.getElementById("eventName").value;
-    var eventStart = document.getElementById("eventStart").value;
-    var eventEnd = document.getElementById("eventEnd").value;
-    var mandatory = document.getElementById("mandatory");
-    mandatory = mandatory.options [mandatory.selectedIndex] .value;
-
-    /*if(eventName !== "")
-    {
-        console.log(mandatory);
-    }
-
-    else
-    {
-        alert("All fields must be filled.");
-    }*/
-}
-
-/*
-$(function() {
-
-    $("#addEventModalForm").validate({
-        rules: {
-            pName: {
-                required: true,
-                minlength: 8
-            },
-            action: "required"
-        },
-        messages: {
-            pName: {
-                required: "Please enter some data",
-                minlength: "Your data must be at least 8 characters"
-            },
-            action: "Please provide some data"
-        }
-    });
-});*/
-
-/*
-$(function(){
-    $('#addEventModalForm').on('submit', function(e){
-        e.preventDefault();
-        $.ajax({
-            url: "../../EmployeeManager/Master/Server_Scripts/ScheduleManager.php", //this is the submit URL
-            type: 'POST', //or POST
-            /!*data: $('#addEventModalForm').serialize(),
-            success: function(data){
-                alert('successfully submitted')
-            }*!/
-        });
-    });
-});*/

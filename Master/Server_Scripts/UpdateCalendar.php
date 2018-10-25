@@ -37,7 +37,8 @@ if(isset($_SESSION["message"]))
 
 $data = $DB->getEvents((int) $session->getisManager());
 
-var_dump($data);
+// Setting default timezone
+date_default_timezone_set('America/Chicago');
 
 /*$data_events[] = array(
     "id" => $r->ID,
@@ -49,11 +50,34 @@ var_dump($data);
 $data_events[] = array();
 foreach($data as $key => $value)
 {
+    // Getting times
+    $start_time = $value["start_time"];
+    $end_time = $value["end_time"];
+    $date = $value["date"];
+
+    // Need to explode to get hours and minutes, these are now arrays
+    // 0 element = hours, 1 element = minutes, 2 element = seconds
+    $start_time = explode(":", $start_time);
+    $end_time = explode(":", $end_time);
+
+    // Creating date objects w/ time
+    $event_date_start = new DateTime($date);
+    $event_date_start->setTime($start_time[0], $start_time[1], $start_time[2]); // Hours, minutes, seconds
+    $event_start_format = $event_date_start->format('Y-m-d H:i:s');
+
+    // Creating date objects w/ time
+    $event_date_end = new DateTime($date);
+    $event_date_end->setTime($end_time[0], $end_time[1], $end_time[2]); // Hours, minutes, seconds
+    $event_end_format = $event_date_end->format('Y-m-d H:i:s');
+
     $data_events[$key] = array(
         "id" => $value["event_id"],
-        "title" => $value["name"]
+        "title" => $value["name"],
+        "description" => $value["description"],
+        "end" => $event_end_format,
+        "start" => $event_start_format
     );
 }
 
-var_dump($data_events);
+echo json_encode(array("events" => $data_events));
 ?>
