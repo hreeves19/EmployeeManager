@@ -40,10 +40,14 @@ if(isset($_POST["enumber"]) && isset($_POST["psw"]))
         $_SESSION['lastName'] = $data["last_name"];
         $_SESSION['isManager'] = $manager;
         $_SESSION['isAdmin'] = $data["admin"];
+        $_SESSION['address'] = $data["street_address"];
+        $_SESSION['title'] = $data["title"];
+        $_SESSION['salary_per_hour'] = $data["salary_per_hour"];
 
         $session = new SessionManager();
         $_SESSION['sessionobj'] = $session;
 
+        // After signing in and creating session manager obj, we relocate the user to the home page
         header("Location: ../../Forms/Home.php");
     }
 

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.1
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 25, 2018 at 05:57 AM
--- Server version: 10.1.33-MariaDB
--- PHP Version: 7.2.6
+-- Generation Time: Oct 26, 2018 at 12:57 AM
+-- Server version: 10.1.35-MariaDB
+-- PHP Version: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -138,14 +138,14 @@ CREATE TABLE `employee` (
   `password` varchar(50) DEFAULT NULL,
   `admin` int(11) DEFAULT '0' COMMENT '0 = not admin, 1 = admin',
   `title_id` int(11) NOT NULL COMMENT 'Foreign key to title table',
-  `adress_id` tinyint(1) NOT NULL COMMENT 'Foreign key to address table'
+  `address_id` tinyint(1) NOT NULL COMMENT 'Foreign key to address table'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `employee`
 --
 
-INSERT INTO `employee` (`id`, `first_name`, `last_name`, `gender`, `hire_date`, `employee_number`, `password`, `admin`, `title_id`, `adress_id`) VALUES
+INSERT INTO `employee` (`id`, `first_name`, `last_name`, `gender`, `hire_date`, `employee_number`, `password`, `admin`, `title_id`, `address_id`) VALUES
 (1, 'John', 'Doe', 'M', '2018-10-09', 123456789, 'password', 0, 1, 1),
 (2, 'Jane', 'Doe', 'F', '2018-10-16', 987654321, 'password', 0, 1, 1),
 (3, 'Jack', 'Myer', 'M', '2018-10-16', 111222333, 'password', 1, 1, 2);
@@ -175,7 +175,10 @@ INSERT INTO `event` (`event_id`, `date`, `name`, `start_time`, `end_time`, `desc
 (4, '2018-10-02', 'BBQ', '05:00:00', '07:00:00', 'fun', 0, 1),
 (5, '2018-10-04', 'Exam', '17:00:00', '19:00:00', 'Exam to take', 0, 1),
 (6, '2018-10-11', 'Class', '17:00:00', '19:00:00', 'All must attend this class.', 1, 1),
-(7, '2018-10-03', 'Meeting', '08:00:00', '10:00:00', 'We will be discussing how to program. How to git gud kid.', 1, 1);
+(7, '2018-10-03', 'Meeting', '08:00:00', '10:00:00', 'We will be discussing how to program. How to git gud kid.', 1, 1),
+(8, '2018-10-25', 'Lunch-in', '12:15:00', '13:15:00', 'This is a lunch in for all my employees.', 0, 1),
+(9, '2018-10-22', 'Orientation', '07:00:00', '10:00:00', 'We are requesting that all new employees attend the orientation.', 1, 1),
+(10, '2018-10-09', 'Whats up', '17:00:00', '19:00:00', 'Hey yo come check this out doe', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -378,7 +381,7 @@ ALTER TABLE `employee`
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'PK', AUTO_INCREMENT=8;
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'PK', AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `pay_period`

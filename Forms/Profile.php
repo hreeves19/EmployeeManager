@@ -107,7 +107,7 @@ if(isset($_SESSION["message"]))
                                 <div class="form-row">
                                     <div class="col-md-6">
                                         <div class="form-label-group">
-                                            <input id="FirstName" type="text" name="FirstName" class="form-control" placeholder="First Name" required="required" autofocus="autofocus">
+                                            <input id="FirstName" type="text" name="FirstName" class="form-control" placeholder="First Name" required="required" autofocus="autofocus" value="<?php echo $session->getTitle(); ?>">
                                             <label for="FirstName">First Name</label>
                                         </div>
                                     </div>

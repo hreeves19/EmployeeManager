@@ -16,6 +16,7 @@ class SessionManager
     private $isManager;
     private $isAdmin;
     private $loggedIn;
+    private $title;
 
     /**
      * SessionManager constructor.
@@ -26,7 +27,7 @@ class SessionManager
 
         // logging in
         if(isset($_SESSION['primarykey']) && isset($_SESSION['employeeNumber']) && isset($_SESSION['firstName'])
-         && isset($_SESSION['lastName']) && isset($_SESSION['isManager']) && isset($_SESSION['isAdmin']))
+         && isset($_SESSION['lastName']) && isset($_SESSION['isManager']) && isset($_SESSION['isAdmin']) && isset($_SESSION['title']))
         {
             // Setting class variables
             $this->setPrimarykey($_SESSION['primarykey']);
@@ -35,6 +36,7 @@ class SessionManager
             $this->setLastName($_SESSION['lastName']);
             $this->setIsManager($_SESSION['isManager']);
             $this->setIsAdmin($_SESSION['isAdmin']);
+            $this->setTitle($_SESSION['title']);
             $this->setLoggedIn(true);
         }
     }
@@ -45,6 +47,22 @@ class SessionManager
         session_destroy();
         $this->setLoggedIn(false);
         header("Location: ../../EmployeeManager/Forms/Login.php");
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param mixed $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
     }
 
     /**
