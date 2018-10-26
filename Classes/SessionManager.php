@@ -17,7 +17,7 @@ class SessionManager
     private $isAdmin;
     private $loggedIn;
     private $title;
-    private $manager;
+    private $managers_id; // If -1, means employee is not a manager
 
     /**
      * SessionManager constructor.
@@ -28,7 +28,8 @@ class SessionManager
 
         // logging in
         if(isset($_SESSION['primarykey']) && isset($_SESSION['employeeNumber']) && isset($_SESSION['firstName'])
-         && isset($_SESSION['lastName']) && isset($_SESSION['isManager']) && isset($_SESSION['isAdmin']) && isset($_SESSION['title']))
+         && isset($_SESSION['lastName']) && isset($_SESSION['isManager']) && isset($_SESSION['isAdmin']) && isset($_SESSION['title'])
+        && isset($_SESSION['manager_id']))
         {
             // Setting class variables
             $this->setPrimarykey($_SESSION['primarykey']);
@@ -39,16 +40,7 @@ class SessionManager
             $this->setIsAdmin($_SESSION['isAdmin']);
             $this->setTitle($_SESSION['title']);
             $this->setLoggedIn(true);
-
-            // By default, set this to 0
-            $this->setManager(0);
-
-
-            // Checking to see if employee is a manager
-            if((int) $this->getisManager() > 0)
-            {
-                // Not a manager, so we set the manager property
-            }
+            $this->setManagersId($_SESSION['manager_id']);
         }
     }
 
@@ -63,17 +55,26 @@ class SessionManager
     /**
      * @return mixed
      */
-    public function getManager()
+    public function getManagersId()
     {
-        return $this->manager;
+        return $this->managers_id;
     }
 
     /**
-     * @param mixed $manager
+     * @param mixed $managers_id
      */
-    public function setManager($manager)
+    public function setManagersId($manager_id)
     {
-        $this->manager = $manager;
+        // Checking to see if employee is a manager
+        if( $this->getisManager() === false)
+        {
+            $this->managers_id = $manager_id;
+        }
+
+        else
+        {
+            $this->managers_id = -1;
+        }
     }
 
     /**

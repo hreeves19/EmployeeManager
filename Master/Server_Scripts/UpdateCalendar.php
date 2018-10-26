@@ -35,7 +35,17 @@ if(isset($_SESSION["message"]))
 }
 /****************************************************************************/
 
-$data = $DB->getEvents((int) $session->getisManager());
+// Checking if employee is a manager
+if((int) $session->getisManager())
+{
+    $data = $DB->getEvents((int) $session->getisManager());
+}
+
+// Not a manager
+else
+{
+    $data = $DB->getEvents((int) $session->getManagersId());
+}
 
 // Setting default timezone
 date_default_timezone_set('America/Chicago');
@@ -47,6 +57,18 @@ foreach($data as $key => $value)
     $start_time = $value["start_time"];
     $end_time = $value["end_time"];
     $date = $value["date"];
+    $color = "";
+
+    // if its mandatory
+    if((int) $value["mandatory"] == 1)
+    {
+        $color = "#DC3546";
+    }
+
+    else
+    {
+        $color = "#0279FF";
+    }
 
     // Need to explode to get hours and minutes, these are now arrays
     // 0 element = hours, 1 element = minutes, 2 element = seconds
@@ -68,7 +90,9 @@ foreach($data as $key => $value)
         "title" => $value["name"],
         "description" => $value["description"],
         "end" => $event_end_format,
-        "start" => $event_start_format
+        "start" => $event_start_format,
+        "color" => $color,
+        "textColor" => "#ffffff"
     );
 }
 

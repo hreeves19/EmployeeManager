@@ -107,23 +107,29 @@ else
 
     <div id="content-wrapper">
         <div class="container-fluid">
-
             <!-- Page Content -->
-            <h1>Welcome
+            <h1 style="text-align: center;">Welcome
                 <?php
                 echo $session->getFirstName();
                 ?>!</h1>
             <hr>
 
-            <div id="divClock" class="container" style="text-align: center; display: none;">
-                <h1 id="head" style="font-weight: normal;">Countdown to End of Pay Period</h1>
-                <ul>
-                    <li id="timer"><span id="days"></span>Days</li>
-                    <li id="timer"><span id="hours"></span>Hours</li>
-                    <li id="timer"><span id="minutes"></span>Minutes</li>
-                    <li id="timer"><span id="seconds"></span>Seconds</li>
-                </ul>
+            <div>
+                <div class="card mb-1">
+                    <div class="card-header">
+                        <h2 id="head" style="font-weight: normal; text-align: center;">Countdown to End of Pay Period</h2>
+                    </div>
+                    <div class="card-body" style="text-align: center;">
+                        <ul>
+                            <li id="timer"><span id="days"></span>Days</li>
+                            <li id="timer"><span id="hours"></span>Hours</li>
+                            <li id="timer"><span id="minutes"></span>Minutes</li>
+                            <li id="timer"><span id="seconds"></span>Seconds</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
+
             <p id="countdown"></p>
         </div>
         <!-- /.container-fluid -->
