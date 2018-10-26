@@ -40,13 +40,6 @@ $data = $DB->getEvents((int) $session->getisManager());
 // Setting default timezone
 date_default_timezone_set('America/Chicago');
 
-/*$data_events[] = array(
-    "id" => $r->ID,
-    "title" => $r->title,
-    "description" => $r->description,
-    "end" => $r->end,
-    "start" => $r->start
-);*/
 $data_events[] = array();
 foreach($data as $key => $value)
 {

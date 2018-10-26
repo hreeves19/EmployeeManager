@@ -17,6 +17,7 @@ class SessionManager
     private $isAdmin;
     private $loggedIn;
     private $title;
+    private $manager;
 
     /**
      * SessionManager constructor.
@@ -38,6 +39,16 @@ class SessionManager
             $this->setIsAdmin($_SESSION['isAdmin']);
             $this->setTitle($_SESSION['title']);
             $this->setLoggedIn(true);
+
+            // By default, set this to 0
+            $this->setManager(0);
+
+
+            // Checking to see if employee is a manager
+            if((int) $this->getisManager() > 0)
+            {
+                // Not a manager, so we set the manager property
+            }
         }
     }
 
@@ -47,6 +58,22 @@ class SessionManager
         session_destroy();
         $this->setLoggedIn(false);
         header("Location: ../../EmployeeManager/Forms/Login.php");
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getManager()
+    {
+        return $this->manager;
+    }
+
+    /**
+     * @param mixed $manager
+     */
+    public function setManager($manager)
+    {
+        $this->manager = $manager;
     }
 
     /**
