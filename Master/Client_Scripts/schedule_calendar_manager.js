@@ -5,6 +5,16 @@ $(document).ready(function() {
     // Getting today's current date
     var today = new Date();
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    var ismanger = false;
+
+    // Getting the managers id, if its -1 then this is a manager
+    var manager_id = JSON.parse(document.getElementById("managerid").value);
+    manager_id = parseInt(manager_id["dept_manager_id"]);
+
+    if(manager_id === -1)
+    {
+        ismanger = true;
+    }
 
     $('#calendar').fullCalendar
     ({
@@ -32,6 +42,7 @@ $(document).ready(function() {
                             end: end.unix()
                         },
                         success: function(msg) {
+                            console.log(msg);
                             var events = msg.events;
                             callback(events);
                         }
@@ -50,8 +61,10 @@ $(document).ready(function() {
             selectedDate = selectedDate.getFullYear() + '-' + (selectedDate.getMonth() + 1) + '-' + selectedDate.getDate();
             document.getElementById("date").value = selectedDate;
 
-            $('#eventModal').modal('show');
-
+            if(ismanger)
+            {
+                $('#eventModal').modal('show');
+            }
         },
 
         loading: function (bool) {
@@ -64,11 +77,6 @@ $(document).ready(function() {
         },
 
         eventClick: function(calEvent, jsEvent, view) {
-
-            /*alert('Event: ' + calEvent.title);
-            alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-            alert('View: ' + view.name);*/
-
             // Need start and end
             // Need id
             // _d for date
@@ -78,7 +86,10 @@ $(document).ready(function() {
             console.log(calEvent.start._d.getDate());
             var day = calEvent.start._d.getDate();
 
-            $('#editModal').modal('show');
+            if(ismanger)
+            {
+                $('#editModal').modal('show');
+            }
         }
     });
 
