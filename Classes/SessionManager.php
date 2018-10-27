@@ -17,6 +17,9 @@ class SessionManager
     private $isAdmin;
     private $loggedIn;
     private $title;
+    private $address;
+
+
     private $managers_id; // If -1, means employee is not a manager
 
     /**
@@ -41,6 +44,7 @@ class SessionManager
             $this->setTitle($_SESSION['title']);
             $this->setLoggedIn(true);
             $this->setManagersId($_SESSION['manager_id']);
+            $this->setAddress(($_SESSION['address']));
         }
     }
 
@@ -55,6 +59,24 @@ class SessionManager
     /**
      * @return mixed
      */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param mixed $address
+     */
+
+    public function setAddress($address)
+    {
+        $this->address = $address;
+    }
+
+    /**
+     * @return mixed
+     */
+
     public function getManagersId()
     {
         return $this->managers_id;
@@ -63,6 +85,7 @@ class SessionManager
     /**
      * @param mixed $managers_id
      */
+
     public function setManagersId($manager_id)
     {
         // Checking to see if employee is a manager
