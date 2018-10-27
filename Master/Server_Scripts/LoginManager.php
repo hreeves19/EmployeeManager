@@ -53,7 +53,7 @@ if(isset($_POST["enumber"]) && isset($_POST["psw"]))
 
     else
     {
-        header("location: ../../Forms/Login.php");
+        //header("location: ../../Forms/Login.php");
         echo "Failed to login.";
     }
 }

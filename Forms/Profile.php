@@ -99,29 +99,45 @@ if(isset($_SESSION["message"]))
             <div class="container">
                 <div class="card card-login mx-auto mt-5">
                     <div class="card-header">Profile</div>
-                    <div class="card-body">
+                    <div   class="card-body">
                         <form id="formLogin" action="../../EmployeeManager/Master/Server_Scripts/SignUpManager.php" method="post" accept-charset="UTF-8">
 
-                            <!-- First and Last Name Row -->
+                            <!-- First and Last Name Display -->
                             <div class="form-group">
                                 <div class="form-row">
                                     <div class="col-md-6">
                                         <div class="form-label-group">
-                                            <input id="FirstName" type="text" name="FirstName" class="form-control" placeholder="First Name" required="required" autofocus="autofocus" value="<?php echo $session->getTitle(); ?>">
+                                            <input id="FirstName" type="text" name="FirstName" class="form-control" placeholder="First Name" required="required" autofocus="autofocus" value="<?php echo $session->getFirstName(); ?>" readonly>
                                             <label for="FirstName">First Name</label>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-label-group">
-                                            <input id="LastName" type="text" name="LastName" class="form-control" placeholder="Last Name" required="required">
+                                            <input id="LastName" type="text" name="LastName" class="form-control" placeholder="Last Name" required="required" value="<?php echo $session->getLastName(); ?>" readonly>
                                             <label for="LastName">Last Name</label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-primary btn-block">Register</button>
+                            <!-- Title Display -->
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input id="title" type="text" name="title" class="form-control" placeholder="title" required="required" value="<?php echo $session->getTitle(); ?>" readonly>
+                                    <label for="title">Title</label>
+                                </div>
+                            </div>
+
+                            <!-- Address display -->
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input id="Address" type="text" name="Address" class="form-control" placeholder="Address" required="required" value="<?php echo $session->getAddress(); ?>" readonly>
+                                    <label for="Address">Address</label>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block">Change</button>
                         </form>
                     </div>
                 </div>

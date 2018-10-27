@@ -142,6 +142,8 @@ if(isset($_SESSION["message"]))
                                     <label for="Password">Password</label>
                                 </div>
                             </div>
+
+                            <!-- Address text box -->
                             <div class="form-group">
                                 <div class="form-label-group">
                                     <input id="Address" type="text" name="Address" class="form-control" placeholder="Address" required="required">

@@ -17,6 +17,7 @@ class SessionManager
     private $isAdmin;
     private $loggedIn;
     private $title;
+    private $address;
 
     /**
      * SessionManager constructor.
@@ -27,7 +28,8 @@ class SessionManager
 
         // logging in
         if(isset($_SESSION['primarykey']) && isset($_SESSION['employeeNumber']) && isset($_SESSION['firstName'])
-         && isset($_SESSION['lastName']) && isset($_SESSION['isManager']) && isset($_SESSION['isAdmin']) && isset($_SESSION['title']))
+         && isset($_SESSION['lastName']) && isset($_SESSION['isManager']) && isset($_SESSION['isAdmin']) && isset($_SESSION['title']) &&
+        isset($_SESSION['address']))
         {
             // Setting class variables
             $this->setPrimarykey($_SESSION['primarykey']);
@@ -37,9 +39,27 @@ class SessionManager
             $this->setIsManager($_SESSION['isManager']);
             $this->setIsAdmin($_SESSION['isAdmin']);
             $this->setTitle($_SESSION['title']);
+            $this->setAddress($_SESSION['address']);
             $this->setLoggedIn(true);
         }
     }
+
+    /**
+     * @return mixed
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param mixed $address
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+    }
+
 
     public function loggout()
     {
