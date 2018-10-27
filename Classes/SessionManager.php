@@ -18,8 +18,6 @@ class SessionManager
     private $loggedIn;
     private $title;
     private $address;
-
-
     private $managers_id; // If -1, means employee is not a manager
 
     /**

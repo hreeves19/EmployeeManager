@@ -97,13 +97,19 @@ if(isset($_SESSION["message"]))
     <div id="content-wrapper">
         <div class="container-fluid">
 
-            <h1 style="text-align: center;">My Schedule</h1>
-            <hr>
             <label for="managerid" style="display: none;"></label>
             <input type="text" style="display: none;" id="managerid" value=<?php echo json_encode($session->getManagersId()) ?>>
 
             <!-- Calendar -->
-            <div id='calendar' style="padding: 10px;"></div>
+            <div class="card ml-lg-5">
+                <div class="card-header">
+                    <h1 style="text-align: center;">My Schedule</h1>
+                </div>
+                <div class="card-body">
+                    <div id='calendar' style="padding: 10px;"></div>
+                </div>
+            </div>
+            <br>
 
             <!-- Add Event Modal -->
             <div class="modal fade" id="eventModal" aria-labelledby="eventModal" role="dialog" tabindex="-1" aria-hidden="true" style="display: none;">

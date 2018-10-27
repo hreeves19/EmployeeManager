@@ -20,7 +20,7 @@
     <!-- Profile -->
     <li class="nav-item">
         <a class="nav-link" href="../../EmployeeManager/Forms/Profile.php">
-            <i class="fas fa-fw fa-clock"></i>
+            <i class="fas fa-fw fa-user-edit"></i>
             <span>Profile</span>
         </a>
     </li>
