@@ -17,9 +17,7 @@ class SessionManager
     private $isAdmin;
     private $loggedIn;
     private $title;
-    private $address;
-
-
+    private $managers_id; // If -1, means employee is not a manager
 
     /**
      * SessionManager constructor.
@@ -30,7 +28,8 @@ class SessionManager
 
         // logging in
         if(isset($_SESSION['primarykey']) && isset($_SESSION['employeeNumber']) && isset($_SESSION['firstName'])
-         && isset($_SESSION['lastName']) && isset($_SESSION['isManager']) && isset($_SESSION['isAdmin']) && isset($_SESSION['title']))
+         && isset($_SESSION['lastName']) && isset($_SESSION['isManager']) && isset($_SESSION['isAdmin']) && isset($_SESSION['title'])
+        && isset($_SESSION['manager_id']))
         {
             // Setting class variables
             $this->setPrimarykey($_SESSION['primarykey']);
@@ -40,8 +39,8 @@ class SessionManager
             $this->setIsManager($_SESSION['isManager']);
             $this->setIsAdmin($_SESSION['isAdmin']);
             $this->setTitle($_SESSION['title']);
-            $this->setAddress($_SESSION['address']);
             $this->setLoggedIn(true);
+            $this->setManagersId($_SESSION['manager_id']);
         }
     }
 
@@ -56,17 +55,26 @@ class SessionManager
     /**
      * @return mixed
      */
-    public function getAddress()
+    public function getManagersId()
     {
-        return $this->address;
+        return $this->managers_id;
     }
 
     /**
-     * @param mixed $address
+     * @param mixed $managers_id
      */
-    public function setAddress($address)
+    public function setManagersId($manager_id)
     {
-        $this->address = $address;
+        // Checking to see if employee is a manager
+        if( $this->getisManager() === false)
+        {
+            $this->managers_id = $manager_id;
+        }
+
+        else
+        {
+            $this->managers_id = -1;
+        }
     }
 
     /**

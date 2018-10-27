@@ -44,7 +44,7 @@ if(isset($_POST["enumber"]) && isset($_POST["psw"]))
         $_SESSION['title'] = $data["title"];
         $_SESSION['salary_per_hour'] = $data["salary_per_hour"];
 
-        // Getting employee's manager id, if its -1 it means that this person is a manager
+        // Getting employee's manager id, if its 0 it means that this person is a manager
         $manager_id = $DB->getEmployeesManager((int) $data["id"]);
         $_SESSION['manager_id'] = $manager_id;
 

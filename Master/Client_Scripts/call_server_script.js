@@ -51,7 +51,7 @@ function startCountDown(latest)
         document.getElementById('hours').innerText = hours;
         document.getElementById('minutes').innerText = minutes;
         document.getElementById('seconds').innerText = seconds;
-        document.getElementById("divClock").style.display = "block";
+        //document.getElementById("divClock").style.display = "block";
 
         // If the count down is over, write some text
         if (distance < 0)

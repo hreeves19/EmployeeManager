@@ -8,10 +8,14 @@ $(document).ready(function() {
     var ismanger = false;
 
     // Getting the managers id, if its -1 then this is a manager
-    var manager_id = JSON.parse(document.getElementById("managerid").value);
-    manager_id = parseInt(manager_id["dept_manager_id"]);
+    /*var manager_id = JSON.parse(document.getElementById("managerid").value);
+    manager_id = parseInt(manager_id["dept_manager_id"]);*/
 
-    if(manager_id === -1)
+    var manager_id = document.getElementById("managerid").value;
+    manager_id = parseInt(manager_id);
+    console.log("Is manager: " + document.getElementById("managerid").value);
+
+    if(manager_id === 0)
     {
         ismanger = true;
     }
