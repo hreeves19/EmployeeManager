@@ -99,6 +99,8 @@ if(isset($_SESSION["message"]))
 
             <h1 style="text-align: center;">My Schedule</h1>
             <hr>
+            <label for="managerid" style="display: none;"></label>
+            <input type="text" style="display: none;" id="managerid" value=<?php echo json_encode($session->getManagersId()) ?>>
 
             <!-- Calendar -->
             <div id='calendar' style="padding: 10px;"></div>

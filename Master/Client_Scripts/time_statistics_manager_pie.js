@@ -33,7 +33,8 @@ $.ajax({
                 labels: ["Hours Worked", "Hours Left"],
                 datasets: [{
                     data: [hoursWorked, pieHoursLeft],
-                    backgroundColor: ['#8DC641', '#21357E'],
+                    // #8DC641 #21357E
+                    backgroundColor: ['#27A844', '#F9C306'],
                 }],
             },
         });
