@@ -27,12 +27,6 @@ else
 {
     header("Location: ../../EmployeeManager/Forms/Login.php");
 }
-
-if(isset($_SESSION["message"]))
-{
-    echo $_SESSION["message"];
-    unset($_SESSION["message"]);
-}
 /****************************************************************************/
 
 // Checking if employee is a manager
@@ -92,7 +86,8 @@ foreach($data as $key => $value)
         "end" => $event_end_format,
         "start" => $event_start_format,
         "color" => $color,
-        "textColor" => "#ffffff"
+        "textColor" => "#ffffff",
+        "mandatory" => $value["mandatory"]
     );
 }
 

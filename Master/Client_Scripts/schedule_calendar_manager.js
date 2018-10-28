@@ -1,4 +1,5 @@
 var selectedDate = "";
+var eventid = -1;
 
 $(document).ready(function() {
 
@@ -84,11 +85,24 @@ $(document).ready(function() {
             // Need start and end
             // Need id
             // _d for date
+            // YYYY-MM-DD
             console.log(calEvent);
             console.log(jsEvent);
             console.log(view);
-            console.log(calEvent.start._d.getDate());
+
+            // title
             var day = calEvent.start._d.getDate();
+            var startDate = calEvent.start._d.getUTCFullYear() + "-" + (calEvent.start._d.getUTCMonth() + 1) + "-" + calEvent.start._d.getUTCDay();
+            var endDate = calEvent.end._d.getUTCFullYear() + "-" + (calEvent.end._d.getUTCMonth() + 1) + "-" + calEvent.end._d.getUTCDay();
+            var startArray = calEvent.start._i.split(" ");
+            var endArray = calEvent.end._i.split(" ");
+            document.getElementById("dateEdit").value = startArray[0];
+            document.getElementById("eventNameEdit").value = calEvent.title;
+            document.getElementById("eventStartEdit").value = startArray[1];
+            document.getElementById("eventEndEdit").value = endArray[1];
+            document.getElementById("eventDescriptionEdit").value = calEvent.description;
+            eventid = calEvent.id;
+            $('#mandatoryEdit').val(calEvent.mandatory);
 
             if(ismanger)
             {
@@ -126,6 +140,59 @@ $(document).ready(function() {
                 success:function(data)
                 {
 
+                }
+            });
+
+            // Force body to reload
+            $('body').click(function() {
+                location.reload();
+            });
+        }
+    });
+
+    // Modal Validator
+    $('#btnSubmitEdit').click(function() {
+        var eventName = $('#eventNameEdit').val();
+        var eventStart = $('#eventStartEdit').val();
+        var eventEnd = $('#eventEndEdit').val();
+        var mandatory = $('#mandatoryEdit').val();
+        var eventDescription = $('#eventDescriptionEdit').val();
+        var people = $('#peopleTaggedEdit').val();
+        var selectedDate = $('#dateEdit').val();
+        console.log(eventid);
+
+        if(eventName !== "" && eventStart !== "" && eventEnd !== "" && mandatory !== "" && eventDescription !== "" && people !== "" && eventid !== -1)
+        {
+            $.ajax({
+                url: "../../EmployeeManager/Master/Server_Scripts/UpdateEvent.php",
+                method:"POST",
+                data:{eventName:eventName, eventStart:eventStart, eventEnd:eventEnd, mandatory:mandatory, eventDescription:eventDescription, people:people, selectedDate:selectedDate, eventid:eventid},
+                success:function(data)
+                {
+                    console.log(data);
+                }
+            });
+
+            // Force body to reload
+            $('body').click(function() {
+                location.reload();
+            });
+        }
+    });
+
+    // Modal Validator
+    $('#btnDeleteEvent').click(function() {
+        console.log(eventid);
+
+        if(eventid !== -1)
+        {
+            $.ajax({
+                url: "../../EmployeeManager/Master/Server_Scripts/UpdateEvent.php",
+                method:"POST",
+                data:{eventid:eventid, delete:true},
+                success:function(data)
+                {
+                    console.log(data);
                 }
             });
 

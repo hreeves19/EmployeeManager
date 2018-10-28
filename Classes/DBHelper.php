@@ -339,6 +339,58 @@ WHERE e.`employee_number` = $employeeNumber AND e.`password` LIKE \"$password\" 
         $conn->close();
     }
 
+    public function updateEvent($name, $startTime, $endTime, $description, $mandatory, $deptManager, $date, $id)
+    {
+        // Create connection
+        $conn = $this->getConnection();
+
+
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "UPDATE `event` SET `event_id`=$id,`date`=\"$date\",`name`=\"$name\",`start_time`=\"$startTime\",`end_time`=\"$endTime\",`description`=\"$description\",`mandatory`=$mandatory,`dept_manager_ID`=$deptManager WHERE `event_id` = $id";
+
+        echo $sql;
+
+        if ($conn->query($sql) === TRUE) {
+            echo "New record created successfully";
+        }
+
+        else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+
+        $conn->close();
+    }
+
+    public function deleteEvent($id)
+    {
+        // Create connection
+        $conn = $this->getConnection();
+
+
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "DELETE FROM `event` WHERE `event_id` = $id";
+
+        echo $sql;
+
+        if ($conn->query($sql) === TRUE) {
+            echo "New record created successfully";
+        }
+
+        else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+
+        $conn->close();
+    }
+
     public function getEvents($deptManager)
     {
         $data = array();

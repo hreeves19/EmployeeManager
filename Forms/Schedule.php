@@ -143,7 +143,7 @@ if(isset($_SESSION["message"]))
                                         <label for="mandatory">Mandatory</label>
                                         <select id="mandatory" name="mandatory" class="form-control">
                                             <option value="0">No</option>
-                                            <option value="1">yes</option>
+                                            <option value="1">Yes</option>
                                         </select>
                                     </div>
                                     <div class="col-xl-12 form-group">
@@ -161,8 +161,6 @@ if(isset($_SESSION["message"]))
                                     <button type="button" class="btn btn-primary btn-outline" data-dismiss="modal">Close</button>
                                 </div>
                             </form>
-                        </div>
-                        <div class="modal-footer">
                         </div>
                     </div>
                 </div>
@@ -200,7 +198,7 @@ if(isset($_SESSION["message"]))
                                         <label for="mandatoryEdit">Mandatory</label>
                                         <select id="mandatoryEdit" name="mandatoryEdit" class="form-control">
                                             <option value="0">No</option>
-                                            <option value="1">yes</option>
+                                            <option value="1">Yes</option>
                                         </select>
                                     </div>
                                     <div class="col-xl-12 form-group">
@@ -215,11 +213,9 @@ if(isset($_SESSION["message"]))
                                     <button class="btn btn-primary btn-outline" type="submit" id="btnSubmitEdit" name="btnSubmitEdit" data-toggle="modal" data-target="#myModal">Update Event</button>
                                 </div>
                                 <div class="float-right">
-                                    <button type="button" class="btn btn-primary btn-outline" data-dismiss="modal">Close</button>
+                                    <button class="btn btn-primary btn-outline" type="submit" id="btnDeleteEvent" name="btnDeleteEvent" data-toggle="modal" data-target="#myModal">Delete Event</button>
                                 </div>
                             </form>
-                        </div>
-                        <div class="modal-footer">
                         </div>
                     </div>
                 </div>

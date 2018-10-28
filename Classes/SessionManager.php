@@ -18,7 +18,7 @@ class SessionManager
     private $loggedIn;
     private $title;
     private $address;
-    private $managers_id; // If -1, means employee is not a manager
+    private $managers_id; // If 0, means employee is not a manager
 
     /**
      * SessionManager constructor.
@@ -94,7 +94,7 @@ class SessionManager
 
         else
         {
-            $this->managers_id = -1;
+            $this->managers_id = 0;
         }
     }
 
