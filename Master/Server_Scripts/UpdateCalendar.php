@@ -51,6 +51,7 @@ foreach($data as $key => $value)
     $start_time = $value["start_time"];
     $end_time = $value["end_time"];
     $date = $value["date"];
+    $dateEnd = $value["date_end"];
     $color = "";
 
     // if its mandatory
@@ -69,13 +70,13 @@ foreach($data as $key => $value)
     $start_time = explode(":", $start_time);
     $end_time = explode(":", $end_time);
 
-    // Creating date objects w/ time
+    // Creating date objects w/ time, start
     $event_date_start = new DateTime($date);
     $event_date_start->setTime($start_time[0], $start_time[1], $start_time[2]); // Hours, minutes, seconds
     $event_start_format = $event_date_start->format('Y-m-d H:i:s');
 
     // Creating date objects w/ time
-    $event_date_end = new DateTime($date);
+    $event_date_end = new DateTime($dateEnd);
     $event_date_end->setTime($end_time[0], $end_time[1], $end_time[2]); // Hours, minutes, seconds
     $event_end_format = $event_date_end->format('Y-m-d H:i:s');
 

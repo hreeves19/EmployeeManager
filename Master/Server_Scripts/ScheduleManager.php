@@ -37,6 +37,18 @@ if($_POST["mandatory"] === "0")
     $mandatory = 0;
 }
 
-// Inserting the event
-$DB->addEvent($_POST["eventName"], $_POST["eventStart"],  $_POST["eventEnd"], $_POST["eventDescription"], $mandatory, (int) $session->getisManager(), $_POST["selectedDate"]);
+// This is for selecting several days
+if(isset($_POST["selectedDateEnd"]))
+{
+    // Inserting the event
+    $DB->addEvent($_POST["eventName"], $_POST["eventStart"],  $_POST["eventEnd"], $_POST["eventDescription"], $mandatory, (int) $session->getisManager(), $_POST["selectedDate"], $_POST["selectedDateEnd"]);
+
+}
+
+else
+{
+    // Inserting the event
+    $DB->addEvent($_POST["eventName"], $_POST["eventStart"],  $_POST["eventEnd"], $_POST["eventDescription"], $mandatory, (int) $session->getisManager(), $_POST["selectedDate"], $_POST["selectedDate"]);
+
+}
 ?>

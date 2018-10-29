@@ -166,6 +166,65 @@ if(isset($_SESSION["message"]))
                 </div>
             </div>
 
+            <!-- Add Event Modal for days -->
+            <div class="modal fade" id="eventModalSelect" aria-labelledby="eventModalSelect" role="dialog" tabindex="-1" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog modal-simple">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="eventModalSelect">Add Event</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="addEventModalFormSelect">
+                                <div class="row">
+                                    <div class="col-xl-4 form-group">
+                                        <label for="eventNameSelect" style="text-align: center;">Event Name</label>
+                                        <input type="text" class="form-control" name="eventNameSelect" placeholder="Event Name" id="eventName" required="required">
+                                    </div>
+                                    <div class="col-xl-4 form-group">
+                                        <label for="eventStartSelect">Event Starts</label>
+                                        <input id="eventStartSelect" type="time" name="eventStartSelect" class="form-control" placeholder="Event Starts" required="required">
+                                    </div>
+                                    <div class="col-xl-4 form-group">
+                                        <label for="eventEndSelect">Event Ends</label>
+                                        <input id="eventEndSelect" type="time" name="eventEndSelect" class="form-control" placeholder="Event Ends" required="required">
+                                    </div>
+                                    <div class="col-xl-6 form-group">
+                                        <?php $DB->ddlEmployees($session->getisManager()); ?>
+                                    </div>
+                                    <div class="col-xl-6 form-group">
+                                        <label for="mandatorySelect">Mandatory</label>
+                                        <select id="mandatorySelect" name="mandatorySelect" class="form-control">
+                                            <option value="0">No</option>
+                                            <option value="1">Yes</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-xl-12 form-group">
+                                        <textarea id="eventDescriptionSelect" name="eventDescriptionSelect" class="form-control" rows="5" placeholder="Type event description"></textarea>
+                                    </div>
+                                    <div class="col-xl-6 form-group">
+                                        <label for="dateSelectStart">Day Event Starts</label>
+                                        <input id="dateSelectStart" type="text" name="dateSelectStart" class="form-control" placeholder="Day of Event" readonly>
+                                    </div>
+                                    <div class="col-xl-6 form-group">
+                                        <label for="dateSelectEnd">Day Event Ends</label>
+                                        <input id="dateSelectEnd" type="text" name="dateSelectEnd" class="form-control" placeholder="Day of Event" readonly>
+                                    </div>
+                                </div>
+                                <div class="float-left">
+                                    <button class="btn btn-primary btn-outline" type="submit" id="btnSubmitSelect" name="btnSubmitSelect" data-toggle="modal" data-target="#myModal">Add Event</button>
+                                </div>
+                                <div class="float-right">
+                                    <button type="button" class="btn btn-primary btn-outline" data-dismiss="modal">Close</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Edit Event Modal -->
             <div class="modal fade" id="editModal" aria-labelledby="editModal" role="dialog" tabindex="-1" aria-hidden="true" style="display: none;">
                 <div class="modal-dialog modal-simple" id="myModal">

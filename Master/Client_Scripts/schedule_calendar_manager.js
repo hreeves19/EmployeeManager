@@ -1,4 +1,6 @@
 var selectedDate = "";
+var startDate ="";
+var endDate = "";
 var eventid = -1;
 
 $(document).ready(function() {
@@ -79,6 +81,29 @@ $(document).ready(function() {
         select: function(start, end)
         {
             console.log(start);
+            console.log(end);
+
+            // Date object, need to increment day to get the right one
+            // It is off by 5 hours, so we are adding 5 hours
+            var sDate = start._d;
+            var eDate = end._d;
+            sDate.setHours(sDate.getHours()); //HH:mm
+            startDate = start._d;
+            startDate.setDate(startDate.getDate() + 1);
+            startDate = startDate.getFullYear() + '-' + (startDate.getMonth() + 1) + '-' + startDate.getDate();
+            document.getElementById("dateSelectStart").value = startDate;
+
+            // End date
+            endDate = end._d;
+            endDate.setDate(endDate.getDate());
+            endDate = endDate.getFullYear() + '-' + (endDate.getMonth() + 1) + '-' + endDate.getDate();
+            document.getElementById("dateSelectEnd").value = endDate;
+            console.log(endDate);
+
+            if(ismanger)
+            {
+                $('#eventModalSelect').modal('show');
+            }
         },
 
         eventClick: function(calEvent, jsEvent, view) {
@@ -114,6 +139,11 @@ $(document).ready(function() {
     // Keeps modal showing
     $('#eventModal').on('hidden.bs.modal', function() {
         $('#eventModal').bootstrapValidator('resetForm', true);
+    });
+
+    // Keeps modal showing
+    $('#eventModalSelect').on('hidden.bs.modal', function() {
+        $('#eventModalSelect').bootstrapValidator('resetForm', true);
     });
 
     // Keeps modal showing
@@ -170,6 +200,36 @@ $(document).ready(function() {
                 success:function(data)
                 {
                     console.log(data);
+                }
+            });
+
+            // Force body to reload
+            $('body').click(function() {
+                location.reload();
+            });
+        }
+    });
+
+    // Modal Validator
+    $('#btnSubmitSelect').click(function() {
+        var eventName = $('#eventNameSelect').val();
+        var eventStart = $('#eventStartSelect').val();
+        var eventEnd = $('#eventEndSelect').val();
+        var mandatory = $('#mandatorySelect').val();
+        var eventDescription = $('#eventDescriptionSelect').val();
+        var people = $('#peopleTagged').val();
+        var selectedDateStart = $('#dateSelectStart').val();
+        var selectedDateEnd = $('#dateSelectEnd').val();
+
+        if(eventName !== "" && eventStart !== "" && eventEnd !== "" && mandatory !== "" && eventDescription !== "" && people !== "")
+        {
+            $.ajax({
+                url: "../../EmployeeManager/Master/Server_Scripts/ScheduleManager.php",
+                method:"POST",
+                data:{eventName:eventName, eventStart:eventStart, eventEnd:eventEnd, mandatory:mandatory, eventDescription:eventDescription, people:people, selectedDate:startDate, selectedDateEnd:endDate},
+                success:function(data)
+                {
+
                 }
             });
 

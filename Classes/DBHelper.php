@@ -313,7 +313,7 @@ WHERE e.`employee_number` = $employeeNumber AND e.`password` LIKE \"$password\" 
         return true;
     }
 
-    public function addEvent($name, $startTime, $endTime, $description, $mandatory, $deptManager, $date)
+    public function addEvent($name, $startTime, $endTime, $description, $mandatory, $deptManager, $date, $dateEnd)
     {
         // Create connection
         $conn = $this->getConnection();
@@ -324,7 +324,7 @@ WHERE e.`employee_number` = $employeeNumber AND e.`password` LIKE \"$password\" 
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $sql = "INSERT INTO `event`(`date`, `name`, `start_time`, `end_time`, `description`, `mandatory`, `dept_manager_ID`) VALUES (\"$date\",\"$name\",\"$startTime\",\"$endTime\",\"$description\",$mandatory,$deptManager)";
+        $sql = "INSERT INTO `event`(`date`, `date_end`, `name`, `start_time`, `end_time`, `description`, `mandatory`, `dept_manager_ID`) VALUES (\"$date\",\"$dateEnd\",\"$name\",\"$startTime\",\"$endTime\",\"$description\",$mandatory,$deptManager)";
 
         echo $sql;
 
