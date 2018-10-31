@@ -2,8 +2,11 @@ var selectedDate = "";
 var startDate ="";
 var endDate = "";
 var eventid = -1;
+var dayClicked = false;
 
 $(document).ready(function() {
+
+    moment().tz("America/Chicago").format();
 
     // Getting today's current date
     var today = new Date();
@@ -31,11 +34,13 @@ $(document).ready(function() {
             right: 'month,agendaWeek,agendaDay,listMonth'
         },
         defaultDate: date,
+        timezone: "American/Chicago",
         navLinks: true, // can click day/week names to navigate views
         editable: true,
         eventLimit: true, // allow "more" link when too many events
         selectable: true,
         selectHelper: true,
+        allDay: false,
 
         eventSources: [
             {
@@ -58,20 +63,10 @@ $(document).ready(function() {
             },
         ],
 
-        dayClick: function (date, allDay, jsEvent, view) {
+        dayClick: function (date, jsEvent, view) {
             // Date object, need to increment day to get the right one
             // It is off by 5 hours, so we are adding 5 hours
-            var time = date._d;
-            time.setHours(time.getHours() + 5); //HH:mm
-            selectedDate = date._d;
-            selectedDate.setDate(selectedDate.getDate() + 1);
-            selectedDate = selectedDate.getFullYear() + '-' + (selectedDate.getMonth() + 1) + '-' + selectedDate.getDate();
-            document.getElementById("date").value = selectedDate;
-
-            if(ismanger)
-            {
-                $('#eventModal').modal('show');
-            }
+            console.log(date.format());
         },
 
         loading: function (bool) {
@@ -80,12 +75,31 @@ $(document).ready(function() {
 
         select: function(start, end)
         {
-            console.log(start);
-            console.log(end);
+            console.log(start.format());
+            console.log(end.format());
+            var tempS = start.format();
+            var tempE = end.format();
+
+            // Seeing if there is a time
+            var sTime = start.format().match(/T\d\d:\d\d:\d\d/);
+            var eTime = end.format().match(/T\d\d:\d\d:\d\d/);
+
+            if(sTime !== null && eTime !== null)
+
+            // Getting date format
+            var startArray = tempS.split("-");
+            var endArray = tempE.split("-");
+
+            var sDate = new Date(parseInt(startArray[0]), parseInt(startArray[1]) - 1, parseInt(startArray[2]), 0, 0, 0, 0);
+            var eDate = new Date(parseInt(endArray[0]), parseInt(endArray[1]) - 1, parseInt(endArray[2]) - 1, 0, 0, 0, 0);
+            console.log(sDate);
+            console.log(eDate);
+            console.log(sTime);
+            console.log(eTime);
 
             // Date object, need to increment day to get the right one
             // It is off by 5 hours, so we are adding 5 hours
-            var sDate = start._d;
+            /*var sDate = start._d;
             var eDate = end._d;
             sDate.setHours(sDate.getHours()); //HH:mm
             startDate = start._d;
@@ -98,11 +112,15 @@ $(document).ready(function() {
             endDate.setDate(endDate.getDate());
             endDate = endDate.getFullYear() + '-' + (endDate.getMonth() + 1) + '-' + endDate.getDate();
             document.getElementById("dateSelectEnd").value = endDate;
-            console.log(endDate);
+            console.log(endDate);*/
 
             if(ismanger)
             {
-                $('#eventModalSelect').modal('show');
+                var show = $('#eventModal').hasClass('in');
+                if(!show)
+                {
+                    $('#eventModalSelect').modal('show');
+                }
             }
         },
 
@@ -152,7 +170,7 @@ $(document).ready(function() {
     });
 
     // Modal Validator
-    $('#btnSubmit').click(function() {
+/*    $('#btnSubmit').click(function() {
         var eventName = $('#eventName').val();
         var eventStart = $('#eventStart').val();
         var eventEnd = $('#eventEnd').val();
@@ -178,7 +196,7 @@ $(document).ready(function() {
                 location.reload();
             });
         }
-    });
+    });*/
 
     // Modal Validator
     $('#btnSubmitEdit').click(function() {
@@ -200,12 +218,8 @@ $(document).ready(function() {
                 success:function(data)
                 {
                     console.log(data);
+                    $('#calendar').fullCalendar( 'refetchEvents' );
                 }
-            });
-
-            // Force body to reload
-            $('body').click(function() {
-                location.reload();
             });
         }
     });
@@ -229,14 +243,16 @@ $(document).ready(function() {
                 data:{eventName:eventName, eventStart:eventStart, eventEnd:eventEnd, mandatory:mandatory, eventDescription:eventDescription, people:people, selectedDate:startDate, selectedDateEnd:endDate},
                 success:function(data)
                 {
+                    /*$('#calendar').fullCalendar( ‘refetchEvents’ );*/
 
+                    $('#calendar').fullCalendar( 'refetchEvents' );
                 }
             });
 
             // Force body to reload
-            $('body').click(function() {
+            /*$('body').click(function() {
                 location.reload();
-            });
+            });*/
         }
     });
 
@@ -253,12 +269,8 @@ $(document).ready(function() {
                 success:function(data)
                 {
                     console.log(data);
+                    $('#calendar').fullCalendar( 'refetchEvents' );
                 }
-            });
-
-            // Force body to reload
-            $('body').click(function() {
-                location.reload();
             });
         }
     });

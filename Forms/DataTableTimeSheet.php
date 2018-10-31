@@ -94,7 +94,10 @@ else
                 // Getting select statement
                 ajax:
                     {
-                        url: "../../EmployeeManager/Master/Server_Scripts/TimeSheetManager.php?datatable=" + true
+                        url: "../../EmployeeManager/Master/Server_Scripts/TimeSheetManager.php?datatable=" + true,
+                        success:function(data) {
+                            console.log(data);
+                        }
                     },
 
                 columns: [

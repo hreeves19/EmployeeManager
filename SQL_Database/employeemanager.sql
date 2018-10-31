@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 29, 2018 at 02:23 AM
+-- Generation Time: Oct 31, 2018 at 06:47 PM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -138,17 +138,18 @@ CREATE TABLE `employee` (
   `password` varchar(50) DEFAULT NULL,
   `admin` int(11) DEFAULT '0' COMMENT '0 = not admin, 1 = admin',
   `title_id` int(11) NOT NULL COMMENT 'Foreign key to title table',
-  `address_id` tinyint(1) NOT NULL COMMENT 'Foreign key to address table'
+  `address_id` tinyint(1) NOT NULL COMMENT 'Foreign key to address table',
+  `image` varchar(100) DEFAULT NULL COMMENT 'Path to the file of the image'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `employee`
 --
 
-INSERT INTO `employee` (`id`, `first_name`, `last_name`, `gender`, `hire_date`, `employee_number`, `password`, `admin`, `title_id`, `address_id`) VALUES
-(1, 'John', 'Doe', 'M', '2018-10-09', 123456789, 'password', 0, 1, 1),
-(2, 'Jane', 'Doe', 'F', '2018-10-16', 987654321, 'password', 0, 1, 1),
-(3, 'Jack', 'Myer', 'M', '2018-10-16', 111222333, 'password', 1, 1, 2);
+INSERT INTO `employee` (`id`, `first_name`, `last_name`, `gender`, `hire_date`, `employee_number`, `password`, `admin`, `title_id`, `address_id`, `image`) VALUES
+(1, 'John', 'Doe', 'M', '2018-10-09', 123456789, 'password', 0, 1, 1, NULL),
+(2, 'Jane', 'Doe', 'F', '2018-10-16', 987654321, 'password', 0, 1, 1, NULL),
+(3, 'Jack', 'Myer', 'M', '2018-10-16', 111222333, 'password', 1, 1, 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -173,8 +174,15 @@ CREATE TABLE `event` (
 --
 
 INSERT INTO `event` (`event_id`, `date`, `date_end`, `name`, `start_time`, `end_time`, `description`, `mandatory`, `dept_manager_ID`) VALUES
-(11, '2018-10-01', '2018-10-03', 'No Work', '08:00:00', '17:00:00', 'No work', 0, 1),
-(12, '2018-10-04', '2018-10-04', '', '09:00:00', '17:00:00', 'Description', 0, 1);
+(11, '0000-00-00', '2018-10-03', '', '00:00:00', '00:00:00', '', 0, 1),
+(12, '0000-00-00', '2018-10-04', '', '00:00:00', '00:00:00', '', 0, 1),
+(13, '2018-10-16', '2018-10-19', 'NO SCHOOL', '08:00:00', '17:00:00', 'There is no school!', 1, 1),
+(14, '0000-00-00', '2018-10-01', '', '00:00:00', '00:00:00', '', 0, 1),
+(15, '0000-00-00', '2018-10-02', '', '00:00:00', '00:00:00', '', 0, 1),
+(16, '0000-00-00', '2018-10-03', '', '00:00:00', '00:00:00', '', 0, 1),
+(17, '0000-00-00', '2018-10-10', '', '00:00:00', '00:00:00', '', 0, 1),
+(18, '2018-10-10', '2018-10-12', 'Training', '08:00:00', '17:00:00', 'Training for all employees.', 1, 1),
+(19, '2018-10-10', '2018-10-10', 'Bake Sale', '10:00:00', '12:00:00', 'Bake sale outside our office!', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -243,7 +251,8 @@ INSERT INTO `time_sheet` (`time_id`, `number_hours`, `time_from`, `time_to`, `da
 (5, 3.91667, '08:00:00', '11:55:00', '2018-10-19', 3, 1),
 (6, 4, '08:00:00', '12:00:00', '2018-10-18', 1, 1),
 (7, 2, '15:00:00', '17:00:00', '2018-10-22', 3, 2),
-(8, 3.8, '08:12:00', '12:00:00', '2018-10-24', 3, 2);
+(8, 3.8, '08:12:00', '12:00:00', '2018-10-24', 3, 2),
+(9, 9, '08:00:00', '17:00:00', '2018-10-30', 2, 2);
 
 -- --------------------------------------------------------
 
@@ -377,7 +386,7 @@ ALTER TABLE `employee`
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'PK', AUTO_INCREMENT=13;
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'PK', AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `pay_period`
@@ -395,7 +404,7 @@ ALTER TABLE `salaries`
 -- AUTO_INCREMENT for table `time_sheet`
 --
 ALTER TABLE `time_sheet`
-  MODIFY `time_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `time_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `titles`

@@ -181,7 +181,7 @@ if(isset($_SESSION["message"]))
                                 <div class="row">
                                     <div class="col-xl-4 form-group">
                                         <label for="eventNameSelect" style="text-align: center;">Event Name</label>
-                                        <input type="text" class="form-control" name="eventNameSelect" placeholder="Event Name" id="eventName" required="required">
+                                        <input type="text" class="form-control" name="eventNameSelect" placeholder="Event Name" id="eventNameSelect" required="required">
                                     </div>
                                     <div class="col-xl-4 form-group">
                                         <label for="eventStartSelect">Event Starts</label>
@@ -336,6 +336,7 @@ if(isset($_SESSION["message"]))
 <link href='https://fullcalendar.io/releases/fullcalendar/3.9.0/fullcalendar.min.css' rel='stylesheet' />
 <link href='https://fullcalendar.io/releases/fullcalendar/3.9.0/fullcalendar.print.min.css' rel='stylesheet' media='print' />
 <script src='https://fullcalendar.io/releases/fullcalendar/3.9.0/lib/moment.min.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.23/moment-timezone-with-data-2012-2022.min.js"></script>
 <script src='https://fullcalendar.io/releases/fullcalendar/3.9.0/lib/jquery.min.js'></script>
 <script src='https://fullcalendar.io/releases/fullcalendar/3.9.0/fullcalendar.min.js'></script>
 <script src='https://fullcalendar.io/releases/fullcalendar/3.9.0/gcal.min.js'></script>
