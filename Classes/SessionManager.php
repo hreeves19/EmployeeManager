@@ -19,6 +19,7 @@ class SessionManager
     private $title;
     private $address;
     private $managers_id; // If 0, means employee is not a manager
+    private $manager_name; // Managers name, empty if this person is a manager
 
     /**
      * SessionManager constructor.
@@ -43,6 +44,18 @@ class SessionManager
             $this->setLoggedIn(true);
             $this->setManagersId($_SESSION['manager_id']);
             $this->setAddress(($_SESSION['address']));
+
+            // Checking if manager name is set
+            if(isset($_SESSION['manager_name']))
+            {
+                $this->setManagerName($_SESSION['manager_name']);
+            }
+
+            else
+            {
+                // Give it nothing
+                $this->setManagerName("");
+            }
         }
     }
 
@@ -52,6 +65,22 @@ class SessionManager
         session_destroy();
         $this->setLoggedIn(false);
         header("Location: ../../EmployeeManager/Forms/Login.php");
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getManagerName()
+    {
+        return $this->manager_name;
+    }
+
+    /**
+     * @param mixed $manager_name
+     */
+    public function setManagerName($manager_name)
+    {
+        $this->manager_name = $manager_name;
     }
 
     /**

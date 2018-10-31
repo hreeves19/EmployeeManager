@@ -46,7 +46,11 @@ if(isset($_POST["enumber"]) && isset($_POST["psw"]))
 
         // Getting employee's manager id, if its 0 it means that this person is a manager
         $manager_id = $DB->getEmployeesManager((int) $data["id"]);
+        $arrayName = $DB->getEmployeeManagerName((int) $manager_id["dept_manager_id"]);
+
+        // Setting more sessions
         $_SESSION['manager_id'] = $manager_id;
+        $_SESSION['manager_name'] = $arrayName["first_name"] . " " . $arrayName["last_name"];
 
         $session = new SessionManager();
         $_SESSION['sessionobj'] = $session;

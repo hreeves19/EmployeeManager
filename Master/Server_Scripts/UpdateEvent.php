@@ -42,6 +42,6 @@ if(isset($_POST["delete"]) && isset($_POST["id"]))
 
 else
 {
-    $DB->updateEvent($_POST["eventName"], $_POST["eventStart"],  $_POST["eventEnd"], $_POST["eventDescription"], (int) $_POST["mandatory"], (int) $session->getisManager(), $_POST["selectedDate"], (int) $_POST["eventid"]);
+    $DB->updateEvent($_POST["eventName"], $_POST["eventStart"],  $_POST["eventEnd"], $_POST["eventDescription"], (int) $_POST["mandatory"], (int) $session->getisManager(), $_POST["selectedDate"], $_POST["endDate"], (int) $_POST["eventid"]);
 }
 ?>

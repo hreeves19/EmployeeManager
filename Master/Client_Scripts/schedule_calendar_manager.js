@@ -79,40 +79,128 @@ $(document).ready(function() {
             console.log(end.format());
             var tempS = start.format();
             var tempE = end.format();
+            var startArray;
+            var endArray;
+            var eDate;
+            var sDate;
 
             // Seeing if there is a time
             var sTime = start.format().match(/T\d\d:\d\d:\d\d/);
             var eTime = end.format().match(/T\d\d:\d\d:\d\d/);
 
             if(sTime !== null && eTime !== null)
+            {
+                tempS = tempS.replace(/T\d\d:\d\d:\d\d/, "");
+                tempE = tempE.replace(/T\d\d:\d\d:\d\d/, "");
+                sTime = sTime[0].replace(/T/, "");
+                eTime = eTime[0].replace(/T/, "");
 
-            // Getting date format
-            var startArray = tempS.split("-");
-            var endArray = tempE.split("-");
+                // Put it in an array
+                sTime = sTime.split(":");
+                eTime = eTime.split(":");
 
-            var sDate = new Date(parseInt(startArray[0]), parseInt(startArray[1]) - 1, parseInt(startArray[2]), 0, 0, 0, 0);
-            var eDate = new Date(parseInt(endArray[0]), parseInt(endArray[1]) - 1, parseInt(endArray[2]) - 1, 0, 0, 0, 0);
+                // Getting date format
+                startArray = tempS.split("-");
+                endArray = tempE.split("-");
+
+                // Creating date objects, this is if user selects the week
+                sDate = new Date(parseInt(startArray[0]), parseInt(startArray[1]) - 1, parseInt(startArray[2]),
+                    parseInt(sTime[0]), parseInt(sTime[1]), parseInt(sTime[2]), 0);
+                eDate = new Date(parseInt(endArray[0]), parseInt(endArray[1]) - 1, parseInt(endArray[2]),
+                    parseInt(eTime[0]), parseInt(eTime[1]), parseInt(eTime[2]), 0);
+
+                console.log(sDate.getHours() + ":" + sDate.getMinutes());
+
+                // For start time
+                if(sDate.getHours() <= 9)
+                {
+                    if(sDate.getMinutes() <= 9)
+                    {
+                        // h:m
+                        // Setting time
+                        document.getElementById("eventStartSelect").value = "0" + sDate.getHours() + ":" + "0" + sDate.getMinutes();
+                    }
+
+                    else
+                    {
+                        //h:mm
+                        // Setting time
+                        document.getElementById("eventStartSelect").value = "0" + sDate.getHours() + ":" + sDate.getMinutes();
+                    }
+                }
+
+                else
+                {
+                    if(sDate.getMinutes() <= 9)
+                    {
+                        // hh:m
+                        // Setting time
+                        document.getElementById("eventStartSelect").value = sDate.getHours() + ":" + "0" + sDate.getMinutes();
+                    }
+
+                    else
+                    {
+                        // hh:mm
+                        // Setting time
+                        document.getElementById("eventStartSelect").value = sDate.getHours() + ":" + sDate.getMinutes();
+                    }
+                }
+
+                // For end time
+                if(eDate.getHours() <= 9)
+                {
+                    if(eDate.getMinutes() <= 9)
+                    {
+                        // h:m
+                        // Setting time
+                        document.getElementById("eventEndSelect").value = "0" + eDate.getHours() + ":" + "0" + eDate.getMinutes();
+                    }
+
+                    else
+                    {
+                        //h:mm
+                        // Setting time
+                        document.getElementById("eventEndSelect").value = "0" + eDate.getHours() + ":" + eDate.getMinutes();
+                    }
+                }
+
+                else
+                {
+                    if(eDate.getMinutes() <= 9)
+                    {
+                        // hh:m
+                        // Setting time
+                        document.getElementById("eventEndSelect").value = eDate.getHours() + ":" + "0" + eDate.getMinutes();
+                    }
+
+                    else
+                    {
+                        // hh:mm
+                        // Setting time
+                        document.getElementById("eventEndSelect").value = eDate.getHours() + ":" + eDate.getMinutes();
+                    }
+                }
+            }
+
+            else
+            {
+                // Getting date format
+                startArray = tempS.split("-");
+                endArray = tempE.split("-");
+
+                sDate = new Date(parseInt(startArray[0]), parseInt(startArray[1]) - 1, parseInt(startArray[2]), 0, 0, 0, 0);
+                eDate = new Date(parseInt(endArray[0]), parseInt(endArray[1]) - 1, parseInt(endArray[2]) - 1, 0, 0, 0, 0);
+            }
+
             console.log(sDate);
             console.log(eDate);
             console.log(sTime);
             console.log(eTime);
 
-            // Date object, need to increment day to get the right one
-            // It is off by 5 hours, so we are adding 5 hours
-            /*var sDate = start._d;
-            var eDate = end._d;
-            sDate.setHours(sDate.getHours()); //HH:mm
-            startDate = start._d;
-            startDate.setDate(startDate.getDate() + 1);
-            startDate = startDate.getFullYear() + '-' + (startDate.getMonth() + 1) + '-' + startDate.getDate();
+            startDate = sDate.getFullYear() + '-' + (sDate.getMonth() + 1) + '-' + sDate.getDate();
             document.getElementById("dateSelectStart").value = startDate;
-
-            // End date
-            endDate = end._d;
-            endDate.setDate(endDate.getDate());
-            endDate = endDate.getFullYear() + '-' + (endDate.getMonth() + 1) + '-' + endDate.getDate();
+            endDate = eDate.getFullYear() + '-' + (eDate.getMonth() + 1) + '-' + eDate.getDate();
             document.getElementById("dateSelectEnd").value = endDate;
-            console.log(endDate);*/
 
             if(ismanger)
             {
@@ -139,7 +227,8 @@ $(document).ready(function() {
             var endDate = calEvent.end._d.getUTCFullYear() + "-" + (calEvent.end._d.getUTCMonth() + 1) + "-" + calEvent.end._d.getUTCDay();
             var startArray = calEvent.start._i.split(" ");
             var endArray = calEvent.end._i.split(" ");
-            document.getElementById("dateEdit").value = startArray[0];
+            document.getElementById("dateEditStart").value = startArray[0];
+            document.getElementById("dateEditEnd").value = endArray[0];
             document.getElementById("eventNameEdit").value = calEvent.title;
             document.getElementById("eventStartEdit").value = startArray[1];
             document.getElementById("eventEndEdit").value = endArray[1];
@@ -150,6 +239,29 @@ $(document).ready(function() {
             if(ismanger)
             {
                 $('#editModal').modal('show');
+            }
+
+            else
+            {
+                // Setting modal paragraphs
+                document.getElementById("descTitle").innerHTML = calEvent.title;
+                document.getElementById("textDescription").innerHTML = "<b>Description:</b> " + calEvent.description;
+                document.getElementById("textStart").innerHTML = "<b>Event Starts:</b> " + startArray[0] + " at " + startArray[1];
+                document.getElementById("textEnd").innerHTML = "<b>Event Ends:</b> " + endArray[0] + " at " + endArray[1];
+                /*document.getElementById("textManager").innerHTML = "<b>Manager Name: </b>";*/
+
+                if(parseInt(calEvent.mandatory) === 1)
+                {
+                    document.getElementById("textMandatory").innerHTML = "<b>Mandatory: </b>Yes";
+                }
+
+                else
+                {
+                    document.getElementById("textMandatory").innerHTML = "<b>Mandatory: </b>No";
+                }
+
+                // Show description
+                $('#modalDescription').modal('show');
             }
         }
     });
@@ -170,35 +282,6 @@ $(document).ready(function() {
     });
 
     // Modal Validator
-/*    $('#btnSubmit').click(function() {
-        var eventName = $('#eventName').val();
-        var eventStart = $('#eventStart').val();
-        var eventEnd = $('#eventEnd').val();
-        var mandatory = $('#mandatory').val();
-        var eventDescription = $('#eventDescription').val();
-        var people = $('#peopleTagged').val();
-        var selectedDate = $('#date').val();
-
-        if(eventName !== "" && eventStart !== "" && eventEnd !== "" && mandatory !== "" && eventDescription !== "" && people !== "")
-        {
-            $.ajax({
-                url: "../../EmployeeManager/Master/Server_Scripts/ScheduleManager.php",
-                method:"POST",
-                data:{eventName:eventName, eventStart:eventStart, eventEnd:eventEnd, mandatory:mandatory, eventDescription:eventDescription, people:people, selectedDate:selectedDate},
-                success:function(data)
-                {
-
-                }
-            });
-
-            // Force body to reload
-            $('body').click(function() {
-                location.reload();
-            });
-        }
-    });*/
-
-    // Modal Validator
     $('#btnSubmitEdit').click(function() {
         var eventName = $('#eventNameEdit').val();
         var eventStart = $('#eventStartEdit').val();
@@ -206,7 +289,8 @@ $(document).ready(function() {
         var mandatory = $('#mandatoryEdit').val();
         var eventDescription = $('#eventDescriptionEdit').val();
         var people = $('#peopleTaggedEdit').val();
-        var selectedDate = $('#dateEdit').val();
+        var selectedDate = $('#dateEditStart').val();
+        var endDate = $('#dateEditEnd').val();
         console.log(eventid);
 
         if(eventName !== "" && eventStart !== "" && eventEnd !== "" && mandatory !== "" && eventDescription !== "" && people !== "" && eventid !== -1)
@@ -214,7 +298,7 @@ $(document).ready(function() {
             $.ajax({
                 url: "../../EmployeeManager/Master/Server_Scripts/UpdateEvent.php",
                 method:"POST",
-                data:{eventName:eventName, eventStart:eventStart, eventEnd:eventEnd, mandatory:mandatory, eventDescription:eventDescription, people:people, selectedDate:selectedDate, eventid:eventid},
+                data:{eventName:eventName, eventStart:eventStart, eventEnd:eventEnd, mandatory:mandatory, eventDescription:eventDescription, people:people, selectedDate:selectedDate, eventid:eventid, endDate:endDate},
                 success:function(data)
                 {
                     console.log(data);
@@ -244,15 +328,10 @@ $(document).ready(function() {
                 success:function(data)
                 {
                     /*$('#calendar').fullCalendar( ‘refetchEvents’ );*/
-
+                    $('#eventModalSelect').modal('hide');
                     $('#calendar').fullCalendar( 'refetchEvents' );
                 }
             });
-
-            // Force body to reload
-            /*$('body').click(function() {
-                location.reload();
-            });*/
         }
     });
 
