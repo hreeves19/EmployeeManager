@@ -8,6 +8,7 @@
 
 /********************************************************************************/
 require('../../EmployeeManager/Classes/SessionManager.php');
+require('../../EmployeeManager/Classes/DBHelper.php');
 
 session_start();
 
@@ -29,6 +30,7 @@ if(isset($_SESSION["message"]))
     unset($_SESSION["message"]);
 }
 /***********************************************************************************/
+$DB = new DBHelper();
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +43,7 @@ if(isset($_SESSION["message"]))
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Time Sheet</title>
+    <title>Profile Page</title>
 
     <!-- Bootstrap core CSS-->
     <link href="../../EmployeeManager/Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -100,6 +102,20 @@ if(isset($_SESSION["message"]))
                 <div class="card card-login mx-auto mt-5">
                     <div class="card-header">Profile</div>
                     <div   class="card-body">
+
+                        <img src="" id="path">
+                        <div id="response"></div>
+                        <br>
+
+                        <form action="../../EmployeeManager/Master/Server_Scripts/ProfilePageManager.php" method="post" enctype="multipart/form-data">
+                            <p>
+                                File : <input type="file" name="upload">
+                            </p>
+                            <input type="submit" value="upload file">
+                        </form>
+
+                        <br>
+
                         <form id="formLogin" action="../../EmployeeManager/Master/Server_Scripts/SignUpManager.php" method="post" accept-charset="UTF-8">
 
                             <!-- First and Last Name Display -->
@@ -149,7 +165,7 @@ if(isset($_SESSION["message"]))
         <footer class="sticky-footer">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright © Your Website 2018</span>
+                    <span>Copyright Group 8</span>
                 </div>
             </div>
         </footer>
@@ -195,6 +211,21 @@ if(isset($_SESSION["message"]))
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $.ajax({
+           url: "../../EmployeeManager/Master/Server_Scripts/ProfilePageManager.php",
+           method: "post",
+           data: {img: true},
+            success: function(data){
+               console.log(data);
+                //$("#path").attr("src", data);
+                document.getElementById("response").innerHTML = data;
+            }
+        });
+    });
+</script>
 
 </body>
 </html>

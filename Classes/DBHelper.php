@@ -453,4 +453,55 @@ WHERE e.`employee_number` = $employeeNumber AND e.`password` LIKE \"$password\" 
         $conn->close();
         return $data;
     }
+
+    public function imageUpload($target_dir, $file_name, $eNumber)
+    {
+        // connect to database
+        $cdb = $this->getConnection();
+
+        $filePath = $target_dir.$file_name;
+
+        // query
+        $q = "UPDATE `employee` SET `image`= '$filePath' WHERE `employee_number` = $eNumber";
+
+        // run query
+        $r = mysqli_query($cdb,$q);
+
+        if(mysqli_affected_rows($cdb) == 1)
+        {
+            echo "<p style='color:green'><b>File has been successfully uploaded</b></p>";
+        }
+        else
+        {
+            echo "<p>A system error has occured</p>".mysqli_error($cdb);
+        }
+
+    }
+
+    public function getImage($eNumber)
+    {
+        // Create connection
+        $conn = $this->getConnection();
+        $data = "";
+
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "SELECT `image` FROM `employee` WHERE `employee_number` = $eNumber";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0)
+        {
+            // output data of each row, there is only one though
+            while($row = $result->fetch_assoc())
+            {
+                $data = $row;
+            }
+        }
+
+        $conn->close();
+        return $data;
+    }
 }
