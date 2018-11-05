@@ -52,12 +52,18 @@ else if($_SERVER['REQUEST_METHOD'] == "POST")
         $file_size = $_FILES['upload']['size'];
 
         // target directory
-        $target_dir = "../../EmployeeManager/Master/Profile_Images/";
+        $target_dir = "C:/xampp/htdocs/EmployeeManager/Master/Profile_Images/";
+        $sql_dir = "../../EmployeeManager/Master/Profile_Images/";
+
+        $path = $target_dir.$file_name;
 
         // uploading file
-        if (move_uploaded_file($file_tmp_name, $target_dir . $file_name))
+        if (move_uploaded_file($file_tmp_name, $path))
         {
-            $DB->imageUpload($target_dir, $file_name, $session->getEmployeeNumber());
+            $DB->imageUpload($sql_dir, $file_name, $session->getEmployeeNumber());
         }
+
+        header("Location: ../../Forms/Profile.php");
+
     }
 }
