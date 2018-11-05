@@ -339,7 +339,7 @@ WHERE e.`employee_number` = $employeeNumber AND e.`password` LIKE \"$password\" 
         $conn->close();
     }
 
-    public function updateEvent($name, $startTime, $endTime, $description, $mandatory, $deptManager, $date, $id)
+    public function updateEvent($name, $startTime, $endTime, $description, $mandatory, $deptManager, $date, $dateEnd, $id)
     {
         // Create connection
         $conn = $this->getConnection();
@@ -350,7 +350,7 @@ WHERE e.`employee_number` = $employeeNumber AND e.`password` LIKE \"$password\" 
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $sql = "UPDATE `event` SET `event_id`=$id,`date`=\"$date\",`name`=\"$name\",`start_time`=\"$startTime\",`end_time`=\"$endTime\",`description`=\"$description\",`mandatory`=$mandatory,`dept_manager_ID`=$deptManager WHERE `event_id` = $id";
+        $sql = "UPDATE `event` SET `event_id`=$id,`date`=\"$date\", `date_end` = \"$dateEnd\",`name`=\"$name\",`start_time`=\"$startTime\",`end_time`=\"$endTime\",`description`=\"$description\",`mandatory`=$mandatory,`dept_manager_ID`=$deptManager WHERE `event_id` = $id";
 
         echo $sql;
 
@@ -437,7 +437,6 @@ WHERE e.`employee_number` = $employeeNumber AND e.`password` LIKE \"$password\" 
             die("Connection failed: " . $conn->connect_error);
         }
 
-        /*        $sql = "SELECT `id`, `first_name`, `last_name`, `employee_number`, `admin` FROM `employee` WHERE `employee_number` = $employeeNumber AND `password` LIKE \"$password\" LIMIT 1";*/
         $sql = "SELECT `dept_manager_id` FROM `dept_emp` WHERE `employee_id` = $employee_primary_key";
         $result = $conn->query($sql);
 
@@ -454,42 +453,20 @@ WHERE e.`employee_number` = $employeeNumber AND e.`password` LIKE \"$password\" 
         return $data;
     }
 
-    public function imageUpload($target_dir, $file_name, $eNumber)
-    {
-        // connect to database
-        $cdb = $this->getConnection();
-
-        $filePath = $target_dir.$file_name;
-
-        // query
-        $q = "UPDATE `employee` SET `image`= '$filePath' WHERE `employee_number` = $eNumber";
-
-        // run query
-        $r = mysqli_query($cdb,$q);
-
-        if(mysqli_affected_rows($cdb) == 1)
-        {
-            echo "<p style='color:green'><b>File has been successfully uploaded</b></p>";
-        }
-        else
-        {
-            echo "<p>A system error has occured</p>".mysqli_error($cdb);
-        }
-
-    }
-
-    public function getImage($eNumber)
+    public function getEmployeeManagerName($dept_manager_ID)
     {
         // Create connection
         $conn = $this->getConnection();
-        $data = "";
+        $data = array();
 
         // Check connection
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $sql = "SELECT `image` FROM `employee` WHERE `employee_number` = $eNumber";
+        $sql = "SELECT `first_name`, `last_name` FROM `employee` e
+left join `dept_manager` d on d.`employee_id` = e.`id`
+WHERE d.`dept_manager_ID` = $dept_manager_ID LIMIT 1";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0)

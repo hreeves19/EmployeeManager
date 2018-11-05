@@ -263,9 +263,13 @@ if(isset($_SESSION["message"]))
                                     <div class="col-xl-12 form-group">
                                         <textarea id="eventDescriptionEdit" name="eventDescriptionEdit" class="form-control" rows="5" placeholder="Type event description"></textarea>
                                     </div>
-                                    <div class="col-xl-12 form-group">
-                                        <label for="dateEdit">Day of Event</label>
-                                        <input id="dateEdit" type="text" name="dateEdit" class="form-control" placeholder="Day of Event" readonly>
+                                    <div class="col-xl-6 form-group">
+                                        <label for="dateEditStart">Event Start</label>
+                                        <input id="dateEditStart" type="text" name="dateEditStart" class="form-control" placeholder="Day of Event" readonly>
+                                    </div>
+                                    <div class="col-xl-6 form-group">
+                                        <label for="dateEditEnd">Event End</label>
+                                        <input id="dateEditEnd" type="text" name="dateEditEnd" class="form-control" placeholder="Day of Event" readonly>
                                     </div>
                                 </div>
                                 <div class="float-left">
@@ -278,6 +282,26 @@ if(isset($_SESSION["message"]))
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- Event Modal so user can see the event description -->
+            <div class="modal fade" id="modalDescription" aria-labelledby="editModal" role="dialog" tabindex="-1" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog modal-simple">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="descTitle">Event Description</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p id="textDescription"></p>
+                            <p id="textStart"></p>
+                            <p id="textEnd"></p>
+                            <p id="textMandatory"></p>
+                            <p id="textManager"><b>Manager Name: </b><?php echo $session->getManagerName();?></p>
+                        </div>
+                    </div>
             </div>
         </div>
         <!-- /.container-fluid -->
