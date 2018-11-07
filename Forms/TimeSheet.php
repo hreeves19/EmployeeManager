@@ -132,6 +132,7 @@ if(isset($_SESSION["message"]))
                     </form>
                 </div>
             </div>
+
             <!-- Pie chart stuff -->
             <hr>
             <h1 style="text-align: center;">Time Statistics</h1>
