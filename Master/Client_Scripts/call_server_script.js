@@ -58,13 +58,28 @@ function startCountDown(latest)
         {
             clearInterval(x);
 
-            // Temp is the end of next pay period, monday is the beginning of the new pay period
-            var temp = new Date();
-            temp.setDate(temp.getDate() + 14);
+            $.ajax({
+                url: "../Master/Server_Scripts/HomeManager.php",
+                method: "post",
+                data: {getLatestPayPeriod: true},
 
-            var monday = new Date();
-            monday.setDate(monday.getDate() + 3);
-            updatePayPeriod(temp, monday);
+                success:function(data)
+                {
+                    // Parsing the json encoded response from the server
+                    latest = JSON.parse(data);
+                    latest = latest["MAX(`date_to`)"];
+                    latest = latest.split("-");
+
+                    // Setting dates
+                    var endPayPeriod = new Date(parseInt(latest[0]), parseInt(latest[1]) - 1 , parseInt(latest[2]), 17, 30, 0, 0);
+                    endPayPeriod.setDate(endPayPeriod.getDate() + 14);
+
+                    var beginPayPeriod = new Date(parseInt(latest[0]), parseInt(latest[1]) - 1 , parseInt(latest[2]), 8, 0, 0, 0);
+                    beginPayPeriod.setDate(beginPayPeriod.getDate() + 3);
+
+                    updatePayPeriod(endPayPeriod, beginPayPeriod);
+                }
+            });
         }
     }, 1000);
 }
