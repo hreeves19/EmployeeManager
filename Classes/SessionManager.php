@@ -19,8 +19,6 @@ class SessionManager
     private $title;
     private $address;
     private $hireDate;
-
-
     private $managers_id; // If 0, means employee is not a manager
     private $manager_name; // Managers name, empty if this person is a manager
 
@@ -87,10 +85,6 @@ class SessionManager
     {
         $this->manager_name = $manager_name;
     }
-
-    /**
-     * @return mixed
-     */
 
     /**
      * @return mixed

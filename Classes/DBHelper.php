@@ -23,11 +23,37 @@ class DBHelper
         $this->db = 'employeemanager';
     }
 
-    public function getConnection()
+    /**
+     * @return string
+     */
+    public function getUser()
     {
-        return $db = new mysqli('localhost', $this->user, $this->password, $this->db);
+        return $this->user;
     }
 
+    /**
+     * @param string $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param string $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
 
     /**
      * @return string
@@ -35,6 +61,20 @@ class DBHelper
     public function getDb()
     {
         return $this->db;
+    }
+
+    /**
+     * @param string $db
+     */
+    public function setDb($db)
+    {
+        $this->db = $db;
+    }
+
+
+    public function getConnection()
+    {
+        return $db = new mysqli('localhost', $this->user, $this->password, $this->db);
     }
 
     // Used to return the latest date_to in the pay_period table
@@ -503,6 +543,9 @@ WHERE d.`dept_manager_ID` = $dept_manager_ID LIMIT 1";
         {
             echo "<p>A system error has been occured</p>".mysqli_error($cdb);
         }
+
+        // Make sure you always close the connection
+        $cdb->close();
     }
 
     public function getImage($eNumber)
