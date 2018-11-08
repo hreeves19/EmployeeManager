@@ -149,11 +149,22 @@ $DB = new DBHelper();
                                         </div>
                                     </div>
 
-                                    <!-- Title Display -->
+                                    <!-- Title and hire date Display -->
                                     <div class="form-group">
-                                        <div class="form-label-group">
-                                            <input id="title" type="text" name="title" class="form-control" placeholder="title" required="required" value="<?php echo $session->getTitle(); ?>" readonly>
-                                            <label for="title">Title</label>
+                                        <div class="form-row">
+                                            <div class="col-md-6">
+                                                <div class="form-label-group">
+                                                    <input id="title" type="text" name="title" class="form-control" placeholder="title" required="required" value="<?php echo $session->getTitle(); ?>" readonly>
+                                                    <label for="title">Title</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-label-group">
+                                                    <input id="hireDate" type="text" name="hireDate" class="form-control" placeholder="Hire Date" required="required" value="<?php echo $session->getHireDate(); ?>" readonly>
+                                                    <label for="hireDate">Hire Date</label>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 

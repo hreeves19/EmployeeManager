@@ -128,11 +128,11 @@ class DBHelper
         }
 
 /*        $sql = "SELECT `id`, `first_name`, `last_name`, `employee_number`, `admin` FROM `employee` WHERE `employee_number` = $employeeNumber AND `password` LIKE \"$password\" LIMIT 1";*/
-        $sql = "SELECT e.`id`, e.`first_name`, e.`last_name`, e.`employee_number`, e.`admin`, a.`street_address`, t.`title`, s.`salary_per_hour` FROM `employee` e
-left join `address` a on a.`address_ID` = e.`address_id`
-left join `titles` t on t.`title_id` = e.`title_id`
-left join `salaries` s on s.`title_id` = t.`title_id`
-WHERE e.`employee_number` = $employeeNumber AND e.`password` LIKE \"$password\" LIMIT 1";
+        $sql = "SELECT e.`id`, e.`first_name`, e.`last_name`, e.`employee_number`, e.`admin`, e.`hire_date`, a.`street_address`, t.`title`, s.`salary_per_hour` FROM `employee` e ".
+            "left join `address` a on a.`address_ID` = e.`address_id`".
+            "left join `titles` t on t.`title_id` = e.`title_id`".
+            "left join `salaries` s on s.`title_id` = t.`title_id`".
+            "WHERE e.`employee_number` = $employeeNumber AND e.`password` LIKE \"$password\" LIMIT 1";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0)
