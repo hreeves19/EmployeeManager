@@ -43,6 +43,7 @@ if(isset($_POST["enumber"]) && isset($_POST["psw"]))
         $_SESSION['address'] = $data["street_address"];
         $_SESSION['title'] = $data["title"];
         $_SESSION['salary_per_hour'] = $data["salary_per_hour"];
+        $_SESSION['hireDate'] = $data["hire_date"];
 
         // Getting employee's manager id, if its 0 it means that this person is a manager
         $manager_id = $DB->getEmployeesManager((int) $data["id"]);

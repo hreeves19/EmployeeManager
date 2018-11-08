@@ -18,6 +18,9 @@ class SessionManager
     private $loggedIn;
     private $title;
     private $address;
+    private $hireDate;
+
+
     private $managers_id; // If 0, means employee is not a manager
     private $manager_name; // Managers name, empty if this person is a manager
 
@@ -31,7 +34,7 @@ class SessionManager
         // logging in
         if(isset($_SESSION['primarykey']) && isset($_SESSION['employeeNumber']) && isset($_SESSION['firstName'])
          && isset($_SESSION['lastName']) && isset($_SESSION['isManager']) && isset($_SESSION['isAdmin']) && isset($_SESSION['title'])
-        && isset($_SESSION['manager_id']))
+        && isset($_SESSION['manager_id']) && isset($_SESSION['address']) && isset($_SESSION['hireDate']))
         {
             // Setting class variables
             $this->setPrimarykey($_SESSION['primarykey']);
@@ -44,6 +47,7 @@ class SessionManager
             $this->setLoggedIn(true);
             $this->setManagersId($_SESSION['manager_id']);
             $this->setAddress(($_SESSION['address']));
+            $this->setHireDate($_SESSION['hireDate']);
 
             // Checking if manager name is set
             if(isset($_SESSION['manager_name']))
@@ -67,6 +71,7 @@ class SessionManager
         header("Location: ../../EmployeeManager/Forms/Login.php");
     }
 
+
     /**
      * @return mixed
      */
@@ -86,6 +91,24 @@ class SessionManager
     /**
      * @return mixed
      */
+
+    /**
+     * @return mixed
+     */
+
+    public function getHireDate()
+    {
+        return $this->hireDate;
+    }
+
+    /**
+     * @param mixed $hireDate
+     */
+    public function setHireDate($hireDate)
+    {
+        $this->hireDate = $hireDate;
+    }
+
     public function getAddress()
     {
         return $this->address;
