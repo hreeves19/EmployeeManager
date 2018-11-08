@@ -94,7 +94,36 @@ if(isset($_SESSION["message"]))
 
     <div id="content-wrapper">
         <div class="container-fluid">
+            <h1 style="text-align: center;">Employee Management Dashboard</h1>
+            <hr>
             <!-- Table showing all their employees -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fas fa-table"></i>
+                    Employee Table</div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Gender</th>
+                                <th>Date of Hirer</th>
+                                <th>Employee Number</th>
+                                <th>Admin</th>
+                                <th>Title</th>
+                                <th>Address</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer small text-muted">All of your employees</div>
+            </div>
 
             <!-- Some kind of statistics showing hours worked for their employees -->
 
