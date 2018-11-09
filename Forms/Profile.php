@@ -130,6 +130,13 @@ $DB = new DBHelper();
 
                                 <form id="formLogin" action="../../EmployeeManager/Master/Server_Scripts/SignUpManager.php" method="post" accept-charset="UTF-8">
 
+                                    <div class="form-group">
+                                        <div class="form-label-group">
+                                            <input id="empNum" type="text" name="empNum" class="form-control" placeholder="Employee Number" required="required" value="<?php echo $session->getEmployeeNumber(); ?>" readonly>
+                                            <label for="empnum">Employee Number</label>
+                                        </div>
+                                    </div>
+
                                     <!-- First and Last Name Display -->
                                     <div class="form-group">
                                         <div class="form-row">
