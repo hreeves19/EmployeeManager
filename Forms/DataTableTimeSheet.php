@@ -35,7 +35,7 @@ else
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Home</title>
+    <title>View Time Sheet</title>
 
     <!-- Bootstrap core JavaScript-->
     <script src="../../EmployeeManager/Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/vendor/jquery/jquery.min.js"></script>
@@ -95,9 +95,6 @@ else
                 ajax:
                     {
                         url: "../../EmployeeManager/Master/Server_Scripts/TimeSheetManager.php?datatable=" + true,
-                        success:function(data) {
-                            console.log(data);
-                        }
                     },
 
                 columns: [

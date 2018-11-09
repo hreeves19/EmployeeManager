@@ -56,6 +56,22 @@ if(isset($_SESSION["message"]))
     <!-- Custom styles for this template-->
     <link href="../../EmployeeManager/Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/css/sb-admin.css" rel="stylesheet">
 
+    <style>
+        #divLoad
+        {
+            display: flex;
+            justify-content: center;
+        }
+
+        #divLoad > #figLoad
+        {
+            border: thin silver solid;
+            background-color: white;
+            text-align: center;
+            border-radius: 25px;
+        }
+    </style>
+
 </head>
 <body id="page-top">
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
@@ -182,9 +198,13 @@ if(isset($_SESSION["message"]))
 <!-- Page level plugin JavaScript-->
 <script src="../../EmployeeManager/Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/vendor/chart.js/Chart.min.js"></script>
 
+<!-- Page level plugin JavaScript-->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script src="../Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/vendor/datatables/dataTables.bootstrap4.js"></script>
+
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script src="../Master/Client_Scripts/manage_employees.js"></script>
 
 </body>
 </html>

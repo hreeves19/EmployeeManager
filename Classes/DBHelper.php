@@ -575,4 +575,35 @@ WHERE d.`dept_manager_ID` = $dept_manager_ID LIMIT 1";
         $conn->close();
         return $data;
     }
+
+    public function getEmployees($manager_id)
+    {
+        // Create connection
+        $conn = $this->getConnection();
+        $data = array();
+
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        /*        $sql = "SELECT `id`, `first_name`, `last_name`, `employee_number`, `admin` FROM `employee` WHERE `employee_number` = $employeeNumber AND `password` LIKE \"$password\" LIMIT 1";*/
+        $sql = "SELECT `id`, `first_name`, `last_name`,`gender`, `hire_date`, `employee_number`, `admin`, `title_id`, `address_id` FROM `employee` e 
+left join `dept_emp` d on d.`employee_id` = e.`id`
+left join `dept_manager` m on m.`employee_id` = e.`id`
+WHERE d.`dept_manager_id` = $manager_id";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0)
+        {
+            // output data of each row, there is only one though
+            while($row = $result->fetch_assoc())
+            {
+                $data[] = $row;
+            }
+        }
+
+        $conn->close();
+        return $data;
+    }
 }
