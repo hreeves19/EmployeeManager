@@ -1,3 +1,5 @@
+
+
 <?php
 /**
  * Created by PhpStorm.
@@ -5,7 +7,7 @@
  * Date: 10/14/2018
  * Time: 10:36 PM
  */
-
+/*comment example*/
 // ADD THIS SECTION ON EVERY PAGE EXCEPT LOGIN
 // This helps us keep track of the user
 /****************************************************************************/
