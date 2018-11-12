@@ -41,6 +41,9 @@ if(isset($_POST["enumber"]) && isset($_POST["psw"]))
         $_SESSION['isManager'] = $manager;
         $_SESSION['isAdmin'] = $data["admin"];
         $_SESSION['address'] = $data["street_address"];
+        $_SESSION['city'] = $data["city"];
+        $_SESSION['zipcode'] = $data["zipcode"];
+        $_SESSION['state'] = $data["state"];
         $_SESSION['title'] = $data["title"];
         $_SESSION['salary_per_hour'] = $data["salary_per_hour"];
         $_SESSION['hireDate'] = $data["hire_date"];
