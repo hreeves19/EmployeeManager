@@ -56,22 +56,6 @@ if(isset($_SESSION["message"]))
     <!-- Custom styles for this template-->
     <link href="../../EmployeeManager/Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/css/sb-admin.css" rel="stylesheet">
 
-    <style>
-        #divLoad
-        {
-            display: flex;
-            justify-content: center;
-        }
-
-        #divLoad > #figLoad
-        {
-            border: thin silver solid;
-            background-color: white;
-            text-align: center;
-            border-radius: 25px;
-        }
-    </style>
-
 </head>
 <body id="page-top">
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
@@ -134,11 +118,34 @@ if(isset($_SESSION["message"]))
                             </tr>
                             </thead>
                             <tfoot>
+                            <tr>
+                                <th>ID</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Gender</th>
+                                <th>Date of Hirer</th>
+                                <th>Employee Number</th>
+                                <th>Admin</th>
+                                <th>Title</th>
+                                <th>Address</th>
+                            </tr>
                             </tfoot>
                         </table>
                     </div>
                 </div>
                 <div class="card-footer small text-muted">All of your employees</div>
+            </div>
+
+            <hr>
+
+            <!-- Calendar -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h1 style="text-align: center;">Employee Time Sheet</h1>
+                </div>
+                <div class="card-body">
+                    <div id='calendar' style="padding: 10px;"></div>
+                </div>
             </div>
 
             <!-- Some kind of statistics showing hours worked for their employees -->
@@ -159,11 +166,6 @@ if(isset($_SESSION["message"]))
     <!-- /.content-wrapper -->
 </div>
 <!-- /#wrapper -->
-
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
 
 <!-- Logout Modal-->
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -197,6 +199,14 @@ if(isset($_SESSION["message"]))
 <!-- For Chart -->
 <!-- Page level plugin JavaScript-->
 <script src="../../EmployeeManager/Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/vendor/chart.js/Chart.min.js"></script>
+
+<link href='https://fullcalendar.io/releases/fullcalendar/3.9.0/fullcalendar.min.css' rel='stylesheet' />
+<link href='https://fullcalendar.io/releases/fullcalendar/3.9.0/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+<script src='https://fullcalendar.io/releases/fullcalendar/3.9.0/lib/moment.min.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.23/moment-timezone-with-data-2012-2022.min.js"></script>
+<script src='https://fullcalendar.io/releases/fullcalendar/3.9.0/lib/jquery.min.js'></script>
+<script src='https://fullcalendar.io/releases/fullcalendar/3.9.0/fullcalendar.min.js'></script>
+<script src='https://fullcalendar.io/releases/fullcalendar/3.9.0/gcal.min.js'></script>
 
 <!-- Page level plugin JavaScript-->
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>

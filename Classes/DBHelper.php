@@ -588,9 +588,11 @@ WHERE d.`dept_manager_ID` = $dept_manager_ID LIMIT 1";
         }
 
         /*        $sql = "SELECT `id`, `first_name`, `last_name`, `employee_number`, `admin` FROM `employee` WHERE `employee_number` = $employeeNumber AND `password` LIKE \"$password\" LIMIT 1";*/
-        $sql = "SELECT `id`, `first_name`, `last_name`,`gender`, `hire_date`, `employee_number`, `admin`, `title_id`, `address_id` FROM `employee` e 
+        $sql = "SELECT `id`, `first_name`, `last_name`,`gender`, `hire_date`, `employee_number`, `admin`, t.`title`, a.`street_address` FROM `employee` e 
 left join `dept_emp` d on d.`employee_id` = e.`id`
 left join `dept_manager` m on m.`employee_id` = e.`id`
+left join `address` a on a.`address_ID` = e.`address_id`
+left join `titles` t on t.`title_ID` = e.`title_id`
 WHERE d.`dept_manager_id` = $manager_id";
         $result = $conn->query($sql);
 
@@ -605,5 +607,10 @@ WHERE d.`dept_manager_id` = $manager_id";
 
         $conn->close();
         return $data;
+    }
+
+    public function getTimeSheet($currentPayPeriod, $employee_id)
+    {
+
     }
 }

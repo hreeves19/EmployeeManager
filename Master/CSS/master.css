@@ -25,3 +25,17 @@
     display: block;
     font-size: 4.5rem;
 }
+
+#divLoad
+{
+    display: flex;
+    justify-content: center;
+}
+
+#divLoad > #figLoad
+{
+    border: thin silver solid;
+    background-color: white;
+    text-align: center;
+    border-radius: 25px;
+}

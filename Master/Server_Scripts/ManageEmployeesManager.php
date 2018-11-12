@@ -34,10 +34,35 @@ if(isset($_SESSION["message"]))
 /****************************************************************************/
 $DB = new DBHelper();
 
+// This is used to get the datatable on the employee management page
 if(isset($_GET["getDataTable"]))
 {
+    // We are getting all the employees and their relevant information
     $data = $DB->getEmployees($session->getIsManager());
     echo json_encode(array("data" => $data));
+}
+
+// This is used to get all the employee under a manager
+else if(isset($_POST["getEmployees"]))
+{
+    $data = $DB->getEmployees($session->getIsManager());
+    echo json_encode($data);
+}
+
+// We are trying to get the timesheet of the employee being passed in
+else if(isset($_POST["getTimeSheet"]) && isset($_POST["employee_id"]))
+{
+    // The Current pay period is the date as a string, the date is the day that the pay period ends
+    $currentPayPeriod = $DB->getLatestPayPeiod();
+    $currentPayPeriod = $currentPayPeriod["MAX(`date_to`)"];
+
+    // Getting the employees id through the post array
+    $employee_id = $_POST["employee_id"];
+
+    // Getting their timesheet
+    $timesheet = $DB->selectAllTimeSheet($employee_id, $DB->getLatestPayPeiod());
+
+    echo json_encode($timesheet);
 }
 
 else
