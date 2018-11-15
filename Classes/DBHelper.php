@@ -167,7 +167,7 @@ class DBHelper
             die("Connection failed: " . $conn->connect_error);
         }
 
-/*        $sql = "SELECT `id`, `first_name`, `last_name`, `employee_number`, `admin` FROM `employee` WHERE `employee_number` = $employeeNumber AND `password` LIKE \"$password\" LIMIT 1";*/
+        /*        $sql = "SELECT `id`, `first_name`, `last_name`, `employee_number`, `admin` FROM `employee` WHERE `employee_number` = $employeeNumber AND `password` LIKE \"$password\" LIMIT 1";*/
         $sql = "SELECT e.`id`, e.`first_name`, e.`last_name`, e.`employee_number`, e.`admin`, e.`hire_date`, a.`street_address`, t.`title`, s.`salary_per_hour` FROM `employee` e ".
             "left join `address` a on a.`address_ID` = e.`address_id`".
             "left join `titles` t on t.`title_id` = e.`title_id`".
@@ -222,7 +222,7 @@ class DBHelper
     {
         //Create connection
         $conn = $this->getConnection();
- 
+
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
@@ -307,6 +307,7 @@ class DBHelper
         $conn->close();
     }
 
+    // This is for a form
     public function ddlEmployees($manager_id)
     {
         // Getting connection
@@ -319,9 +320,9 @@ class DBHelper
         }
         // Creating select statement
         $sql = "SELECT `id`, `first_name`, `last_name` FROM `employee` e " .
-        "LEFT JOIN `dept_manager` m on m.`employee_id` = e.`id` " .
-        "LEFT JOIN `dept_emp` d on d.`employee_id` = e.`id` " .
-        "WHERE d.`dept_emp_ID` = $manager_id";
+            "LEFT JOIN `dept_manager` m on m.`employee_id` = e.`id` " .
+            "LEFT JOIN `dept_emp` d on d.`employee_id` = e.`id` " .
+            "WHERE d.`dept_emp_ID` = $manager_id";
 
         $result = $mysqli->query($sql);
 
@@ -331,6 +332,51 @@ class DBHelper
             echo "<label for='peopleTagged'>Tag employees</label>";
             echo "<select id = 'peopleTagged' class='form-control' name='peopleTagged'>";
             echo "<option value ='" . -1 . "'>All</option>";
+
+            // output data of each row
+            while($row = $result->fetch_assoc())
+            {
+                $name = $row["first_name"] . " " . $row["last_name"];
+                echo "<option value ='" . $row["id"] . "'>"
+                    . $name  . "</option>";
+            }
+            echo "</select>";
+        }
+        else
+        {
+            // Closing database connection
+            echo "Hey there $manager_id";
+            $mysqli->close();
+            return false;
+        }
+        // Closing db connection
+        mysqli_close($mysqli);
+        return true;
+    }
+
+    // This is if you just want the drop down list, this is for the manage employees dashboard
+    public function ddlGetEmployees($manager_id)
+    {
+        // Getting connection
+        $mysqli = $this->getConnection();
+        // Checking to see if the connection failed
+        if($mysqli->connect_errno)
+        {
+            echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+            return false;
+        }
+        // Creating select statement
+        $sql = "SELECT `id`, `first_name`, `last_name` FROM `employee` e " .
+            "LEFT JOIN `dept_manager` m on m.`employee_id` = e.`id` " .
+            "LEFT JOIN `dept_emp` d on d.`employee_id` = e.`id` " .
+            "WHERE d.`dept_manager_ID` = $manager_id";
+
+        $result = $mysqli->query($sql);
+
+        if ($result)
+        {
+            echo "Employees <select id='ddlEmployees' onchange='showNewCalendar()' class='form-control'>";
+            //echo "<option value ='" . -1 . "'>Unselected</option>";
 
             // output data of each row
             while($row = $result->fetch_assoc())
@@ -609,8 +655,87 @@ WHERE d.`dept_manager_id` = $manager_id";
         return $data;
     }
 
-    public function getTimeSheet($currentPayPeriod, $employee_id)
+    // This function is used to update the approved value in the timesheet table
+    public function updateTimesheetApproved($employee_id, $status)
     {
 
+        // connect to database
+        $cdb = $this->getConnection();
+
+        // Using flag to determine if there was an error
+        $flag = false;
+
+        // query
+        $q = "UPDATE `time_sheet` SET `approved`= $status WHERE `employee_id` = $employee_id";
+        echo $q;
+
+        // run query
+        $r = mysqli_query($cdb,$q);
+
+        if(mysqli_affected_rows($cdb) == 1)
+        {
+            $flag = true;
+        }
+        else
+        {
+            echo "<p>A system error has been occured</p>".mysqli_error($cdb);
+        }
+
+        // Make sure you always close the connection
+        $cdb->close();
+        return $flag;
+    }
+
+    // Select all function
+    public function getAllTable($table, $where)
+    {
+        $flag = false;
+
+        // Checking to make sure table is set
+        if(empty($table))
+        {
+            echo "You need to give the table that you want to select from.";
+            return false;
+        }
+
+        if(empty($where) )
+        {
+            $flag = true;
+        }
+
+        // Create connection
+        $conn = $this->getConnection();
+        $data = array();
+
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        // Include where statement if the where is set
+        if($where == false)
+        {
+            $sql = "SELECT * FROM `$table`";
+        }
+
+        else
+        {
+            $sql = "SELECT * FROM `$table` WHERE $where";
+        }
+
+        $result = $conn->query($sql);
+
+        // Checking to see if the query returns anything
+        if ($result->num_rows > 0)
+        {
+            // output data of each row, there is only one though
+            while($row = $result->fetch_assoc())
+            {
+                $data[] = $row;
+            }
+        }
+
+        $conn->close();
+        return $data;
     }
 }
