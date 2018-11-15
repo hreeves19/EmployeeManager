@@ -60,12 +60,67 @@ else if(isset($_POST["getTimeSheet"]) && isset($_POST["employee_id"]))
     $employee_id = $_POST["employee_id"];
 
     // Getting their timesheet
-    $timesheet = $DB->selectAllTimeSheet($employee_id, $DB->getLatestPayPeiod());
+    $timesheet = $DB->selectAllTimeSheet((int) $employee_id, $DB->getLatestPayPeiod());
 
-    echo json_encode($timesheet);
+    // Setting default timezone
+    date_default_timezone_set('America/Chicago');
+
+    $data_events[] = array();
+
+    foreach($timesheet as $key => $value)
+    {
+        // Getting times
+        $start_time = $value["time_from"];
+        $end_time = $value["time_to"];
+        $date = $value["date"];
+        $dateEnd = $value["date"];
+        $color = "#0279FF";
+
+        // Checking to see if timesheet hasn't been approved
+        if((int) $value["approved"] == 0)
+        {
+            // Change the color to red
+            $color = "#DC3546";
+        }
+
+        // Need to explode to get hours and minutes, these are now arrays
+        // 0 element = hours, 1 element = minutes, 2 element = seconds
+        $start_time = explode(":", $start_time);
+        $end_time = explode(":", $end_time);
+
+        // Creating date objects w/ time, start
+        $event_date_start = new DateTime($date);
+        $event_date_start->setTime($start_time[0], $start_time[1], $start_time[2]); // Hours, minutes, seconds
+        $event_start_format = $event_date_start->format('Y-m-d H:i:s');
+
+        // Creating date objects w/ time
+        $event_date_end = new DateTime($dateEnd);
+        $event_date_end->setTime($end_time[0], $end_time[1], $end_time[2]); // Hours, minutes, seconds
+        $event_end_format = $event_date_end->format('Y-m-d H:i:s');
+
+        $data_events[$key] = array(
+            "id" => $value["time_id"],
+            "title" => "Hours Worked",
+            "description" => "You have worked " . $value["number_hours"],
+            "end" => $event_end_format,
+            "start" => $event_start_format,
+            "color" => $color,
+            "textColor" => "#ffffff",
+        );
+    }
+
+    echo json_encode(array("events" => $data_events));
+}
+
+// Approving the employees timesheet for the current pay period
+else if(isset($_POST["status"]) && isset($_POST["employee_id"]))
+{
+    // Will return true on success, false if negative
+    $status = $DB->updateTimesheetApproved((int) $_POST["employee_id"], (int) $_POST["status"]);
 }
 
 else
 {
+    var_dump($_POST);
     echo "Something went wrong.";
 }

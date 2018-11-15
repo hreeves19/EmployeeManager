@@ -26,24 +26,48 @@ function getEmployees()
 
             //console.log(timesheet);
             // Call calendar
-            showCalendar();
+            showCalendar(employee[0]["id"]);
         }
     });
 }
 
-function showCalendar()
+function showNewCalendar()
 {
-    console.log(employee);
+    // Getting selected value from the employees ddl
+    var employee = document.getElementById("ddlEmployees").value;
+    employee = parseInt(employee);
 
     // Getting today's current date
     var today = new Date();
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
+    // Destroy calendar, then redraw it
+    $('#calendar').fullCalendar( 'destroy' );
+    showCalendar(employee);
+}
+
+function showCalendar(employee)
+{
+    // Getting today's current date
+    var today = new Date();
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
+    // Getting range for work week
+    var text = document.getElementById("payPeriod").value;
+
+    /*text = text.match(/\d\d\d\d-\d\d-\d\d/g);*/
+    console.log(text);
+
     $('#calendar').fullCalendar({
         header: {
             left: 'prev,next today',
             center: 'title',
-            right: 'listDay,listWeek,month'
+            right: 'listDay,agendaWeek,month'
+        },
+
+        visibleRange: {
+            start: '2017-03-22',
+            end: '2017-03-25'
         },
 
         // customize the button names,
@@ -53,24 +77,21 @@ function showCalendar()
             listWeek: { buttonText: 'list week' }
         },
 
-        defaultView: 'listWeek',
+        defaultView: 'agendaWeek',
         defaultDate: date,
         navLinks: true, // can click day/week names to navigate views
         eventSources: [
             {
                 events: function(start, end, timezone, callback) {
                     $.ajax({
-                        url: '../../EmployeeManager/Master/Server_Scripts/CalendarTimesheet.php',
+                        url: '../../EmployeeManager/Master/Server_Scripts/ManageEmployeesManager.php',
+                        method: "post",
+                        data: {getTimeSheet: true, employee_id:employee},
                         dataType: 'json',
-                        data: {
-                            // our hypothetical feed requires UNIX timestamps
-                            start: start.unix(),
-                            end: end.unix()
-                        },
                         success: function(msg) {
                             console.log(msg);
-                            //var events = msg.events;
-                            //callback(events);
+                            var events = msg.events;
+                            callback(events);
                         }
                     });
                 }
@@ -85,17 +106,16 @@ function calculateChart(emp)
     $.ajax({
         url: "../../EmployeeManager/Master/Server_Scripts/ManageEmployeesManager.php",
         method: "post",
-        data: {getTimeSheet: true, employee_id:emp["id"]},
+        data: {getTimeSheet: true, employee_id:emp[0]["id"]},
         success:function(data)
         {
-            var temp = JSON.parse(data);
+            console.log(data);
         }
     });
 }
 
 // Used to show the datatable
 function showTable() {
-    console.log("show table");
     // Creating data table and defining its properties
     var table = $('#dataTable').DataTable({
         "processing": true,
@@ -130,5 +150,68 @@ function showTable() {
             {data: 'title'},
             {data: 'street_address'}
         ]
+    });
+}
+
+function approveSheet()
+{
+    // Getting selected value from the employees ddl
+    var employee = document.getElementById("ddlEmployees").value;
+    employee = parseInt(employee);
+
+    // Making an ajax call to approve the time sheet
+    $.ajax({
+        url: "../../EmployeeManager/Master/Server_Scripts/ManageEmployeesManager.php",
+        method: "post",
+        data: {status: 1, employee_id:employee},
+        success:function(data)
+        {
+            console.log(data);
+            // Destroy calendar, then redraw it
+            $('#calendar').fullCalendar( 'destroy' );
+            showCalendar(employee);
+        }
+    });
+}
+
+function disapproveSheet()
+{
+    // Getting selected value from the employees ddl
+    var employee = document.getElementById("ddlEmployees").value;
+    employee = parseInt(employee);
+
+    // Making an ajax call to approve the time sheet
+    $.ajax({
+        url: "../../EmployeeManager/Master/Server_Scripts/ManageEmployeesManager.php",
+        method: "post",
+        data: {status: 0, employee_id:employee},
+        success:function(data)
+        {
+            console.log(data);
+            // Destroy calendar, then redraw it
+            $('#calendar').fullCalendar( 'destroy' );
+            showCalendar(employee);
+        }
+    });
+}
+
+function resetSheet()
+{
+    // Getting selected value from the employees ddl
+    var employee = document.getElementById("ddlEmployees").value;
+    employee = parseInt(employee);
+
+    // Making an ajax call to approve the time sheet
+    $.ajax({
+        url: "../../EmployeeManager/Master/Server_Scripts/ManageEmployeesManager.php",
+        method: "post",
+        data: {status: 0, employee_id:employee},
+        success:function(data)
+        {
+            console.log(data);
+            // Destroy calendar, then redraw it
+            $('#calendar').fullCalendar( 'destroy' );
+            showCalendar(employee);
+        }
     });
 }
