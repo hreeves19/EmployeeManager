@@ -171,7 +171,7 @@ if(isset($_SESSION["message"]))
                                 </div>
                             </div>
 
-                                    <!-- State Drop Down box -->
+                            <!-- State Drop Down box -->
                             <div class="form-group">
                                 <div class="form-label-group">
                                     <label for="State"></label>
