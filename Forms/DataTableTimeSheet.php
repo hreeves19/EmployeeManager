@@ -62,6 +62,16 @@ else
     <script src="../../EmployeeManager/Master/Client_Scripts/call_server_script.js"></script>
     <link href="../../EmployeeManager/Master/CSS/master.css" rel="stylesheet">
 
+    <!-- Calender -->
+    <link href='https://fullcalendar.io/releases/fullcalendar/3.9.0/fullcalendar.min.css' rel='stylesheet' />
+    <link href='https://fullcalendar.io/releases/fullcalendar/3.9.0/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+    <script src='https://fullcalendar.io/releases/fullcalendar/3.9.0/lib/moment.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.23/moment-timezone-with-data-2012-2022.min.js"></script>
+    <script src='https://fullcalendar.io/releases/fullcalendar/3.9.0/lib/jquery.min.js'></script>
+    <script src='https://fullcalendar.io/releases/fullcalendar/3.9.0/fullcalendar.min.js'></script>
+    <script src='https://fullcalendar.io/releases/fullcalendar/3.9.0/gcal.min.js'></script>
+    <script src="../Master/Client_Scripts/TimeSheetData.js"></script>
+
     <!-- Page level plugin JavaScript-->
     <script src="../Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/vendor/datatables/jquery.dataTables.js"></script>
     <script src="../Master/Bootstrap_Template/startbootstrap-sb-admin-gh-pages/vendor/datatables/dataTables.bootstrap4.js"></script>
@@ -185,8 +195,22 @@ else
                         </table>
                     </div>
                 </div>
+
                 <div class="card-footer small text-muted">Your Time Log</div>
+
             </div>
+
+            <!-- Calendar -->
+            <div class="card ml-lg-5">
+                <div class="card-header">
+                    <h1 style="text-align: center;">Completed Hours</h1>
+                </div>
+                <div class="card-body">
+                    <div id='calendar' style="padding: 10px;"></div>
+                </div>
+            </div>
+            <br>
+
         </div>
         <!-- /.container-fluid -->
 

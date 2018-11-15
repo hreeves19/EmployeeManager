@@ -130,14 +130,15 @@ $DB = new DBHelper();
 
                                 <form id="formLogin" action="../../EmployeeManager/Master/Server_Scripts/SignUpManager.php" method="post" accept-charset="UTF-8">
 
+                                    <!-- Employee Number Display -->
                                     <div class="form-group">
                                         <div class="form-label-group">
                                             <input id="empNum" type="text" name="empNum" class="form-control" placeholder="Employee Number" required="required" value="<?php echo $session->getEmployeeNumber(); ?>" readonly>
-                                            <label for="empnum">Employee Number</label>
+                                            <label for="empNum">Employee Number</label>
                                         </div>
                                     </div>
 
-                                    <!-- First and Last Name Display -->
+                                    <!-- First and Last Name Row Display -->
                                     <div class="form-group">
                                         <div class="form-row">
                                             <div class="col-md-6">
@@ -156,7 +157,7 @@ $DB = new DBHelper();
                                         </div>
                                     </div>
 
-                                    <!-- Title and hire date Display -->
+                                    <!-- Title and hire date Row Display -->
                                     <div class="form-group">
                                         <div class="form-row">
                                             <div class="col-md-6">
@@ -183,7 +184,33 @@ $DB = new DBHelper();
                                         </div>
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary btn-block">Change</button>
+                                    <!-- City, State, and Zip Code Row Display -->
+                                    <div class="form-group">
+                                        <div class="form-row">
+                                            <div class="col-md-5">
+                                                <div class="form-label-group">
+                                                    <input id="city" type="text" name="city" class="form-control" placeholder="City" required="required" value="<?php echo $session->getCity(); ?>" readonly>
+                                                    <label for="city">City</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <div class="form-label-group">
+                                                    <input id="state" type="text" name="state" class="form-control" placeholder="State" required="required" value="<?php echo $session->getState(); ?>" readonly>
+                                                    <label for="state">State</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-5">
+                                                <div class="form-label-group">
+                                                    <input id="zipcode" type="text" name="zipcode" class="form-control" placeholder="Zip Code" required="required" value="<?php echo $session->getZipcode(); ?>" readonly>
+                                                    <label for="zipcode">Zip Code</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary btn-block">Edit</button>
                                 </form>
                             </div>
                     </div>

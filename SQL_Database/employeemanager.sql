@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 31, 2018 at 06:47 PM
--- Server version: 10.1.35-MariaDB
--- PHP Version: 7.2.9
+-- Generation Time: Nov 15, 2018 at 02:15 AM
+-- Server version: 10.1.34-MariaDB
+-- PHP Version: 5.6.37
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -147,9 +147,9 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`id`, `first_name`, `last_name`, `gender`, `hire_date`, `employee_number`, `password`, `admin`, `title_id`, `address_id`, `image`) VALUES
-(1, 'John', 'Doe', 'M', '2018-10-09', 123456789, 'password', 0, 1, 1, NULL),
-(2, 'Jane', 'Doe', 'F', '2018-10-16', 987654321, 'password', 0, 1, 1, NULL),
-(3, 'Jack', 'Myer', 'M', '2018-10-16', 111222333, 'password', 1, 1, 2, NULL);
+(1, 'John', 'Doe', 'M', '2018-10-09', 123456789, 'password', 0, 1, 1, '../../EmployeeManager/Master/Profile_Images/ceasar.jpg'),
+(2, 'Jane', 'Doe', 'F', '2018-10-16', 987654321, 'password', 0, 1, 1, '../../EmployeeManager/Master/Profile_Images/Brand_SpiritFireSkin.jpg'),
+(3, 'Jack', 'Myer', 'M', '2018-10-16', 111222333, 'password', 1, 1, 2, '../../EmployeeManager/Master/Profile_Images/shrek.jpg');
 
 -- --------------------------------------------------------
 
@@ -202,7 +202,8 @@ CREATE TABLE `pay_period` (
 
 INSERT INTO `pay_period` (`pay_period_id`, `date_from`, `date_to`) VALUES
 (1, '2018-10-08', '2018-10-19'),
-(2, '2018-10-22', '2018-11-02');
+(2, '2018-10-22', '2018-11-02'),
+(3, '2018-11-08', '2018-11-19');
 
 -- --------------------------------------------------------
 
@@ -252,7 +253,8 @@ INSERT INTO `time_sheet` (`time_id`, `number_hours`, `time_from`, `time_to`, `da
 (6, 4, '08:00:00', '12:00:00', '2018-10-18', 1, 1),
 (7, 2, '15:00:00', '17:00:00', '2018-10-22', 3, 2),
 (8, 3.8, '08:12:00', '12:00:00', '2018-10-24', 3, 2),
-(9, 9, '08:00:00', '17:00:00', '2018-10-30', 2, 2);
+(9, 9, '08:00:00', '17:00:00', '2018-10-30', 2, 2),
+(10, 9, '08:00:00', '17:00:00', '2018-11-12', 3, 3);
 
 -- --------------------------------------------------------
 
@@ -392,7 +394,7 @@ ALTER TABLE `event`
 -- AUTO_INCREMENT for table `pay_period`
 --
 ALTER TABLE `pay_period`
-  MODIFY `pay_period_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `pay_period_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `salaries`
@@ -404,7 +406,7 @@ ALTER TABLE `salaries`
 -- AUTO_INCREMENT for table `time_sheet`
 --
 ALTER TABLE `time_sheet`
-  MODIFY `time_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `time_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `titles`

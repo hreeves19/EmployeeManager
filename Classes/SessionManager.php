@@ -18,6 +18,9 @@ class SessionManager
     private $loggedIn;
     private $title;
     private $address;
+    private $city;
+    private $zipcode;
+    private $state;
     private $hireDate;
     private $managers_id; // If 0, means employee is not a manager
     private $manager_name; // Managers name, empty if this person is a manager
@@ -32,7 +35,8 @@ class SessionManager
         // logging in
         if(isset($_SESSION['primarykey']) && isset($_SESSION['employeeNumber']) && isset($_SESSION['firstName'])
          && isset($_SESSION['lastName']) && isset($_SESSION['isManager']) && isset($_SESSION['isAdmin']) && isset($_SESSION['title'])
-        && isset($_SESSION['manager_id']) && isset($_SESSION['address']) && isset($_SESSION['hireDate']))
+        && isset($_SESSION['manager_id']) && isset($_SESSION['address']) && isset($_SESSION['hireDate']) && isset($_SESSION['city'])
+            && isset($_SESSION['zipcode']) && isset($_SESSION['state']))
         {
             // Setting class variables
             $this->setPrimarykey($_SESSION['primarykey']);
@@ -46,6 +50,9 @@ class SessionManager
             $this->setManagersId($_SESSION['manager_id']);
             $this->setAddress(($_SESSION['address']));
             $this->setHireDate($_SESSION['hireDate']);
+            $this->setCity($_SESSION['city']);
+            $this->setZipcode($_SESSION['zipcode']);
+            $this->setState($_SESSION['state']);
 
             // Checking if manager name is set
             if(isset($_SESSION['manager_name']))
@@ -69,6 +76,53 @@ class SessionManager
         header("Location: ../../EmployeeManager/Forms/Login.php");
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param mixed $city
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getZipcode()
+    {
+        return $this->zipcode;
+    }
+
+    /**
+     * @param mixed $zipcode
+     */
+    public function setZipcode($zipcode)
+    {
+        $this->zipcode = $zipcode;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     * @param mixed $state
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+    }
 
     /**
      * @return mixed
