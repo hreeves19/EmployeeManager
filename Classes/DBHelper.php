@@ -608,9 +608,4 @@ WHERE d.`dept_manager_id` = $manager_id";
         $conn->close();
         return $data;
     }
-
-    public function getTimeSheet($currentPayPeriod, $employee_id)
-    {
-
-    }
 }

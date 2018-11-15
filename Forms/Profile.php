@@ -184,7 +184,7 @@ $DB = new DBHelper();
                                         </div>
                                     </div>
 
-                                    <!-- Title and hire date Row Display -->
+                                    <!-- City, State, and Zip Code Row Display -->
                                     <div class="form-group">
                                         <div class="form-row">
                                             <div class="col-md-5">
@@ -210,7 +210,7 @@ $DB = new DBHelper();
                                         </div>
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary btn-block">Change</button>
+                                    <button type="submit" class="btn btn-primary btn-block">Edit</button>
                                 </form>
                             </div>
                     </div>
