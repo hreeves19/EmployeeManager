@@ -50,7 +50,7 @@ else if(isset($_POST["getEmployees"]))
 }
 
 // We are trying to get the timesheet of the employee being passed in
-else if(isset($_POST["getTimeSheet"]) && isset($_POST["employee_id"]))
+else if(isset($_POST["getTimeSheet"]) && isset($_POST["employee_id"]) && isset($_POST["payperiod"]))
 {
     // The Current pay period is the date as a string, the date is the day that the pay period ends
     $currentPayPeriod = $DB->getLatestPayPeiod();
@@ -59,8 +59,11 @@ else if(isset($_POST["getTimeSheet"]) && isset($_POST["employee_id"]))
     // Getting the employees id through the post array
     $employee_id = $_POST["employee_id"];
 
+    // Getting pay period
+    $pay_period = $_POST["payperiod"];
+
     // Getting their timesheet
-    $timesheet = $DB->selectAllTimeSheet((int) $employee_id, $DB->getLatestPayPeiod());
+    $timesheet = $DB->selectAllTimeSheet((int) $employee_id, $pay_period, true);
 
     // Setting default timezone
     date_default_timezone_set('America/Chicago');

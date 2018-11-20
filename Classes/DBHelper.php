@@ -248,10 +248,9 @@ class DBHelper
     }
 
     // pay_period_id is actually the current date, not the primary key
-    public function selectAllTimeSheet($employee_id, $pay_period_id)
+    public function selectAllTimeSheet($employee_id, $pay_period_id, $flag)
     {
         $data = array();
-        $to_date = $pay_period_id["MAX(`date_to`)"];
 
         // Getting connection
         $mysqli = $this->getConnection();
@@ -263,7 +262,18 @@ class DBHelper
             return false;
         }
 
-        $sql = "SELECT * FROM `time_sheet` WHERE `employee_id` = $employee_id AND `pay_period_id` = (SELECT `pay_period_id` FROM `pay_period` WHERE `date_to` = \"$to_date\")";
+        // If given pay period by primary key
+        if($flag)
+        {
+            $sql = "SELECT * FROM `time_sheet` WHERE `employee_id` = $employee_id AND `pay_period_id` = $pay_period_id";
+        }
+
+        else
+        {
+            $to_date = $pay_period_id["MAX(`date_to`)"];
+            $sql = "SELECT * FROM `time_sheet` WHERE `employee_id` = $employee_id AND `pay_period_id` = (SELECT `pay_period_id` FROM `pay_period` WHERE `date_to` = \"$to_date\")";
+
+        }
 
         $response = $mysqli->query($sql);
 
@@ -737,5 +747,46 @@ WHERE d.`dept_manager_id` = $manager_id";
 
         $conn->close();
         return $data;
+    }
+
+    public function getDDLPayPeriod()
+    {
+        // Getting connection
+        $mysqli = $this->getConnection();
+        // Checking to see if the connection failed
+        if($mysqli->connect_errno)
+        {
+            echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+            return false;
+        }
+        // Creating select statement
+        $sql = "SELECT * FROM `pay_period` ORDER BY `pay_period_id` DESC";
+
+        $result = $mysqli->query($sql);
+
+        if ($result)
+        {
+            echo "Pay period <select id='ddlPayPeriod' onchange='showNewCalendar()' class='form-control'>";
+            //echo "<option value ='" . -1 . "'>Unselected</option>";
+
+            // output data of each row
+            while($row = $result->fetch_assoc())
+            {
+                $show = $row["date_from"] . " to " . $row["date_to"];
+                echo "<option value ='" . $row["pay_period_id"] . "'>"
+                    . $show  . "</option>";
+            }
+            echo "</select>";
+        }
+        else
+        {
+            // Closing database connection
+            echo "Cannot show list of pay periods.";
+            $mysqli->close();
+            return false;
+        }
+        // Closing db connection
+        mysqli_close($mysqli);
+        return true;
     }
 }

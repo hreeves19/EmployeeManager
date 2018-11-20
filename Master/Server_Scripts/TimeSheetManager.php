@@ -55,7 +55,7 @@ if(isset($_POST["date"]) && isset($_POST["timef"]) && isset($_POST["timet"]) && 
 if(isset($_GET["datatable"]))
 {
     $currentPeriod = $DB->getLatestPayPeiod();
-    $data = $DB->selectAllTimeSheet($session->getPrimarykey(), $currentPeriod);
+    $data = $DB->selectAllTimeSheet($session->getPrimarykey(), $currentPeriod, false);
     echo json_encode(array('data' => $data));
 }
 ?>

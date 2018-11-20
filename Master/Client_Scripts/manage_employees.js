@@ -21,7 +21,7 @@ function getEmployees()
             {
                 //console.log(data[i]);
                 employee[i] = data[i];
-                console.log(calculateChart(employee));
+                //console.log(calculateChart(employee));
             }
 
             //console.log(timesheet);
@@ -52,17 +52,14 @@ function showCalendar(employee)
     var today = new Date();
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
-    // Getting range for work week
-    var text = document.getElementById("payPeriod").value;
-
-    /*text = text.match(/\d\d\d\d-\d\d-\d\d/g);*/
-    console.log(text);
+    // Getting pay period
+    var payPeriod = document.getElementById("ddlPayPeriod").value;
 
     $('#calendar').fullCalendar({
         header: {
             left: 'prev,next today',
             center: 'title',
-            right: 'listDay,agendaWeek,month'
+            right: 'agendaWeek,month'
         },
 
         visibleRange: {
@@ -86,7 +83,7 @@ function showCalendar(employee)
                     $.ajax({
                         url: '../../EmployeeManager/Master/Server_Scripts/ManageEmployeesManager.php',
                         method: "post",
-                        data: {getTimeSheet: true, employee_id:employee},
+                        data: {getTimeSheet: true, employee_id:employee, payperiod:payPeriod},
                         dataType: 'json',
                         success: function(msg) {
                             console.log(msg);
@@ -101,7 +98,7 @@ function showCalendar(employee)
 }
 
 // Used to calculate the data for the chart
-function calculateChart(emp)
+/*function calculateChart(emp)
 {
     $.ajax({
         url: "../../EmployeeManager/Master/Server_Scripts/ManageEmployeesManager.php",
@@ -112,7 +109,7 @@ function calculateChart(emp)
             console.log(data);
         }
     });
-}
+}*/
 
 // Used to show the datatable
 function showTable() {

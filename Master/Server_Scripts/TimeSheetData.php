@@ -32,7 +32,7 @@ else
 $latestPayPeriod = $DB->getLatestPayPeiod();
 $currentPayPeriod = $latestPayPeriod["MAX(`date_to`)"];
 
-$data = $DB->selectAllTimeSheet((int) $session->getPrimarykey(), $DB->getLatestPayPeiod());
+$data = $DB->selectAllTimeSheet((int) $session->getPrimarykey(), $DB->getLatestPayPeiod(), false);
 
 // Setting default timezone
 date_default_timezone_set('America/Chicago');

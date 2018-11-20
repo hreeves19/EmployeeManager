@@ -147,19 +147,27 @@ $DB = new DBHelper();
                     <h1 style="text-align: center;">Employee Time Sheet</h1>
                 </div>
                 <div class="card-body">
-                    <?php
-                    // Getting $db
-                    $data = $DB->getAllTable("pay_period", "");
+                    <div class="row">
+                        <div class="col">
+                            <?php
+                            // Getting $db
+                            $data = $DB->getAllTable("pay_period", "");
 
-                    // example var dump: var_dump(end($data));
-                    // array(3) { ["pay_period_id"]=> string(2) "47" ["date_from"]=> string(10) "2018-11-05" ["date_to"]=> string(10) "2018-11-16" }
-                    $pay_period = end($data);
-                    $date_to = $pay_period["date_to"];
-                    $date_from = $pay_period["date_from"];
-                    echo "<p id='payPeriod'>Pay period from $date_from to $date_to</p>";
+                            // example var dump: var_dump(end($data));
+                            // array(3) { ["pay_period_id"]=> string(2) "47" ["date_from"]=> string(10) "2018-11-05" ["date_to"]=> string(10) "2018-11-16" }
+                            $pay_period = end($data);
+                            $date_to = $pay_period["date_to"];
+                            $date_from = $pay_period["date_from"];
+                            /*echo "<p id='payPeriod'>Pay period from $date_from to $date_to</p>";*/
+                            $DB->getDDLPayPeriod();
 
-                    ?>
-                    <?php $DB->ddlGetEmployees($session->getisManager()); ?>
+                            ?>
+                        </div>
+                        <div class="col">
+                            <?php $DB->ddlGetEmployees($session->getisManager()); ?>
+                        </div>
+                    </div>
+
                     <div id='calendar' style="padding: 10px;"></div>
                     <button class="btn btn-primary btn-block" onclick="approveSheet()">Approve Timesheet</button>
                     <button class="btn btn-danger btn-block" onclick="disapproveSheet()">Disapprove Timesheet</button>
