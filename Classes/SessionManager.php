@@ -24,6 +24,7 @@ class SessionManager
     private $hireDate;
     private $managers_id; // If 0, means employee is not a manager
     private $manager_name; // Managers name, empty if this person is a manager
+    private $address_ID;
 
     /**
      * SessionManager constructor.
@@ -36,7 +37,7 @@ class SessionManager
         if(isset($_SESSION['primarykey']) && isset($_SESSION['employeeNumber']) && isset($_SESSION['firstName'])
          && isset($_SESSION['lastName']) && isset($_SESSION['isManager']) && isset($_SESSION['isAdmin']) && isset($_SESSION['title'])
         && isset($_SESSION['manager_id']) && isset($_SESSION['address']) && isset($_SESSION['hireDate']) && isset($_SESSION['city'])
-            && isset($_SESSION['zipcode']) && isset($_SESSION['state']))
+            && isset($_SESSION['zipcode']) && isset($_SESSION['state']) && isset($_SESSION['address_ID']))
         {
             // Setting class variables
             $this->setPrimarykey($_SESSION['primarykey']);
@@ -53,6 +54,7 @@ class SessionManager
             $this->setCity($_SESSION['city']);
             $this->setZipcode($_SESSION['zipcode']);
             $this->setState($_SESSION['state']);
+            $this->setAddressId($_SESSION['address_ID']);
 
             // Checking if manager name is set
             if(isset($_SESSION['manager_name']))
@@ -74,6 +76,22 @@ class SessionManager
         session_destroy();
         $this->setLoggedIn(false);
         header("Location: ../../EmployeeManager/Forms/Login.php");
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAddressID()
+    {
+        return $this->address_ID;
+    }
+
+    /**
+     * @param mixed $address_ID
+     */
+    public function setAddressID($address_ID)
+    {
+        $this->address_ID = $address_ID;
     }
 
     /**

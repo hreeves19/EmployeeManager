@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2018 at 02:15 AM
+-- Generation Time: Nov 21, 2018 at 02:46 AM
 -- Server version: 10.1.34-MariaDB
 -- PHP Version: 5.6.37
 
@@ -44,8 +44,8 @@ CREATE TABLE `address` (
 --
 
 INSERT INTO `address` (`address_ID`, `street_address`, `city`, `zipcode`, `state`, `country`) VALUES
-(1, '1773 Ennis Joslin Rd', 'Corpus Christi', 78412, 'Tx', 'United States'),
-(2, '2921 Airline Rd Apartment 325', 'Corpus Christi', 78414, 'Tx', 'United States');
+(1, '1773 Ennis Joslin Rd', 'Corpus Christi', 78412, 'TX', 'United States'),
+(2, '2921 Airline Rd Apartment 325', 'Corpus Christi', 78414, 'TX', 'United States');
 
 -- --------------------------------------------------------
 
@@ -147,9 +147,9 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`id`, `first_name`, `last_name`, `gender`, `hire_date`, `employee_number`, `password`, `admin`, `title_id`, `address_id`, `image`) VALUES
-(1, 'John', 'Doe', 'M', '2018-10-09', 123456789, 'password', 0, 1, 1, '../../EmployeeManager/Master/Profile_Images/ceasar.jpg'),
-(2, 'Jane', 'Doe', 'F', '2018-10-16', 987654321, 'password', 0, 1, 1, '../../EmployeeManager/Master/Profile_Images/Brand_SpiritFireSkin.jpg'),
-(3, 'Jack', 'Myer', 'M', '2018-10-16', 111222333, 'password', 1, 1, 2, '../../EmployeeManager/Master/Profile_Images/shrek.jpg');
+(1, 'John', 'Doe', 'M', '2018-10-09', 123456789, 'password', 0, 1, 1, '../../EmployeeManager/Master/Profile_Images/samtheman.jpg'),
+(2, 'Jane', 'Doe', 'F', '2018-10-16', 987654321, 'password', 0, 1, 1, '../../EmployeeManager/Master/Profile_Images/courtland.jpg'),
+(3, 'Jack', 'Myer', 'M', '2018-10-16', 111222333, 'password', 1, 1, 2, '../../EmployeeManager/Master/Profile_Images/ProPics.JPG');
 
 -- --------------------------------------------------------
 
@@ -203,7 +203,8 @@ CREATE TABLE `pay_period` (
 INSERT INTO `pay_period` (`pay_period_id`, `date_from`, `date_to`) VALUES
 (1, '2018-10-08', '2018-10-19'),
 (2, '2018-10-22', '2018-11-02'),
-(3, '2018-11-08', '2018-11-19');
+(3, '2018-11-08', '2018-11-19'),
+(5, '2018-11-22', '2018-12-03');
 
 -- --------------------------------------------------------
 
@@ -254,7 +255,13 @@ INSERT INTO `time_sheet` (`time_id`, `number_hours`, `time_from`, `time_to`, `da
 (7, 2, '15:00:00', '17:00:00', '2018-10-22', 3, 2),
 (8, 3.8, '08:12:00', '12:00:00', '2018-10-24', 3, 2),
 (9, 9, '08:00:00', '17:00:00', '2018-10-30', 2, 2),
-(10, 9, '08:00:00', '17:00:00', '2018-11-12', 3, 3);
+(10, 9, '08:00:00', '17:00:00', '2018-11-12', 3, 3),
+(11, 9, '08:00:00', '17:00:00', '2018-11-19', 1, 5),
+(12, 4.75, '08:00:00', '12:45:00', '2018-11-22', 1, 5),
+(13, 9, '08:00:00', '17:00:00', '2018-11-20', 3, 5),
+(14, 5.5, '08:00:00', '13:30:00', '2018-11-23', 3, 5),
+(15, 9, '08:00:00', '17:00:00', '2018-11-19', 2, 5),
+(16, 4, '12:00:00', '16:00:00', '2018-11-21', 2, 5);
 
 -- --------------------------------------------------------
 
@@ -394,7 +401,7 @@ ALTER TABLE `event`
 -- AUTO_INCREMENT for table `pay_period`
 --
 ALTER TABLE `pay_period`
-  MODIFY `pay_period_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `pay_period_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `salaries`
@@ -406,7 +413,7 @@ ALTER TABLE `salaries`
 -- AUTO_INCREMENT for table `time_sheet`
 --
 ALTER TABLE `time_sheet`
-  MODIFY `time_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `time_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `titles`

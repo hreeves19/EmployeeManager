@@ -40,6 +40,7 @@ if(isset($_POST["enumber"]) && isset($_POST["psw"]))
         $_SESSION['lastName'] = $data["last_name"];
         $_SESSION['isManager'] = $manager;
         $_SESSION['isAdmin'] = $data["admin"];
+        $_SESSION['address_ID'] = $data["address_ID"];
         $_SESSION['address'] = $data["street_address"];
         $_SESSION['city'] = $data["city"];
         $_SESSION['zipcode'] = $data["zipcode"];

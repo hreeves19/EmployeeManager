@@ -39,6 +39,16 @@ if(isset($_POST["img"]))
     //echo $filePath["image"];
     echo "<img src='" . $filePath['image'] ."' class='img-thumbnail'>";
 }
+else if(isset($_POST["UPDATE"]) && isset($_POST["Address"]) && isset($_POST["zipcode"]) && isset($_POST["city"]) && isset($_POST["State"]))
+{
+    //echo "Head asss";
+    $address = $_POST["Address"];
+    $zip = $_POST["zipcode"];
+    $city = $_POST["city"];
+    $state = $_POST["State"];
+
+    $DB->updateProfile($address, $city, $zip, $state, $session->getAddressID());
+}
 
 // check for form request method
 else if($_SERVER['REQUEST_METHOD'] == "POST")

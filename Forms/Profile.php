@@ -194,18 +194,11 @@ $DB = new DBHelper();
                                                 </div>
                                             </div>
 
-                                            <!--<div class="col-md-2">
-                                                <div class="form-label-group">
-                                                    <input id="state" type="text" name="state" class="form-control" placeholder="State" required="required" value="<?php /*echo $session->getState(); */?>" readonly>
-                                                    <label for="state">State</label>
-                                                </div>
-                                            </div>-->
-
                                             <!-- State Drop Down box -->
                                             <div class="col-md-2">
                                                 <div class="form-label-group">
                                                     <label for="State"></label>
-                                                    <select class="form-control" name="State" id="State" required="required">
+                                                    <select class="form-control" name="State" id="State" required="required" readonly="readonly">
                                                         <option value="AL">Alabama</option>
                                                         <option value="AK">Alaska</option>
                                                         <option value="AZ">Arizona</option>

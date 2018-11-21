@@ -168,7 +168,7 @@ class DBHelper
         }
 
         /*        $sql = "SELECT `id`, `first_name`, `last_name`, `employee_number`, `admin` FROM `employee` WHERE `employee_number` = $employeeNumber AND `password` LIKE \"$password\" LIMIT 1";*/
-        $sql = "SELECT e.`id`, e.`first_name`, e.`last_name`, e.`employee_number`, e.`admin`, e.`hire_date`, a.`street_address`, a.`city`, a.`zipcode`, a.`state`, t.`title`, s.`salary_per_hour` FROM `employee` e ".
+        $sql = "SELECT e.`id`, e.`first_name`, e.`last_name`, e.`employee_number`, e.`admin`, e.`hire_date`, a.`address_ID`, a.`street_address`, a.`city`, a.`zipcode`, a.`state`, t.`title`, s.`salary_per_hour` FROM `employee` e ".
             "left join `address` a on a.`address_ID` = e.`address_id`".
             "left join `titles` t on t.`title_id` = e.`title_id`".
             "left join `salaries` s on s.`title_id` = t.`title_id`".
@@ -788,5 +788,34 @@ class DBHelper
         // Closing db connection
         mysqli_close($mysqli);
         return true;
+    }
+
+    public function updateProfile($address, $city, $zip, $State, $address_ID)
+    {
+        // connect to database
+        $cdb = $this->getConnection();
+
+        // Using flag to determine if there was an error
+        $flag = false;
+
+        // query
+        $q = "UPDATE `address` SET `street_address`=\"$address\",`city`=\"$city\",`zipcode`=$zip,`state`=\"$State\" WHERE `address_ID` = $address_ID";
+
+        //echo $q;
+        // run query
+        $r = mysqli_query($cdb,$q);
+
+        if(mysqli_affected_rows($cdb) == 1)
+        {
+            $flag = true;
+        }
+        else
+        {
+            echo "<p>A system error has been occured</p>".mysqli_error($cdb);
+        }
+
+        // Make sure you always close the connection
+        $cdb->close();
+        return $flag;
     }
 }
