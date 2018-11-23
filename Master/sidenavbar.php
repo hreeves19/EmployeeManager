@@ -71,4 +71,18 @@
             <span>My Schedule</span>
         </a>
     </li>
+
+    <!-- Manage Network -->
+    <?php
+    // Checking if admin
+    if((int) $session->getIsAdmin() == 1)
+    {
+        echo "<li class=\"nav-item\">
+        <a class=\"nav-link\" href=\"../../EmployeeManager/Forms/Network.php\">
+            <i class=\"fas fa-fw fa-info\"></i>
+            <span>Network Information</span>
+        </a>
+    </li>";
+    }
+    ?>
 </ul>
