@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2018 at 02:46 AM
--- Server version: 10.1.34-MariaDB
--- PHP Version: 5.6.37
+-- Generation Time: Dec 03, 2018 at 07:51 AM
+-- Server version: 10.1.36-MariaDB
+-- PHP Version: 5.6.38
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -30,6 +30,7 @@ USE `employeemanager`;
 -- Table structure for table `address`
 --
 
+DROP TABLE IF EXISTS `address`;
 CREATE TABLE `address` (
   `address_ID` int(11) NOT NULL COMMENT 'Primary key',
   `street_address` varchar(50) NOT NULL,
@@ -53,6 +54,7 @@ INSERT INTO `address` (`address_ID`, `street_address`, `city`, `zipcode`, `state
 -- Table structure for table `calendar`
 --
 
+DROP TABLE IF EXISTS `calendar`;
 CREATE TABLE `calendar` (
   `schedule_id` int(11) NOT NULL COMMENT 'PK schedule_id',
   `date` date NOT NULL COMMENT 'Date scheduled',
@@ -66,6 +68,7 @@ CREATE TABLE `calendar` (
 -- Table structure for table `departments`
 --
 
+DROP TABLE IF EXISTS `departments`;
 CREATE TABLE `departments` (
   `deptartment_id` int(11) NOT NULL,
   `department_number` int(11) DEFAULT NULL COMMENT 'Department number given by company',
@@ -85,6 +88,7 @@ INSERT INTO `departments` (`deptartment_id`, `department_number`, `department_na
 -- Table structure for table `dept_emp`
 --
 
+DROP TABLE IF EXISTS `dept_emp`;
 CREATE TABLE `dept_emp` (
   `dept_emp_ID` int(11) NOT NULL COMMENT 'Primary key',
   `from_date` date NOT NULL COMMENT 'Day employee started working for the department',
@@ -99,7 +103,8 @@ CREATE TABLE `dept_emp` (
 --
 
 INSERT INTO `dept_emp` (`dept_emp_ID`, `from_date`, `to_date`, `employee_id`, `department_id`, `dept_manager_id`) VALUES
-(1, '2018-10-01', '2018-10-23', 1, 1, 1);
+(1, '2018-10-01', '2018-10-23', 1, 1, 1),
+(2, '2018-10-01', '2018-10-16', 3, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -107,6 +112,7 @@ INSERT INTO `dept_emp` (`dept_emp_ID`, `from_date`, `to_date`, `employee_id`, `d
 -- Table structure for table `dept_manager`
 --
 
+DROP TABLE IF EXISTS `dept_manager`;
 CREATE TABLE `dept_manager` (
   `dept_manager_ID` int(11) NOT NULL COMMENT 'Primary Key',
   `from_date` date NOT NULL COMMENT 'Day manager started for department',
@@ -128,6 +134,7 @@ INSERT INTO `dept_manager` (`dept_manager_ID`, `from_date`, `to_date`, `employee
 -- Table structure for table `employee`
 --
 
+DROP TABLE IF EXISTS `employee`;
 CREATE TABLE `employee` (
   `id` int(11) NOT NULL COMMENT 'Primary key to identify unique values',
   `first_name` varchar(50) NOT NULL,
@@ -157,6 +164,7 @@ INSERT INTO `employee` (`id`, `first_name`, `last_name`, `gender`, `hire_date`, 
 -- Table structure for table `event`
 --
 
+DROP TABLE IF EXISTS `event`;
 CREATE TABLE `event` (
   `event_id` int(11) NOT NULL COMMENT 'PK',
   `date` date NOT NULL COMMENT 'Date of the event',
@@ -182,7 +190,11 @@ INSERT INTO `event` (`event_id`, `date`, `date_end`, `name`, `start_time`, `end_
 (16, '0000-00-00', '2018-10-03', '', '00:00:00', '00:00:00', '', 0, 1),
 (17, '0000-00-00', '2018-10-10', '', '00:00:00', '00:00:00', '', 0, 1),
 (18, '2018-10-10', '2018-10-12', 'Training', '08:00:00', '17:00:00', 'Training for all employees.', 1, 1),
-(19, '2018-10-10', '2018-10-10', 'Bake Sale', '10:00:00', '12:00:00', 'Bake sale outside our office!', 0, 1);
+(19, '2018-10-10', '2018-10-10', 'Bake Sale', '10:00:00', '12:00:00', 'Bake sale outside our office!', 0, 1),
+(20, '2018-12-20', '2018-12-21', 'Christmas Holiday Break', '08:00:00', '17:00:00', 'There will be no work held between these days for the Christmas Holidays.', 1, 1),
+(21, '2018-12-24', '2018-12-26', 'No Work', '08:00:00', '17:00:00', 'Continuation of the Christmas Holiday break.', 1, 1),
+(22, '2018-12-27', '2018-12-27', 'Back to Work', '08:00:00', '17:00:00', 'Resume normal work schedules on this day.', 1, 1),
+(23, '2018-12-31', '2018-12-31', 'New Years Lunch-in', '12:00:00', '13:30:00', 'Hey all!\n\nWe are having a New Years lunch celebration, stop by if you want!', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -190,6 +202,7 @@ INSERT INTO `event` (`event_id`, `date`, `date_end`, `name`, `start_time`, `end_
 -- Table structure for table `pay_period`
 --
 
+DROP TABLE IF EXISTS `pay_period`;
 CREATE TABLE `pay_period` (
   `pay_period_id` int(11) NOT NULL,
   `date_from` date NOT NULL COMMENT 'Date that pay period has started',
@@ -202,9 +215,10 @@ CREATE TABLE `pay_period` (
 
 INSERT INTO `pay_period` (`pay_period_id`, `date_from`, `date_to`) VALUES
 (1, '2018-10-08', '2018-10-19'),
-(2, '2018-10-22', '2018-11-02'),
-(3, '2018-11-08', '2018-11-19'),
-(5, '2018-11-22', '2018-12-03');
+(6, '2018-10-22', '2018-11-02'),
+(7, '2018-11-05', '2018-11-16'),
+(8, '2018-11-19', '2018-11-30'),
+(9, '2018-12-03', '2018-12-14');
 
 -- --------------------------------------------------------
 
@@ -212,6 +226,7 @@ INSERT INTO `pay_period` (`pay_period_id`, `date_from`, `date_to`) VALUES
 -- Table structure for table `salaries`
 --
 
+DROP TABLE IF EXISTS `salaries`;
 CREATE TABLE `salaries` (
   `salary_ID` int(11) NOT NULL COMMENT 'Primary key to identify unique values',
   `salary_per_hour` int(11) NOT NULL COMMENT 'Amount employee is making per hour',
@@ -231,12 +246,14 @@ INSERT INTO `salaries` (`salary_ID`, `salary_per_hour`, `title_id`) VALUES
 -- Table structure for table `time_sheet`
 --
 
+DROP TABLE IF EXISTS `time_sheet`;
 CREATE TABLE `time_sheet` (
   `time_id` int(11) NOT NULL,
   `number_hours` float NOT NULL COMMENT 'Number of hours submitted',
   `time_from` time NOT NULL COMMENT 'Time work started',
   `time_to` time NOT NULL COMMENT 'Time work ended',
   `date` date NOT NULL COMMENT 'Day time submitted on',
+  `approved` tinyint(1) NOT NULL DEFAULT '0',
   `employee_id` int(11) NOT NULL COMMENT 'Foreign key to the employee table',
   `pay_period_id` int(11) NOT NULL COMMENT 'Foreign key to the pay period'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -245,23 +262,39 @@ CREATE TABLE `time_sheet` (
 -- Dumping data for table `time_sheet`
 --
 
-INSERT INTO `time_sheet` (`time_id`, `number_hours`, `time_from`, `time_to`, `date`, `employee_id`, `pay_period_id`) VALUES
-(1, 1.05, '00:00:00', '00:00:00', '2018-10-17', 3, 1),
-(2, 0.916667, '13:05:00', '14:00:00', '2018-10-17', 3, 1),
-(3, 0.0333333, '13:03:00', '13:05:00', '2018-10-17', 3, 1),
-(4, 9, '08:00:00', '17:00:00', '2018-10-18', 3, 1),
-(5, 3.91667, '08:00:00', '11:55:00', '2018-10-19', 3, 1),
-(6, 4, '08:00:00', '12:00:00', '2018-10-18', 1, 1),
-(7, 2, '15:00:00', '17:00:00', '2018-10-22', 3, 2),
-(8, 3.8, '08:12:00', '12:00:00', '2018-10-24', 3, 2),
-(9, 9, '08:00:00', '17:00:00', '2018-10-30', 2, 2),
-(10, 9, '08:00:00', '17:00:00', '2018-11-12', 3, 3),
-(11, 9, '08:00:00', '17:00:00', '2018-11-19', 1, 5),
-(12, 4.75, '08:00:00', '12:45:00', '2018-11-22', 1, 5),
-(13, 9, '08:00:00', '17:00:00', '2018-11-20', 3, 5),
-(14, 5.5, '08:00:00', '13:30:00', '2018-11-23', 3, 5),
-(15, 9, '08:00:00', '17:00:00', '2018-11-19', 2, 5),
-(16, 4, '12:00:00', '16:00:00', '2018-11-21', 2, 5);
+INSERT INTO `time_sheet` (`time_id`, `number_hours`, `time_from`, `time_to`, `date`, `approved`, `employee_id`, `pay_period_id`) VALUES
+(1, 1.05, '00:00:00', '00:00:00', '2018-10-17', 0, 3, 1),
+(2, 0.916667, '13:05:00', '14:00:00', '2018-10-17', 0, 3, 1),
+(3, 0.0333333, '13:03:00', '13:05:00', '2018-10-17', 0, 3, 1),
+(4, 9, '08:00:00', '17:00:00', '2018-10-18', 0, 3, 1),
+(5, 3.91667, '08:00:00', '11:55:00', '2018-10-19', 0, 3, 1),
+(6, 4, '08:00:00', '12:00:00', '2018-10-18', 0, 1, 1),
+(7, 2, '15:00:00', '17:00:00', '2018-10-22', 0, 3, 2),
+(8, 3.8, '08:12:00', '12:00:00', '2018-10-24', 0, 3, 2),
+(9, 9, '08:00:00', '17:00:00', '2018-10-30', 0, 2, 2),
+(10, 9, '08:00:00', '17:00:00', '2018-11-12', 0, 3, 3),
+(11, 9, '08:00:00', '17:00:00', '2018-11-19', 0, 1, 5),
+(12, 4.75, '08:00:00', '12:45:00', '2018-11-22', 0, 1, 5),
+(13, 9, '08:00:00', '17:00:00', '2018-11-20', 0, 3, 5),
+(14, 5.5, '08:00:00', '13:30:00', '2018-11-23', 0, 3, 5),
+(15, 9, '08:00:00', '17:00:00', '2018-11-19', 0, 2, 5),
+(16, 4, '12:00:00', '16:00:00', '2018-11-21', 0, 2, 5),
+(17, 4, '08:00:00', '12:00:00', '2018-12-03', 0, 1, 9),
+(18, 4, '13:00:00', '17:00:00', '2018-12-03', 0, 1, 9),
+(19, 3, '10:00:00', '13:00:00', '2018-12-04', 0, 1, 9),
+(20, 4, '08:00:00', '12:00:00', '2018-12-05', 0, 1, 9),
+(21, 3.75, '13:15:00', '17:00:00', '2018-12-05', 0, 1, 9),
+(22, 3, '14:00:00', '17:00:00', '2018-12-06', 0, 1, 9),
+(23, 5, '08:00:00', '13:00:00', '2018-12-07', 0, 1, 9),
+(24, 9, '08:00:00', '17:00:00', '2018-12-03', 0, 2, 9),
+(25, 1, '12:00:00', '13:00:00', '2018-12-04', 0, 2, 9),
+(26, 4, '08:00:00', '12:00:00', '2018-12-05', 0, 2, 9),
+(27, 2, '15:00:00', '17:00:00', '2018-12-06', 0, 2, 9),
+(28, 1, '08:00:00', '09:00:00', '2018-12-03', 0, 3, 9),
+(29, 5, '12:00:00', '17:00:00', '2018-12-03', 0, 3, 9),
+(30, 5, '12:00:00', '17:00:00', '2018-12-05', 0, 3, 9),
+(31, 8, '08:00:00', '16:00:00', '2018-12-06', 0, 3, 9),
+(32, 3, '09:00:00', '12:00:00', '2018-12-07', 0, 3, 9);
 
 -- --------------------------------------------------------
 
@@ -269,6 +302,7 @@ INSERT INTO `time_sheet` (`time_id`, `number_hours`, `time_from`, `time_to`, `da
 -- Table structure for table `titles`
 --
 
+DROP TABLE IF EXISTS `titles`;
 CREATE TABLE `titles` (
   `title_id` int(11) NOT NULL COMMENT 'Primary key',
   `title` varchar(50) NOT NULL COMMENT 'Job title description'
@@ -377,7 +411,7 @@ ALTER TABLE `departments`
 -- AUTO_INCREMENT for table `dept_emp`
 --
 ALTER TABLE `dept_emp`
-  MODIFY `dept_emp_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary key', AUTO_INCREMENT=2;
+  MODIFY `dept_emp_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary key', AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `dept_manager`
@@ -395,13 +429,13 @@ ALTER TABLE `employee`
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'PK', AUTO_INCREMENT=20;
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'PK', AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `pay_period`
 --
 ALTER TABLE `pay_period`
-  MODIFY `pay_period_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `pay_period_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `salaries`
@@ -413,7 +447,7 @@ ALTER TABLE `salaries`
 -- AUTO_INCREMENT for table `time_sheet`
 --
 ALTER TABLE `time_sheet`
-  MODIFY `time_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `time_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `titles`
