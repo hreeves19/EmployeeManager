@@ -115,7 +115,7 @@ function showDiskUsage()
                 type: 'pie',
                 // Getting select statement
                 data: {
-                    labels: ["Used Space", "Free Space"],
+                    labels: ["Free Space", "Used Space"],
                     datasets: [{
                         data: [data.diskFree, data.diskRemaining],
                         // #8DC641 #21357E
